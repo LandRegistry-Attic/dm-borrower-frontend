@@ -1,0 +1,14 @@
+__pycache__
+/app/static/elements
+/app/static/govuk_template
+/build/zip
+.webassets-cache
+*.pyc
+.DS_Store
+.coverage
+coverage.xml
+test-reports/
+/puppet/modules
+*.lock
+.librarian
+.tmp

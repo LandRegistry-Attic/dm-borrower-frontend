@@ -1,0 +1,30 @@
+{% set asset_path = '/static/govuk_template/' %}
+{% set page_title = 'Sign your mortgage deed' %}
+{% set assets_main = '/static/elements/main.css' %}
+
+<link href="{{assets_main}}" media="screen" rel="stylesheet" type="text/css">
+
+{% extends "base/govuk_base_template.html" %}
+
+{% block content %}
+    <div class="main" id="content">
+        <div class="grid-row">
+            &nbsp;
+        </div>
+
+        <div class="grid-row">
+
+            <div class="column-half">
+                  <label class="form-label" for="deed-reference">Enter deed reference: </label>
+            </div>
+
+            <div class="column-half">
+                  <div style="width:100%;margin-right:0.6em">
+                      <input  id="deed-reference" type="text" style="width:100%">
+                  </div>
+                  <input  class="button" type="submit" style="float:right">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
