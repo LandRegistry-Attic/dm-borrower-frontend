@@ -1,4 +1,6 @@
-from app import app
-import os
+from application import create_manager
 
-app.run(debug=True, host="0.0.0.0", port=int(os.getenv("PORT", "9030")))
+manager = create_manager()
+
+if __name__ == '__main__':
+    manager.run()

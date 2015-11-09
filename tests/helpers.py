@@ -1,5 +1,5 @@
 from functools import wraps
-from app import create_manager
+from application import create_manager
 from tests.mock import mock_clients
 
 
@@ -31,8 +31,7 @@ def mock_scribe_api_client():
 
 
 def setUpApp(self):
-    manager = create_manager(deed_api_client=mock_deed_api_client(),
-                             scribe_api_client=mock_scribe_api_client())
+    manager = create_manager(deed_api_client=mock_deed_api_client())
     self.app = manager.app
     self.manager = manager
     self.app.config['TESTING'] = True
