@@ -1,0 +1,39 @@
+{% set asset_path = '/static/govuk_template/' %}
+{% set page_title = 'Sign your mortgage deed' %}
+{% set assets_main = '/static/elements/main.css' %}
+
+<link href="{{assets_main}}" media="screen" rel="stylesheet" type="text/css">
+
+{% extends "base/govuk_base_template.html" %}
+
+{% block content %}
+<div class="main" id="content">
+    <div class="phase-banner">
+        <p>
+            <strong class="phase-tag">BETA</strong>
+            <span>This service is in private beta. Please give us your <a rel="external"
+                                                                          href="mailto:digital-register-feedback@digital.landregistry.gov.uk">Feedback</a>.</span>
+        </p>
+    </div>
+    <div>&nbsp;</div>
+
+    <strong>Your mortgage deed</strong>
+
+    <p>Deed details for: {{deed_reference}}</p>
+
+    <p>Borrowers:</p>
+    <ul id="borrowers">
+        {% for borrower in deed_data.borrowers %}
+        <li>{{ borrower.first_name + ' ' + borrower.last_name }}</a></li>
+        {% endfor %}
+    </ul>
+    <p>Property address: {{ deed_data.property.address }}</p>
+
+    <p>Title reference: {{ deed_data.title_reference }}</p>
+
+    <form action="/searchdeed">
+        <input class="button" type="submit" value="Back">
+    </form>
+</div>
+
+{% endblock %}

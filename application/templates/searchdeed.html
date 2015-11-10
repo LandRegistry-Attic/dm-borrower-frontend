@@ -1,0 +1,31 @@
+{% set page_title = 'Sign your mortgage deed' %}
+{% set asset_path = '/static/govuk_template/' %}
+{% set assets_main = '/static/elements/main.css' %}
+
+<link href="{{assets_main}}" media="screen" rel="stylesheet" type="text/css">
+
+{% extends "base/govuk_base_template.html" %}
+
+{% block content %}
+<div class="main" id="content">
+    <div class="phase-banner">
+        <p>
+            <strong class="phase-tag">BETA</strong>
+            <span>This service is in private beta. Please give us your <a rel="external"
+                                                                          href="mailto:digital-register-feedback@digital.landregistry.gov.uk">Feedback</a>.</span>
+        </p>
+    </div>
+    <div>&nbsp;</div>
+    <form id="search-deed-form" action="/searchdeed/search" method="POST">
+
+        <div class="form-group">
+            <label class="form-label" for="deed_reference">Enter Deed Reference: </label>
+            <input id="deed_reference" class="form-control" type="text" name="deed_reference">
+        </div>
+        <div class="form-group">
+            <input type="submit" class="button" value="Search">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

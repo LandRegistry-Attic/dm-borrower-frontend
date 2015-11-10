@@ -4,7 +4,7 @@ import sass as libsass
 __dot = path.dirname(path.realpath(__file__))
 __toolkit_dir = path.join(__dot, 'elements/govuk_template/')
 __elemets_dir = path.join(__dot, 'elements/')
-__output_dir = path.join(__dot, '../app/static/elements/')
+__output_dir = path.join(__dot, '../application/static/elements/')
 
 
 def __compile_sass(_in, out, **kw):

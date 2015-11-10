@@ -84,7 +84,7 @@ def unzip(tar_path):
 def copy_views(tar_path, name):
     unzipped_path = unzip_path(tar_path)
     source_view = unzipped_path + '/views/layouts/govuk_template.html'
-    target_view = './app/templates/base/govuk_base_template.html'
+    target_view = './application/templates/base/govuk_base_template.html'
 
     if not path.exists(unzipped_path):
         unzip(tar_path)
@@ -97,7 +97,7 @@ def copy_views(tar_path, name):
 
 def copy_assets(tar_path):
     unzipped_path = unzip_path(tar_path)
-    assets_path = './app/static/govuk_template'
+    assets_path = './application/static/govuk_template'
 
     if not path.exists(unzipped_path):
         unzip(tar_path)
