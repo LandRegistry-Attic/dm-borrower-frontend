@@ -13,7 +13,7 @@ def create_manager(deed_api_client=make_deed_client):
 
     manager = Manager(app)
     static.register_assets(app)
-
+    app.url_map.strict_slashes = False
     app.register_blueprint(helloworld, url_prefix='/helloworld')
     app.register_blueprint(searchdeed, url_prefix='/searchdeed')
 

@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en-GB">
-<head>
-    <title>dm-api-skeleton</title>
-    <meta charset="utf-8">
-</head>
-<body>
-<h1> Digital Mortgage API Skeleton </h1>
+{% set asset_path = '/static/govuk_template/assets/' %}
+{% set page_title = 'Sign your mortgage deed' %}
+{% set assets_main = '/static/elements/main.css' %}
 
-<p>Hello, this is the page from the helloworld blueprint.</p>
-</body>
-</html>
+<link href="{{assets_main}}" media="screen" rel="stylesheet" type="text/css">
+
+{% extends "base/govuk_base_template.html" %}
+
+{% block content %}
+
+<div class="main" id="content">
+
+    <h1> Digital Mortgage API Skeleton </h1>
+
+    <p>Hello, this is the page from the helloworld blueprint.</p>
+</div>
+
+{% endblock %}

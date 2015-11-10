@@ -1,4 +1,4 @@
-{% set asset_path = '/static/govuk_template/' %}
+{% set asset_path = '/static/govuk_template/assets/' %}
 {% set page_title = 'Sign your mortgage deed' %}
 {% set assets_main = '/static/elements/main.css' %}
 
@@ -8,13 +8,14 @@
 
 {% block content %}
 <div class="main" id="content">
-    <div class="grid-row">
-        &nbsp;
-    </div>
+    <p>&nbsp;</p>
 
-    <div class="grid-row">
-        <p>Deed was not found for: {{deed_reference}}</p>
-    </div>
+    <p>Deed was not found for: {{deed_reference}}</p>
+
+    <form action="/searchdeed">
+        <input class="button" type="submit" value="Back">
+    </form>
+
 </div>
 
 {% endblock %}
