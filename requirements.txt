@@ -2,5 +2,5 @@ Flask
 Flask-Script
 gunicorn
 flask-assets
-sass
 requests
+libsass
