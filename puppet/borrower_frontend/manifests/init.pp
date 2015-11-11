@@ -66,8 +66,5 @@ class borrower_frontend (
     notify  => Service['nginx'],
   }
 
-  if $environment == 'development' {
-    standard_env::dev_host { $subdomain: }
-  }
 
 }
