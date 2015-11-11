@@ -4,7 +4,7 @@ class borrower_frontend (
     $host = '0.0.0.0',
     $source = 'git://github.com/LandRegistry/dm-borrower-frontend',
   $branch_or_revision = 'US20-borrower-frontend',
-  $subdomain = 'borrower_frontend',
+  $subdomain = 'dm-borrower-frontend',
     $domain = undef,
     $owner = 'vagrant',
     $group = 'vagrant'
