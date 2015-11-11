@@ -4,7 +4,7 @@ class borrower_frontend (
     $host = '0.0.0.0',
     $source = 'git://github.com/LandRegistry/dm-borrower-frontend',
   $branch_or_revision = 'US20-borrower-frontend',
-    $subdomain = 'api',
+  $subdomain = 'borrower_frontend',
     $domain = undef,
     $owner = 'vagrant',
     $group = 'vagrant'
@@ -66,5 +66,8 @@ class borrower_frontend (
     notify  => Service['nginx'],
   }
 
+  if $environment == 'development' {
+    standard_env::dev_host { $subdomain: }
+  }
 
 }
