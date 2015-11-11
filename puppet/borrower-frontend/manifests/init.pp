@@ -3,7 +3,7 @@ class borrower-frontend (
     $port = '9030',
     $host = '0.0.0.0',
     $source = 'git://github.com/LandRegistry/dm-borrower-frontend',
-    $branch_or_revision = 'develop',
+  $branch_or_revision = 'US20-borrower-frontend',
     $subdomain = 'api',
     $domain = undef,
     $owner = 'vagrant',
