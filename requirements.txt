@@ -1,6 +1,8 @@
-Flask
+flask==0.10.1
+gunicorn==19.3.0
 Flask-Script
-gunicorn
 flask-assets
 requests
 libsass
+
+
