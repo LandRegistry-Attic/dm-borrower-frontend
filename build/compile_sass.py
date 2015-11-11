@@ -16,4 +16,5 @@ def __compile_sass(_in, out, **kw):
 
 
 def compile_sass():
-    __compile_sass(open(__elemets_dir + 'main.scss', 'r'), open(__output_dir + 'main.css', 'w+'))
+    __compile_sass(open(__elemets_dir + 'main.scss', 'r'),
+                   open(__output_dir + 'main.css', 'w+'))

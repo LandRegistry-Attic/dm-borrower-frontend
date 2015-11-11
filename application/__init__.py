@@ -1,7 +1,7 @@
 from flask import Flask  # type: ignore
-from flask import render_template, current_app, redirect
+from flask import current_app, redirect
 from flask.ext.script import Manager
-from application import helloworld, static
+from application import static
 from application.service.deed_api import make_deed_client
 from .helloworld.views import helloworld
 from .deed.searchdeed.views import searchdeed

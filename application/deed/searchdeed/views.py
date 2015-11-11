@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, current_app, redirect, jsonify
+from flask import Blueprint, render_template, request
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -17,9 +17,11 @@ def search_deed_search():
     deed_data = lookup_deed(deed_reference)
 
     if deed_data is not None:
-        response = render_template('viewdeed.html', deed_data=deed_data, deed_reference=deed_reference)
+        response = render_template('viewdeed.html', deed_data=deed_data,
+                                   deed_reference=deed_reference)
     else:
-        response = render_template('deednotfound.html', deed_reference=deed_reference)
+        response = render_template('deednotfound.html',
+                                   deed_reference=deed_reference)
 
     return response
 

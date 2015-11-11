@@ -1,6 +1,5 @@
-from application.service.model import Borrower, LandProperty, Lender, Address, Deed
-from flask.ext.api import status
-from flask import jsonify
+from application.service.model import Borrower, LandProperty, \
+    Lender, Address, Deed
 
 
 class DeedApiMockClient:

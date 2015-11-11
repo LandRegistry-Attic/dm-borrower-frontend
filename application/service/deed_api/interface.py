@@ -4,4 +4,3 @@ class DeedApiInterface(object):
 
     def get_deed(self, borrower_token):
         return self.implementation.get_deed(borrower_token)
-

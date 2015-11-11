@@ -19,7 +19,8 @@ class TestGovukAssets (unittest.TestCase):
     @with_context
     @with_client
     def test_css(self, client):
-        res = client.get('/static/govuk_template/assets/stylesheets/govuk-template.css')
+        res = client.get('/static/govuk_template' +
+                         '/assets/stylesheets/govuk-template.css')
         self.assertEqual(res.status_code, 200)
         css_type = mimetypes.guess_type('govuk-template.css')[0]
         self.assertIn(css_type, res.headers['Content-Type'])
@@ -27,7 +28,8 @@ class TestGovukAssets (unittest.TestCase):
     @with_context
     @with_client
     def test_js(self, client):
-        res = client.get('/static/govuk_template/assets/javascripts/govuk-template.js')
+        res = client.get('/static/govuk_template' +
+                         '/assets/javascripts/govuk-template.js')
         self.assertEqual(res.status_code, 200)
         js_type = mimetypes.guess_type('govuk-template.js')[0]
         self.assertIn(js_type, res.headers['Content-Type'])
