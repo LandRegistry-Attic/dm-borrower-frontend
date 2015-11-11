@@ -19,17 +19,17 @@
 
     <strong>Your mortgage deed</strong>
 
-    <p>Deed details for: {{deed_reference}}</p>
-
     <p>Borrowers:</p>
     <ul id="borrowers">
         {% for borrower in deed_data.borrowers %}
         <li>{{ borrower.first_name + ' ' + borrower.last_name }}</a></li>
         {% endfor %}
     </ul>
-    <p>Property address: {{ deed_data.property.address }}</p>
+    <p>Property</p>
 
-    <p>Title reference: {{ deed_data.title_reference }}</p>
+    <ul>
+        <li>Title number: {{ deed_data.title_reference }}</li>
+    </ul>
 
     <form action="/searchdeed">
         <input class="button" type="submit" value="Back">
