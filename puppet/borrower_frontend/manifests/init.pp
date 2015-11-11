@@ -1,5 +1,5 @@
 # Install and configure the Flask Api Skeleton
-class borrower-frontend (
+class borrower_frontend (
     $port = '9030',
     $host = '0.0.0.0',
     $source = 'git://github.com/LandRegistry/dm-borrower-frontend',
