@@ -10,7 +10,7 @@ virtualenv $env_dir
 pip install -r requirements.txt
 pip install -r requirements_test.txt
 
-coverage run --source=app tests.py --xml
+./test.sh
 
 test_pass=$?
 
