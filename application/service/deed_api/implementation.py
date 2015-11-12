@@ -1,15 +1,14 @@
 import requests
 from application import config
-
-DEED_API_BASE_HOST = config.DEED_API_BASE_HOST
-
-
-def get_deed_json(borrower_token):
-    return requests.get(DEED_API_BASE_HOST + '/deed/borrower/' +
-                        str(borrower_token)).json()
+from flask.ext.api import status
 
 
-def get_deed(borrower_token):
-    deed_json = get_deed_json(borrower_token)
+def get_deed(deed_reference):
+    data = None
+    resp = requests.get(config.DEED_API_BASE_HOST + '/deed/' +
+                        str(deed_reference))
 
-    return deed_json
+    if resp.status_code == status.HTTP_200_OK:
+        data = resp.json()
+
+    return data

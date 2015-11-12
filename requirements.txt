@@ -4,5 +4,3 @@ Flask-Script
 flask-assets
 requests
 libsass
-
-

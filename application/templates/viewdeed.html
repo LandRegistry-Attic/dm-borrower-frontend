@@ -22,13 +22,13 @@
     <p>Borrowers:</p>
     <ul id="borrowers">
         {% for borrower in deed_data.borrowers %}
-        <li>{{ borrower.first_name + ' ' + borrower.last_name }}</a></li>
+        <li>{{ borrower.name}}</a></li>
         {% endfor %}
     </ul>
     <p>Property</p>
 
     <ul>
-        <li>Title number: {{ deed_data.title_reference }}</li>
+        <li>Title number: {{ deed_data.title_number }}</li>
     </ul>
 
     <form action="/searchdeed">

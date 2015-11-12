@@ -3,14 +3,14 @@ import unittest
 from lxml.html import document_fromstring
 
 
-class TestHelloWorld(unittest.TestCase):
+class TestHealth(unittest.TestCase):
     def setUp(self):
         setUpApp(self)
 
     @with_context
     @with_client
     def test_start_route(self, client):
-        res = client.get('/helloworld')
+        res = client.get('/health')
         html = document_fromstring(res.get_data())
 
         self.assertEqual(res.status_code, 200)
@@ -21,7 +21,7 @@ class TestHelloWorld(unittest.TestCase):
     @with_context
     @with_client
     def test_assets_path_correct(self, client):
-        res = client.get('/helloworld')
+        res = client.get('/health')
         html = document_fromstring(res.get_data())
 
         self.assertEqual(res.status_code, 200)

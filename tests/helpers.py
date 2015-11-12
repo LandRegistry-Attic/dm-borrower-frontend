@@ -26,10 +26,6 @@ def mock_deed_api_client():
     return mock_clients.DeedApiMockClient
 
 
-def mock_scribe_api_client():
-    return mock_clients.ScribeApiMockClient
-
-
 def setUpApp(self):
     manager = create_manager(deed_api_client=mock_deed_api_client())
     self.app = manager.app

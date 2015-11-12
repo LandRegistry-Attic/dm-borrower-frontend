@@ -28,18 +28,8 @@ def search_deed_search():
 
 def lookup_deed(deed_reference):
     if deed_reference is not None and deed_reference != '':
-        # TODO: fire off request to deed API here ...
-        deed_data = {
-            'borrowers': [
-                {'first_name': 'fred', 'last_name': 'bloggs'},
-                {'first_name': 'mickey', 'last_name': 'mouse'}
-            ],
-            'property': {
-                'address': 'disney land, florida'
-            },
-            'title_reference': 'ref-1234a',
-            'deed_reference': deed_reference
-        }
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        deed_data = deed_api_client.get_deed(str(deed_reference))
     else:
         deed_data = None
 

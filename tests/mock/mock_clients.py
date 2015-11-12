@@ -1,28 +1,20 @@
-from application.service.model import Borrower, LandProperty, \
-    Lender, Address, Deed
+from application.service.model import Borrower, Address, Deed
+from flask.ext.api import status
 
 
 class DeedApiMockClient:
-    def get_deed(self, md_ref):
+    @staticmethod
+    def get_deed(deed_reference):
         address = Address("Flat 16 Kingman Court",
                           "Verdant Road",
                           "London",
                           "SV19 9BT")
         borrower = Borrower("John Andrew", address)
-        lender = Lender("Bank of England Plc", address, "2347676")
-        land_property = LandProperty(address, "GHR67832")
+        title_number = 'dm1234'
         deed = Deed(
-            "",
-            "",
+            deed_reference,
             [borrower],
-            lender,
-            land_property,
-            "",
-            [],
-            [],
-            "",
-            signing_borrower_signed=False,
-            names_signed=["John Andrew"]
+            title_number
         )
 
         return deed

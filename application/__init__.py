@@ -1,25 +1,26 @@
 from flask import Flask  # type: ignore
 from flask import current_app, redirect
 from flask.ext.script import Manager
-from application import static
-from application.service.deed_api import make_deed_client
-from .helloworld.views import helloworld
+from application.service.deed_api import make_deed_api_client
+from .health.views import health
 from .deed.searchdeed.views import searchdeed
 
 
-def create_manager(deed_api_client=make_deed_client):
+def create_manager(deed_api_client=make_deed_api_client()):
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
 
     manager = Manager(app)
-    static.register_assets(app)
     app.url_map.strict_slashes = False
-    app.register_blueprint(helloworld, url_prefix='/helloworld')
+
+    setattr(searchdeed, 'deed_api_client', deed_api_client)
+
+    app.register_blueprint(health, url_prefix='/health')
     app.register_blueprint(searchdeed, url_prefix='/searchdeed')
 
     @app.route('/')
     def index():
-        # TODO: for now just redirect to the searchdeed landing page
+        # For now just redirect to the searchdeed landing page
         response = current_app.make_response(redirect('/searchdeed', code=303))
         return response
 
