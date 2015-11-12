@@ -1,5 +1,4 @@
 from flask import Flask  # type: ignore
-from flask import current_app, redirect
 from flask.ext.script import Manager
 from application.service.deed_api import make_deed_api_client
 from .health.views import health
