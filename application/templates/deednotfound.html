@@ -1,0 +1,15 @@
+{% extends "base/lr_base_layout.html" %}
+
+{% block content %}
+<div class="main" id="content">
+    <p>&nbsp;</p>
+
+    <p>Deed was not found for: {{deed_reference}}</p>
+
+    <form action="/searchdeed">
+        <input class="button" type="submit" value="Back">
+    </form>
+
+</div>
+
+{% endblock %}

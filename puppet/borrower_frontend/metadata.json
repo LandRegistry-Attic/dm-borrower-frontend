@@ -1,0 +1,11 @@
+{
+  "name": "dm-borrower-frontend",
+  "version": "0.0.1",
+  "author": "Land Registry Charges team",
+  "summary": "Install the dm-borrower-frontend.",
+  "license": "MIT",
+  "source": "https://github.com/LandRegistry/dm-borrower-frontend",
+  "project_page": "https://github.com/LandRegistry/dm-borrower-frontend",
+  "issues_url": "https://github.com/LandRegistry/dm-borrower-frontend",
+  "dependencies": [{"name": "puppetlabs/vcsrepo"}]
+}
