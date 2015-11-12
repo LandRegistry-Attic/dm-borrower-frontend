@@ -10,7 +10,7 @@ virtualenv $env_dir
 pip install -r requirements.txt
 pip install -r requirements_test.txt
 
-./test.sh
+source test.sh
 
 test_pass=$?
 
