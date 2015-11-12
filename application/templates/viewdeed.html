@@ -1,0 +1,33 @@
+{% extends "base/lr_base_layout.html" %}
+
+{% block content %}
+<div class="main" id="content">
+    <div class="phase-banner">
+        <p>
+            <strong class="phase-tag">BETA</strong>
+            <span>This service is in private beta. Please give us your <a rel="external"
+                                                                          href="mailto:digital-register-feedback@digital.landregistry.gov.uk">Feedback</a>.</span>
+        </p>
+    </div>
+    <div>&nbsp;</div>
+
+    <strong>Your mortgage deed</strong>
+
+    <p>Borrowers:</p>
+    <ul id="borrowers">
+        {% for borrower in deed_data.borrowers %}
+        <li>{{ borrower.name}}</a></li>
+        {% endfor %}
+    </ul>
+    <p>Property</p>
+
+    <ul>
+        <li>Title number: {{ deed_data.title_number }}</li>
+    </ul>
+
+    <form action="/searchdeed">
+        <input class="button" type="submit" value="Back">
+    </form>
+</div>
+
+{% endblock %}
