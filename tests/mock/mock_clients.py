@@ -1,5 +1,4 @@
 from application.service.model import Borrower, Address, Deed
-from flask.ext.api import status
 
 
 class DeedApiMockClient:
