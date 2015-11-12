@@ -8,6 +8,7 @@ virtualenv $env_dir
 
 #install requirements
 pip install -r requirements.txt
+pip install -r requirements_test.txt
 
 coverage run --source=app tests.py --xml
 
