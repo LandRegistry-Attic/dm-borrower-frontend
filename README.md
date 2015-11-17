@@ -11,6 +11,7 @@ mortgage deeds online.
 ## Usage
 ```
 GET     /health                         -- renders standard Gov UK template
+GET     /searchdeed                     -- borrower views deed landing page
 POST    /searchdeed/search              -- form POST the response is a html page which will display the deed or an error page
 ```
 
@@ -46,7 +47,7 @@ All of the acceptance tests are contained within the acceptance-tests folder wit
 
 If you would like to run all of the acceptance tests then navigate into the acceptance-tests folder and run the following command:
 
-'./run_tests.sh'
+'./test.sh'
 
 ### Running Rubocop
 
