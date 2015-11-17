@@ -47,5 +47,6 @@ pip install -r requirements_test.txt
 
 Run unit tests and provide coverage report
 
-'source test.sh'
-
+```
+source test.sh
+```
