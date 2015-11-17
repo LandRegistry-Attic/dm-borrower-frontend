@@ -8,6 +8,7 @@ mortgage deeds online.
 - [Install The Requirements](#install-the-requirements)
 - [Run The App](#run-the-app)
 - [Run The Unit Tests](#run-the-unit-tests)
+- [Acceptance Tests](#acceptance-tests)
 
 ## Usage
 ```
@@ -50,3 +51,9 @@ Run unit tests and provide coverage report
 ```
 source test.sh
 ```
+
+## Acceptance tests
+
+See, the following link for information on how to run the acceptance tests:-
+
+[Acceptance Tests](https://github.com/LandRegistry/dm-acceptance-tests)
