@@ -5,15 +5,18 @@ mortgage deeds online.
 
 ## Contents
 - [Usage](#usage)
-- [Getting Started](#getting-started)
-- [Acceptance Tests](#acceptance-tests)
+- [Install The Requirements](#install-the-requirements)
+- [Run The App](#run-the-app)
+- [Run The Unit Tests](#run-the-unit-tests)
 
 ## Usage
 ```
 GET     /health                         -- renders standard Gov UK template
 GET     /searchdeed                     -- borrower views deed landing page
-POST    /searchdeed/search              -- POST search for deed. Response is a html page
+POST    /searchdeed/search              -- POST search for deed (deed reference is in the request body)
 ```
+
+## Install the requirements
 
 Install the requirements
 ```
@@ -27,12 +30,8 @@ Optional: export variable for deed-api
 
 > default is localhost:9030
 
-Run the unit tests
-```
-source test.sh
-```
 
-Run the app
+## Run the app
 ```
 python run.py runserver
 ```
@@ -40,8 +39,7 @@ python run.py runserver
 > optional ```--port 9000``` where 9000 is the number of a port you can supply to start the server on.
 
 
-### Running the Unit Tests
-
+## Run the Unit Tests
 
 Install the requirements
 ```
