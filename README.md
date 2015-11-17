@@ -34,9 +34,9 @@ source test.sh
 
 Run the app
 ```
-python run.py runserver --host 0.0.0.0
+python run.py runserver
 ```
-> optional ```--host 0.0.0.0``` where 9000 is the number of a port you can supply to start the server on.
+> optional ```--host 0.0.0.0``` where 0.0.0.0 is the host address to start on.
 > optional ```--port 9000``` where 9000 is the number of a port you can supply to start the server on.
 
 
