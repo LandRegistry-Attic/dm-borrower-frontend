@@ -3,6 +3,7 @@ from flask.ext.script import Manager
 from application.service.deed_api import make_deed_api_client
 from .health.views import health
 from .deed.searchdeed.views import searchdeed
+from .borrower.views import borrower_landing
 
 
 def create_manager(deed_api_client=make_deed_api_client()):
@@ -16,5 +17,6 @@ def create_manager(deed_api_client=make_deed_api_client()):
 
     app.register_blueprint(health, url_prefix='/health')
     app.register_blueprint(searchdeed, url_prefix='/searchdeed')
+    app.register_blueprint(borrower_landing)
 
     return manager
