@@ -12,6 +12,7 @@ mortgage deeds online.
 
 ## Usage
 ```
+GET     /                               -- renders borrower landing page
 GET     /health                         -- renders standard Gov UK template
 GET     /searchdeed                     -- borrower views deed landing page
 POST    /searchdeed/search              -- POST search for deed (deed reference is in the request body)
