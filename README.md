@@ -24,10 +24,10 @@ POST    /searchdeed/search              -- POST search for deed (deed reference 
 
 2. Initialise the submodules
 
-'''
+```
 git submodule init
 git submodule update
-'''
+```
 
 3. Install the requirements
 ```
