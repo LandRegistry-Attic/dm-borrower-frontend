@@ -76,7 +76,7 @@ The Elements repo uses the [Gov.UK frontend toolkit](https://github.com/alphagov
 included in this project as a git submodule. The frontend also uses 
 the [Gov.UK Jinja2](https://github.com/alphagov/govuk_template) template which 
 is downloaded into the /build directory before being copied into the 'live' /application/static/govuk_template folder.
-The build directory in this project is intended as astaging area for the import and compilation of the the 
+The build directory in this project is intended as a staging area for the import and compilation of the 
 government templates from source code (SASS). The build process can be triggered using:-
 
 ```
