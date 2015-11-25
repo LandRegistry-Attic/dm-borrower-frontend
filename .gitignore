@@ -13,3 +13,4 @@ test-reports/
 .librarian
 .tmp
 .idea/
+htmlcov/
