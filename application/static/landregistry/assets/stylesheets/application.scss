@@ -1,7 +1,6 @@
 // Import GOV.UK elements, this will import the frontend toolkit and some base styles.
 // Take a look at elements.scss to see which files are imported.
-@import 'elements';
-
+@import '../../../../../build/elements/main';
 // Set up your main content area <main id="content">
 // This will give you a full width content block
 // See elements _layout.scss line 7.
@@ -175,4 +174,14 @@ margin-bottom:30px;
 .verified-bullets-img{
 float: left;
 
+}
+
+.verified-bullets-fa {
+  float: left;
+  font-size:27px;
+}
+
+.verfied-bullet-numbers-fa {
+  font-family: 'nta';
+  color:white;
 }
