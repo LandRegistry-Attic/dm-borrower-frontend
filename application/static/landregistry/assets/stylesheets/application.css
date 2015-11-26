@@ -126,14 +126,14 @@
     margin: 0;
     color: #000;
     font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.14286;
     font-weight: 400;
     text-transform: none; }
-    @media (max-width: 640px) {
+    @media (min-width: 641px) {
       .phase-banner p {
-        font-size: 14px;
-        line-height: 1.14286; } }
+        font-size: 16px;
+        line-height: 1.25; } }
   .phase-banner .phase-tag {
     display: -moz-inline-stack;
     display: inline-block;
@@ -141,8 +141,8 @@
     margin: 0 8px 0 0;
     padding: 2px 5px 0;
     font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.14286;
     font-weight: 700;
     text-transform: none;
     text-transform: uppercase;
@@ -153,10 +153,10 @@
     @media (min-width: 641px) {
       .phase-banner .phase-tag {
         vertical-align: baseline; } }
-    @media (max-width: 640px) {
+    @media (min-width: 641px) {
       .phase-banner .phase-tag {
-        font-size: 14px;
-        line-height: 1.14286; } }
+        font-size: 16px;
+        line-height: 1.25; } }
   .phase-banner span {
     display: -moz-inline-stack;
     display: inline-block;
@@ -280,37 +280,37 @@ fieldset {
 
 .form-label {
   font-family: "nta", Arial, sans-serif;
-  font-size: 19px;
-  line-height: 1.31579;
+  font-size: 16px;
+  line-height: 1.25;
   font-weight: 400;
   text-transform: none;
   margin-bottom: 5px; }
-  @media (max-width: 640px) {
+  @media (min-width: 641px) {
     .form-label {
-      font-size: 16px;
-      line-height: 1.25; } }
+      font-size: 19px;
+      line-height: 1.31579; } }
 
 .form-label-bold {
   font-family: "nta", Arial, sans-serif;
-  font-size: 24px;
-  line-height: 1.25;
+  font-size: 18px;
+  line-height: 1.2;
   font-weight: 700;
   text-transform: none;
   margin-bottom: 0; }
-  @media (max-width: 640px) {
+  @media (min-width: 641px) {
     .form-label-bold {
-      font-size: 18px;
-      line-height: 1.2; } }
+      font-size: 24px;
+      line-height: 1.25; } }
   .form-label-bold .form-hint {
     font-family: "nta", Arial, sans-serif;
-    font-size: 19px;
-    line-height: 1.31579;
+    font-size: 16px;
+    line-height: 1.25;
     font-weight: 400;
     text-transform: none; }
-    @media (max-width: 640px) {
+    @media (min-width: 641px) {
       .form-label-bold .form-hint {
-        font-size: 16px;
-        line-height: 1.25; } }
+        font-size: 19px;
+        line-height: 1.31579; } }
 
 .form-block {
   float: left;
@@ -329,8 +329,8 @@ fieldset {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "nta", Arial, sans-serif;
-  font-size: 19px;
-  line-height: 1.31579;
+  font-size: 16px;
+  line-height: 1.25;
   font-weight: 400;
   text-transform: none;
   width: 100%;
@@ -339,10 +339,10 @@ fieldset {
   border: 1px solid #bfc1c3;
   -webkit-appearance: none;
   border-radius: 0; }
-  @media (max-width: 640px) {
+  @media (min-width: 641px) {
     .form-control {
-      font-size: 16px;
-      line-height: 1.25; } }
+      font-size: 19px;
+      line-height: 1.31579; } }
   @media (min-width: 641px) {
     .form-control {
       width: 50%; } }
@@ -395,7 +395,7 @@ fieldset {
 @-o-viewport {
   width: device-width; }
 .validation-summary {
-  border: 3px solid #af1324;
+  border: 3px solid #b10e1e;
   padding: 15px 30px;
   margin-bottom: 30px; }
   .validation-summary ul {
@@ -403,35 +403,35 @@ fieldset {
   .validation-summary li,
   .validation-summary p {
     font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.14286;
     font-weight: 400;
     text-transform: none; }
-    @media (max-width: 640px) {
+    @media (min-width: 641px) {
       .validation-summary li,
       .validation-summary p {
-        font-size: 14px;
-        line-height: 1.14286; } }
+        font-size: 16px;
+        line-height: 1.25; } }
   .validation-summary p {
     margin-top: 15px;
     margin-bottom: 5px; }
   .validation-summary a {
-    color: #af1324; }
+    color: #b10e1e; }
   .validation-summary .heading-small {
     margin-top: 15px; }
 
 .validation-message {
   font-family: "nta", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.25;
+  font-size: 14px;
+  line-height: 1.14286;
   font-weight: 400;
   text-transform: none;
   display: block;
-  color: #af1324; }
-  @media (max-width: 640px) {
+  color: #b10e1e; }
+  @media (min-width: 641px) {
     .validation-message {
-      font-size: 14px;
-      line-height: 1.14286; } }
+      font-size: 16px;
+      line-height: 1.25; } }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -680,14 +680,14 @@ input[type=number] {
     margin: 0;
     color: #000;
     font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.14286;
     font-weight: 400;
     text-transform: none; }
-    @media (max-width: 640px) {
+    @media (min-width: 641px) {
       .alpha-banner p {
-        font-size: 14px;
-        line-height: 1.14286; } }
+        font-size: 16px;
+        line-height: 1.25; } }
   .alpha-banner .phase-tag {
     display: -moz-inline-stack;
     display: inline-block;
@@ -695,8 +695,8 @@ input[type=number] {
     margin: 0 8px 0 0;
     padding: 2px 5px 0;
     font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
+    font-size: 14px;
+    line-height: 1.14286;
     font-weight: 700;
     text-transform: none;
     text-transform: uppercase;
@@ -707,10 +707,10 @@ input[type=number] {
     @media (min-width: 641px) {
       .alpha-banner .phase-tag {
         vertical-align: baseline; } }
-    @media (max-width: 640px) {
+    @media (min-width: 641px) {
       .alpha-banner .phase-tag {
-        font-size: 14px;
-        line-height: 1.14286; } }
+        font-size: 16px;
+        line-height: 1.25; } }
   .alpha-banner span {
     display: -moz-inline-stack;
     display: inline-block;
@@ -728,8 +728,8 @@ input[type=number] {
   margin: 0 8px 0 0;
   padding: 2px 5px 0;
   font-family: "nta", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.25;
+  font-size: 14px;
+  line-height: 1.14286;
   font-weight: 700;
   text-transform: none;
   text-transform: uppercase;
@@ -740,10 +740,10 @@ input[type=number] {
   @media (min-width: 641px) {
     .alpha-tag {
       vertical-align: baseline; } }
-  @media (max-width: 640px) {
+  @media (min-width: 641px) {
     .alpha-tag {
-      font-size: 14px;
-      line-height: 1.14286; } }
+      font-size: 16px;
+      line-height: 1.25; } }
 
 .deed-summary {
   padding: 15px;
