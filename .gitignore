@@ -1,6 +1,6 @@
 __pycache__
-/app/static/elements
-/app/static/govuk_template
+/application/static/elements
+/application/static/govuk_template
 /build/zip
 .webassets-cache
 *.pyc
@@ -12,3 +12,8 @@ test-reports/
 *.lock
 .librarian
 .tmp
+.idea/
+htmlcov/
+/application
+*.css.map
+.sass-cache/
