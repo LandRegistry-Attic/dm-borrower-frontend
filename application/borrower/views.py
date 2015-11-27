@@ -5,6 +5,11 @@ borrower_landing = Blueprint('borrower_landing', __name__,
                              static_folder='static')
 
 
+@borrower_landing.route('/identity-verified')
+def verified():
+    return render_template("landing.html")
+
+
 @borrower_landing.route('/')
 def home():
-    return render_template("landing.html")
+    return render_template("start.html")
