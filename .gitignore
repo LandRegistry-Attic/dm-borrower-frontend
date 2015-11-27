@@ -16,3 +16,4 @@ test-reports/
 htmlcov/
 *.css.map
 .sass-cache/
+/build/elements-toolkit/govuk_modules
