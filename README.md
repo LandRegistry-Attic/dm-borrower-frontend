@@ -71,11 +71,6 @@ See, the following link for information on how to run the acceptance tests:-
 
 ## Frontend
 
-The templates and styles for the borrower frontend are built using a copy of the 
-[Gov.UK Elements repo](https://github.com/alphagov/govuk_elements). 
-The Elements repo uses the [Gov.UK frontend toolkit](https://github.com/alphagov/govuk_frontend_toolkit) which is 
-included in this project as a git submodule. The frontend also uses 
-the [Gov.UK Jinja2](https://github.com/alphagov/govuk_template) template which 
-is downloaded into the /build directory before being copied into the 'live' /application/static/govuk_template folder.
-The build directory in this project is intended as a staging area for the import and compilation of the 
-government templates from source code (SASS). 
+[Frontend build readme](https://github.com/landregistry/dm-borrower-frontend/build/readme.md)
+
+
