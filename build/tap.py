@@ -2,6 +2,7 @@ import requests
 from os import path, makedirs
 from subprocess import call
 
+
 def thisDir():
     return path.dirname(path.realpath(__file__))
 
@@ -37,7 +38,7 @@ def jinja_asset(release):
 
 
 def download(asset):
-    local_filepath = './build/zip/' + asset['name']
+    local_filepath = './zip/' + asset['name']
     response = requests.get(asset['browser_download_url'], stream=True)
     if not path.exists(path.dirname(local_filepath)):
         makedirs(path.dirname(local_filepath))
@@ -83,7 +84,7 @@ def unzip(tar_path):
 def copy_views(tar_path, name):
     unzipped_path = unzip_path(tar_path)
     source_view = unzipped_path + '/views/layouts/govuk_template.html'
-    target_view = './application/templates/base/govuk_base_template.html'
+    target_view = '../application/templates/base/govuk_base_template.html'
 
     if not path.exists(unzipped_path):
         unzip(tar_path)
@@ -96,7 +97,7 @@ def copy_views(tar_path, name):
 
 def copy_assets(tar_path):
     unzipped_path = unzip_path(tar_path)
-    assets_path = './application/static/govuk_template'
+    assets_path = '../application/static/govuk_template'
 
     if not path.exists(unzipped_path):
         unzip(tar_path)

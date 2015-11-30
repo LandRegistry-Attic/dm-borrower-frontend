@@ -4,13 +4,16 @@
 The templates and styles for the borrower frontend are built using a copy of the 
 [Gov.UK Elements repo](https://github.com/alphagov/govuk_elements) which is setup as a git sub-module repo in the 
 /build/elements-toolkit directory. 
+
 The Elements repo uses the [Gov.UK frontend toolkit](https://github.com/alphagov/govuk_frontend_toolkit) which is 
 downloaded into the build/elements-toolkit/govuk_modules directory as part of a grunt build (see below). 
+
 The dm-borrower-frontend also uses the [Gov.UK Jinja2](https://github.com/alphagov/govuk_template) template which 
 is downloaded into the /build directory before being copied into the 'live' /application/static/govuk_template folder.
 The build directory in this project is intended as a staging area for the import and compilation of the 
-government templates from source code (SASS). THe build process only needs to be run if the intention is to update
-the government templates and styles into the live /application directory
+government templates from source code (SASS). The build process only needs to be run if the intention is to update
+the government templates and styles into the live /application directory.
+
 
 ## Contents
 - [Initialise Elements Submodule](#initalise-elements-submodule)
