@@ -2,7 +2,6 @@ import requests
 from os import path, makedirs
 from subprocess import call
 
-
 def thisDir():
     return path.dirname(path.realpath(__file__))
 
@@ -104,3 +103,6 @@ def copy_assets(tar_path):
     call(["cp", "-rf", unzipped_path + "/assets", assets_path])
 
     print('Copied ' + unzipped_path + '/assets to ' + assets_path)
+
+
+download_jinja()
