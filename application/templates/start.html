@@ -1,0 +1,51 @@
+{% extends "base/lr_base_layout.html" %}
+
+{% block content %}
+<head>
+  <link href="/static/landregistry/assets/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+
+
+<main id="content" role="main">
+
+  <h1 class="heading-xlarge">Sign your mortgage deed</h1>
+
+	<div class="text">
+
+		<p>
+			Use this service to confirm your mortgage details are correct, and sign
+			your mortgage deed. Your conveyancer will then ensure the Land Registry is
+			updated.
+		</p>
+
+		<p>To do this you will need:</p>
+
+		<ul>
+			<li>To verify your identity using GOV.UK Verify</li>
+			<li>The phone number and/or email address you provided during your application</li>
+		</ul>
+
+		<p>
+			<a href="/identity-verified" class="button button-get-started">Start now</a>
+		</p>
+
+		<div class="panel-indent">
+			<p class="font-xsmall">
+				Any information you provide during this process will be stored by
+				GOV.UK for fraud prevention purposes.
+			</p>
+		</div>
+
+		<details>
+			<summary>
+				Why is the government involved in this?
+			</summary>
+			<p>The Land Registry registers any interests affecting registered land,
+				such as a change of mortgage. Find out more
+				<a href="https://www.gov.uk/government/organisations/land-registry/about">here.</a>
+			</p>
+		</details>
+
+	</div>
+</main>
+{% endblock %}
