@@ -2,13 +2,7 @@
 
 {% block content %}
 <div class="main" id="content">
-    <div class="phase-banner">
-        <p>
-            <strong class="phase-tag">BETA</strong>
-            <span>This service is in private beta. Please give us your <a rel="external"
-                                                                          href="mailto:digital-register-feedback@digital.landregistry.gov.uk">Feedback</a>.</span>
-        </p>
-    </div>
+    {{ super() }}
     <div>&nbsp;</div>
     <form id="search-deed-form" action="/searchdeed/search" method="POST">
 
