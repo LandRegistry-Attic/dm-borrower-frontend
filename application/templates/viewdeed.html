@@ -15,7 +15,7 @@
 
     <p>Borrowers:</p>
     <ul id="borrowers">
-        {% for borrower in deed_data.borrowers %}
+        {% for borrower in deed_data.deed.borrowers %}
         <li><a>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
             borrower.surname}}</a></li>
         {% endfor %}
@@ -23,8 +23,8 @@
     <p>Property</p>
 
     <ul>
-        <li>Title number: {{ deed_data.title_number }}</li>
-        <li>MD Ref: {{deed_data.md_ref}}</li>
+        <li>Title number: {{ deed_data.deed.title_number }}</li>
+        <li>MD Ref: {{deed_data.deed.md_ref}}</li>
     </ul>
 
     <form action="/searchdeed">
