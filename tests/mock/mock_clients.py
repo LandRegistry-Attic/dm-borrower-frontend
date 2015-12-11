@@ -16,4 +16,4 @@ class DeedApiMockClient:
             title_number
         )
 
-        return deed
+        return {"deed": deed}
