@@ -4,4 +4,4 @@ DEBUG = True
 
 
 DEED_API_BASE_HOST = os.getenv('DEED_API_ADDRESS',
-                               'http://deed-api.dev.service.gov.uk')
+                               'http://10.10.10.10:9020')
