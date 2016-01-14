@@ -26,7 +26,7 @@ def search_deed_search():
                                    deed_reference=deed_token)
     else:
         response = render_template('deednotfound.html',
-                                   borrower_token=deed_token)
+                                   borrower_token=borrower_token)
 
     return response
 
