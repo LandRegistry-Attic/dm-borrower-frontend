@@ -34,11 +34,11 @@ def search_deed_search():
 def validate_borrower(borrower_token):
     if borrower_token is not None and borrower_token != '':
         deed_api_client = getattr(searchdeed, 'deed_api_client')
-        borrower_token = deed_api_client.validate_borrower(str(borrower_token))
+        deed_token = deed_api_client.validate_borrower(str(borrower_token))
     else:
-        borrower_token = None
+        deed_token = None
 
-    return borrower_token
+    return deed_token
 
 
 def lookup_deed(deed_reference):
