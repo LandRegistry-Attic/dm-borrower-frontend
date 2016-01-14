@@ -12,18 +12,33 @@ def search_deed_main():
 
 @searchdeed.route('/search', methods=['POST'])
 def search_deed_search():
-    deed_reference = request.form['deed_reference']
+    borrower_token = request.form['borrower_token']
 
-    deed_data = lookup_deed(deed_reference)
+    deed_token = validate_borrower(borrower_token)
+
+    deed_data = None
+
+    if deed_token:
+        deed_data = lookup_deed(deed_token['deed_token'])
 
     if deed_data is not None:
         response = render_template('viewdeed.html', deed_data=deed_data,
-                                   deed_reference=deed_reference)
+                                   deed_reference=deed_token)
     else:
         response = render_template('deednotfound.html',
-                                   deed_reference=deed_reference)
+                                   borrower_token=deed_token)
 
     return response
+
+
+def validate_borrower(borrower_token):
+    if borrower_token is not None and borrower_token != '':
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        borrower_token = deed_api_client.validate_borrower(str(borrower_token))
+    else:
+        borrower_token = None
+
+    return borrower_token
 
 
 def lookup_deed(deed_reference):
