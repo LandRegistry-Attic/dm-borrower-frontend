@@ -17,3 +17,9 @@ class DeedApiMockClient:
         )
 
         return {"deed": deed}
+
+    @staticmethod
+    def validate_borrower(borrower_token):
+        deed_token = "aaaaaaa"
+
+        return {"deed_token": deed_token}
