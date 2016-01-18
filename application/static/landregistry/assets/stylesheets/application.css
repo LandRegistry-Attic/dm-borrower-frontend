@@ -873,3 +873,16 @@ dl {
   color: white; }
 
 /*# sourceMappingURL=application.css.map */
+
+.bordered-output-present{
+    border: 1px solid #bfc1c3;
+    padding: 4px;
+    width: 350px;
+}
+
+.bordered-output-not-present{
+    border: 1px solid #bfc1c3;
+    padding: 4px;
+    color: #6f777b;
+    width: 350px;
+}
