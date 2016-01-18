@@ -13,87 +13,81 @@
         <p><b>This is a legal document &mdash; please check all details carefully.</b></p>
       </div>
     </div>
-
+    <div class="column-two-thirds">
     <article class="deed-document--bounds">
-    <h2 class="heading-large">Electronic Mortgage Deed</h2>
-        <h2 class="heading-medium">Property: </h2>
-            <p itemscope itemtype="http://schema.org/PostalAddress">
-            <span itemprop="streetAddress">
-              Address Line 1<br>
-            </span>
-            <span itemprop="addressLocality">Locality</span><br>
-            <span itemprop="postalCode">PO57 CDE</span>
-          </p>
+        <h2 class="heading-large">Electronic Mortgage Deed</h2>
+            <h2 class="heading-medium">Property: </h2>
+                <p itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="streetAddress">
+                  Address Line 1<br>
+                </span>
+                <span itemprop="addressLocality">Locality</span><br>
+                <span itemprop="postalCode">PO57 CDE</span>
+              </p>
 
-        <dl class="definition-inline">
-        <dt><b>Title number</b></dt>
-            <dd>{{ deed_data.deed.title_number }}</dd>
-        </dl>
+            <dl class="definition-inline">
+            <dt><b>Title number</b></dt>
+                <dd>{{ deed_data.deed.title_number }}</dd>
+            </dl>
 
-      <h2 class="heading-medium">Lender:</h2>
+          <h2 class="heading-medium">Lender</h2>
 
 
-    <h2 class="heading-medium">Borrowers:</h2>
-    <div class="grid-row">
-        {% for borrower in deed_data.deed.borrowers %}
-        <div class="column-third">
-          <p>
-            <b><a>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
-            borrower.surname}}</a></b><br>
-          </p>
-        </div>
-        {% endfor %}
-    </div>
-
-     <h2 class="heading-medium">Property:</h2>
-
-    <ul>
-        <li>MD Ref: {{deed_data.deed.md_ref}}</li>
-    </ul>
-
-    <div class="text">
-
-        <h3 class="heading-small">Charging clause:</h3>
-        <p>The borrower, with full title guarantee, charges to the lender the property by way of legal mortgage with payment of all money secured by the charge.</p>
-
-        <h3 class="heading-small">Additional provisions:</h3>
-        <ol>
-          <li>
-            <p>This Mortgage Deed incorporates the <a href="#" rel="external">Lenders Mortgage Conditions and Explanation 2006</a>, a copy of which the borrower has received.</p>
-          </li>
-          <li>
-            <p>The lender is obliged to make further advances and applies for the obligation to be entered in the register.</p>
-          </li>
-          <li>
-            <p>The borrower applies to enter a restriction in the register that no disposition of the registered estate by the proprietor of the registered estate is to be registered without a written consent signed by the proprietor for the time being of the charge dated [the date of this charge] in favour of Bank of England Plc referred to in the charges register.</p>
-          </li>
-        </ol>
-    </div>
-    <div class="form-group">
-
-          <label class="heading-small" for="auth-code">Effective date and time</label></br>
-          <p class="form-hint">This charge takes effect when the registrar receives notification from
-              <br>[name of conveyancer preparing the charge] that the charge is to
-              <br>take effect.</p>
-          <input type="text" class="form-control" id="auth-code" name="auth-code" disabled="true" value="Effective date and time will be shown here">
-
-          <label class="heading-small" for="signature">Borrower's electronic signature(s)</label><br>
-
-          <input type="text" class="form-control" id="signature1" name="signature1" disabled="true" value="Electronically signed by Sarah Jane Smith">
-          <br>
-          <input type="text" class="form-control" id="signature2" name="signature2" disabled="false" value="[Awaiting signature by Peter Smith]">
-
-				<div class="form-group">
-					<label class="heading-small" for="auth-code">Registrar's electronic signature</label><br>
-					<input type="text" class="form-control" id="auth-code" name="auth-code" disabled="true" value="[Will be applied when the charge takes effect]">
-				</div>
-    </div>
-        <div class="form-group">
-          <label>E-MD ref: 1118</label><br>
+        <h2 class="heading-medium">Borrower</h2>
+        <div class="grid-row">
+            {% for borrower in deed_data.deed.borrowers %}
+            <div class="column-third">
+              <p>
+                <b><a>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+                borrower.surname}}</a></b><br>
+              </p>
+            </div>
+            {% endfor %}
         </div>
 
+        <div class="text">
+
+            <h3 class="heading-small">Charging clause:</h3>
+            <p>The borrower, with full title guarantee, charges to the lender the property by way of legal mortgage with payment of all money secured by the charge.</p>
+
+            <h3 class="heading-small">Additional provisions:</h3>
+            <ol>
+              <li>
+                <p>This Mortgage Deed incorporates the <a href="#" rel="external">Lenders Mortgage Conditions and Explanation 2006</a>, a copy of which the borrower has received.</p>
+              </li>
+              <li>
+                <p>The lender is obliged to make further advances and applies for the obligation to be entered in the register.</p>
+              </li>
+              <li>
+                <p>The borrower applies to enter a restriction in the register that no disposition of the registered estate by the proprietor of the registered estate is to be registered without a written consent signed by the proprietor for the time being of the charge dated [the date of this charge] in favour of Bank of England Plc referred to in the charges register.</p>
+              </li>
+            </ol>
+        </div>
+        <div class="text">
+
+              <label class="heading-small" for="auth-code">Effective date and time</label></br>
+              <p class="form-hint">This charge takes effect when the registrar receives notification from
+                  <br>[name of conveyancer preparing the charge]
+                  <br>that the charge is to take effect.</p>
+              <div class="block-label" id="auth-code" style="width: 400px;">Effective date and time will be shown here</div>
+                <br><br>
+              <label class="heading-small" for="signature">Borrower's electronic signature(s)</label><br>
+            {% for borrower in deed_data.deed.borrowers %}
+              <div class="block-label" id="signature1" style="width: 400px;">Signature of {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+                borrower.surname}}</div>
+              <br><br>
+            {% endfor %}
+                    <div class="form-group">
+                        <label class="heading-small" for="auth-code">Registrar's electronic signature</label><br>
+                        <div class="block-label" id="signature1" style="width: 400px;" id="elecsig">[Will be applied when the charge takes effect]</div>
+                    </div>
+        </div>
+            <div class="text">
+              <label>E-MD ref: {{deed_data.deed.md_ref}}</label><br>
+            </div>
 
     </article>
+    </div>
 </div>
     <form action="/searchdeed">
         <input class="button" type="submit" value="Back">

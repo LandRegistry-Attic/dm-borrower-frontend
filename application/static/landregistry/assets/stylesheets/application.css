@@ -512,7 +512,8 @@ input[type=number] {
   padding: 0 30px 30px 30px;
   border-color: #2b8cc4;
   border-width: 3px 2px;
-  border-style: solid; }
+  border-style: solid;
+  }
 
 .deed-document--divider {
   margin-top: 30px;
