@@ -39,6 +39,12 @@ sudo npm install -g grunt-cli   -- install the grunt tool as a global tool
 
 #Run Grunt
 
+From the build/elements-toolkit directory:-
+
+```
+grunt
+```
+
 From the build/ directory:-
 
 ```
