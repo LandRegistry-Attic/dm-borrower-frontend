@@ -14,12 +14,11 @@ def get_deed(deed_reference):
     return data
 
 
-def validate_borrower(borrower_token):
-    data = None
-    resp = requests.get(config.DEED_API_BASE_HOST + '/borrower/' +
-                        str(borrower_token))
-
+def validate_borrower(payload):
+    resp = requests.post(config.DEED_API_BASE_HOST +
+                         '/borrower/validate', json=payload)
+    deed_token = None
     if resp.status_code == status.HTTP_200_OK:
-        data = resp.json()
+        deed_token = resp.json()
 
-    return data
+    return deed_token
