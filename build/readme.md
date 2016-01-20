@@ -39,6 +39,12 @@ sudo npm install -g grunt-cli   -- install the grunt tool as a global tool
 
 #Run Grunt
 
+From the build/elements-toolkit directory:-
+
+```
+grunt
+```
+
 From the build/ directory:-
 
 ```
@@ -67,4 +73,21 @@ python3 tap.py
 
 This will download the latest copy of the Jinja templates and assets and copy them into 
 /application/static/govuk_template directory.
+
+#Setup PyCharm IDE
+
+1) Install SASS using:- gem install sass
+2) In PyCharm, Setup a watcher to auto build sass Preferences|Tools|File Watchers
+
+Click '+' to add and setup as follows:
+
+File Type: .SCSS
+Scope: Project files
+Program: /usr/local/bin/sass
+Arguments: $FileDir$/$FileName$ $FileDir$/$FileNameWithoutExtension$.css  -I /Users/User1/landregistry/beta/dm-borrower-frontend/build/elements-toolkit/govuk_modules/public/sass
+Working Directory: $ProjectFileDir
+Output Paths to refresh: $FileNameWithoutExtension$.css
+
+3) Changes to landregistry.scss and application.scss will build .css files
+
 
