@@ -4,17 +4,40 @@
 <div class="main" id="content">
     {{ super() }}
     <div>&nbsp;</div>
+    <h1 class="heading-small">What is your date of birth?</h1>
     <form id="enter-dob-form" action="/searchdeed/search" method="POST">
+    <fieldset>
 
-        <div class="form-group">
-            <label class="form-label" for="borrower_token">Enter date of birth: </label>
-            <input id="dob" class="form-control" type="text" name="dob">
-            <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text" value="{{borrower_token}}">
+      <legend class="visuallyhidden">Date of birth</legend>
+
+      <div class="form-date">
+
+        <p class="form-hint">For example, 31 3 1980</p>
+        <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text" value="{{borrower_token}}">
+
+        <div class="form-group form-group-day">
+          <label for="dd">Day</label>
+          <input class="form-control" id="dob-day" name="dd" type="number" pattern="[0-9]*" min="0" max="31">
         </div>
-        <div class="form-group">
-            <input type="submit" class="button" value="Search">
+
+        <div class="form-group form-group-month">
+          <label for="mm">Month</label>
+          <input class="form-control" id="dob-month" name="mm" type="number" pattern="[0-9]*" min="0" max="12">
         </div>
-    </form>
+
+        <div class="form-group form-group-year">
+          <label for="yyyy">Year</label>
+          <input class="form-control" id="dob-year" name="yyyy" type="number" pattern="[0-9]*" min="0" max="2014">
+        </div>
+
+      </div>
+
+    </fieldset>
+    <div>&nbsp;</div>
+    <div class="form-group">
+        <input type="submit" class="button" value="Search">
+    </div>
+  </form>
 </div>
 
 {% endblock %}
