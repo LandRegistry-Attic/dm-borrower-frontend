@@ -20,7 +20,6 @@ def enter_dob():
 def search_deed_search():
     borrower_token = request.form['borrower_token']
     dob = request.form['dd']+"/"+request.form['mm']+"/"+request.form['yyyy']
-    print(dob)
     deed_token = validate_borrower(borrower_token, dob)
 
     deed_data = None
@@ -40,7 +39,6 @@ def search_deed_search():
 
 def validate_borrower(borrower_token, dob):
     if borrower_token is not None and borrower_token != '':
-
 
         payload = {
             "borrower_token": borrower_token,
