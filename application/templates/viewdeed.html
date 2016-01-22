@@ -19,7 +19,7 @@
               </p>
 
             <dl class="definition-inline">
-            <dt class="bolden-text">Title number</dt>
+            <dt class="bold-text">Title number</dt>
                 <dd>{{ deed_data.deed.title_number }}</dd>
             </dl>
 
@@ -29,7 +29,7 @@
         </div>
 
         <h3 class="heading-medium">Borrower</h3>
-        <div class="bolden-text">
+        <div class="bold-text">
             {% for borrower in deed_data.deed.borrowers %}
                 {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
                 borrower.surname}}<br>
