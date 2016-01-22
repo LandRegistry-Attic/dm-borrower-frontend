@@ -29,10 +29,10 @@
         </div>
 
         <h3 class="heading-medium">Borrower</h3>
-            <p class="bold-text"> {% for borrower in deed_data.deed.borrowers %}
+            {% for borrower in deed_data.deed.borrowers %} <p class="bold-text">
                 {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
                 borrower.surname}}
-            </p>
+                </p>
             {% endfor %}
 
         <div class="text">
@@ -64,11 +64,11 @@
             borrower.surname}} goes here]</p>
         {% endfor %}
             <div class="form-group">
-                <label class="heading-small" for="auth-code">Registrar's electronic signature</label><br>
+                <label class="heading-small" for="auth-code">Registrar's electronic signature</label>
                 <p class="bordered-output-not-present" id="registrarsig">[Will be applied when the charge takes effect]</p>
             </div>
             <div class="text">
-              <label>{{deed_data.deed.md_ref}}</label><br>
+              <label>{{deed_data.deed.md_ref}}</label>
             </div>
         </p>
     </article>
