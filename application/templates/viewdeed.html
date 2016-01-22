@@ -40,8 +40,8 @@
             {% for borrower in deed_data.deed.borrowers %}
             <div class="column-third">
               <p>
-                <b><a>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
-                borrower.surname}}</a></b><br>
+                <b>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+                borrower.surname}}</b><br>
               </p>
             </div>
             {% endfor %}
