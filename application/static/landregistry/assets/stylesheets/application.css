@@ -1505,6 +1505,9 @@ dl {
   padding-top: 15px;
   border-top: 1px solid #dee0e2; }
 
+.bolden-text {
+  font-weight: bold; }
+
 .verified-container {
   margin-top: 30px;
   width: 50%; }
