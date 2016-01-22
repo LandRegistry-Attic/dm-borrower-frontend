@@ -14,7 +14,7 @@
     <div class="column-two-thirds">
     <article class="deed-document--bounds">
         <h2 class="heading-large">Electronic Mortgage Deed</h2>
-            <h2 class="heading-medium">Property: </h2>
+            <h3 class="heading-medium">Property </h3>
                 <p itemscope itemtype="http://schema.org/PostalAddress">
                 <span itemprop="streetAddress">
                   Address Line 1<br>
@@ -28,12 +28,12 @@
                 <dd>{{ deed_data.deed.title_number }}</dd>
             </dl>
 
-          <h2 class="heading-medium">Lender</h2>
+          <h3 class="heading-medium">Lender</h3>
         <div class="text">
             Lender Information will go here
         </div>
 
-        <h2 class="heading-medium">Borrower</h2>
+        <h3 class="heading-medium">Borrower</h3>
         <div class="grid-row">
             {% for borrower in deed_data.deed.borrowers %}
             <div class="column-third">
@@ -46,7 +46,6 @@
         </div>
 
         <div class="text">
-
             <h3 class="heading-small">Charging clause:</h3>
             <p>The borrower, with full title guarantee, charges to the lender the property by way of legal mortgage with payment of all money secured by this charge.</p>
 
@@ -63,34 +62,32 @@
               </li>
             </ol>
         </div>
-        <p class="text">
 
-              <label class="heading-small" for="auth-code">Effective date and time</label></br>
-              <p >This charge takes effect when the registrar receives notification from
-                  Pure Law that the charge is to take effect.</p>
-              <p class="bordered-output-not-present">[Effective date and time will be shown here]</p>
-              <label class="heading-small" for="signature">Borrower's electronic signature(s)</label><br>
-            {% for borrower in deed_data.deed.borrowers %}
-              <p class="bordered-output-not-present" id="signature{{loop.index}}">[e-signature of {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
-                borrower.surname}} goes here]</p>
-            {% endfor %}
-                    <div class="form-group">
-                        <label class="heading-small" for="auth-code">Registrar's electronic signature</label><br>
-                        <p class="bordered-output-not-present" id="registrarsig">[Will be applied when the charge takes effect]</p>
-                    </div>
+        <p class="text">
+          <label class="heading-small" for="auth-code">Effective date and time</label>
+          <p>This charge takes effect when the registrar receives notification from
+              Pure Law that the charge is to take effect.</p>
+          <p class="bordered-output-not-present">[Effective date and time will be shown here]</p>
+          <label class="heading-small" for="signature">Borrower's electronic signature(s)</label><br>
+        {% for borrower in deed_data.deed.borrowers %}
+          <p class="bordered-output-not-present" id="signature{{loop.index}}">[e-signature of {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+            borrower.surname}} goes here]</p>
+        {% endfor %}
+            <div class="form-group">
+                <label class="heading-small" for="auth-code">Registrar's electronic signature</label><br>
+                <p class="bordered-output-not-present" id="registrarsig">[Will be applied when the charge takes effect]</p>
+            </div>
             <div class="text">
               <label>E-MD ref: {{deed_data.deed.md_ref}}</label><br>
-
             </div>
         </p>
     </article>
-    <div class="text">
-        <form action="/searchdeed">
-        <input class="button" type="submit" value="Back">
-    </form>
+        <div class="text">
+            <form action="/searchdeed">
+            <input class="button" type="submit" value="Back">
+        </form>
+        </div>
     </div>
-
-</div>
 
 </div>
 
