@@ -29,12 +29,10 @@
         </div>
 
         <h3 class="heading-medium">Borrower</h3>
-        <div class="bold-text">
             {% for borrower in deed_data.deed.borrowers %}
-                {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
-                borrower.surname}}<br>
+                <p class="bold-text">{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+                borrower.surname}}</p>
             {% endfor %}
-        </div>
 
         <div class="text">
             <h3 class="heading-small">Charging clause:</h3>
