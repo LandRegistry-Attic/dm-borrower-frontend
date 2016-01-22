@@ -29,9 +29,10 @@
         </div>
 
         <h3 class="heading-medium">Borrower</h3>
-            {% for borrower in deed_data.deed.borrowers %}
-                <p class="bold-text">{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
-                borrower.surname}}</p>
+            <p class="bold-text"> {% for borrower in deed_data.deed.borrowers %}
+                {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+                borrower.surname}}
+            </p>
             {% endfor %}
 
         <div class="text">
@@ -57,7 +58,7 @@
           <p>This charge takes effect when the registrar receives notification from
               Pure Law that the charge is to take effect.</p>
           <p class="bordered-output-not-present">[Effective date and time will be shown here]</p>
-          <label class="heading-small" for="signature">Borrower's electronic signature(s)</label><br>
+          <label class="heading-small" for="signature">Borrower's electronic signature(s)</label>
         {% for borrower in deed_data.deed.borrowers %}
           <p class="bordered-output-not-present" id="signature{{loop.index}}">[e-signature of {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
             borrower.surname}} goes here]</p>
