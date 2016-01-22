@@ -3,27 +3,92 @@
 {% block content %}
 <div class="main" id="content">
     {{ super() }}
-    <div>&nbsp;</div>
 
-    <strong>Your mortgage deed</strong>
+    <h1 class="heading-xlarge">Your mortgage deed</h1>
 
-    <p>Borrowers:</p>
-    <ul id="borrowers">
+    <div class="text">
+      <div class="alert-inline">
+        <p><b>This is a legal document &mdash; please check all details carefully.</b></p>
+      </div>
+    </div>
+    <div class="column-two-thirds">
+    <article class="deed-document-bounds">
+        <h2 class="heading-large">Electronic Mortgage Deed</h2>
+            <h3 class="heading-medium">Property </h3>
+                <p itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="streetAddress">
+                  Address Line 1<br>
+                </span>
+                <span itemprop="addressLocality">Locality</span><br>
+                <span itemprop="postalCode">PO57 CDE</span>
+              </p>
+
+            <dl class="definition-inline">
+            <dt><b>Title number</b></dt>
+                <dd>{{ deed_data.deed.title_number }}</dd>
+            </dl>
+
+          <h3 class="heading-medium">Lender</h3>
+        <div class="text">
+            Lender Information will go here
+        </div>
+
+        <h3 class="heading-medium">Borrower</h3>
+        <div class="grid-row">
+            {% for borrower in deed_data.deed.borrowers %}
+            <div class="column-third">
+              <p>
+                <b>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+                borrower.surname}}</b><br>
+              </p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text">
+            <h3 class="heading-small">Charging clause:</h3>
+            <p>The borrower, with full title guarantee, charges to the lender the property by way of legal mortgage with payment of all money secured by this charge.</p>
+
+            <h3 class="heading-small">Additional provisions:</h3>
+            <ol>
+              <li>
+                <p>This Mortgage Deed incorporates the <a href="#" rel="external">Lenders Mortgage Conditions and Explanation 2006</a>, a copy of which the borrower has received.</p>
+              </li>
+              <li>
+                <p>The lender is obliged to make further advances and applies for the obligation to be entered in the register.</p>
+              </li>
+              <li>
+                <p>The borrower applies to enter a restriction in the register that no disposition of the registered estate by the proprietor of the registered estate is to be registered without a written consent signed by the proprietor for the time being of the charge dated [the date of this charge] in favour of Bank of England Plc referred to in the charges register.</p>
+              </li>
+            </ol>
+        </div>
+
+        <p class="text">
+          <label class="heading-small" for="auth-code">Effective date and time</label>
+          <p>This charge takes effect when the registrar receives notification from
+              Pure Law that the charge is to take effect.</p>
+          <p class="bordered-output-not-present">[Effective date and time will be shown here]</p>
+          <label class="heading-small" for="signature">Borrower's electronic signature(s)</label><br>
         {% for borrower in deed_data.deed.borrowers %}
-        <li><a>{{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
-            borrower.surname}}</a></li>
+          <p class="bordered-output-not-present" id="signature{{loop.index}}">[e-signature of {{ borrower.forename}} {{ borrower.middle_name}}{% if borrower.middle_name %} {% endif %}{{
+            borrower.surname}} goes here]</p>
         {% endfor %}
-    </ul>
-    <p>Property</p>
+            <div class="form-group">
+                <label class="heading-small" for="auth-code">Registrar's electronic signature</label><br>
+                <p class="bordered-output-not-present" id="registrarsig">[Will be applied when the charge takes effect]</p>
+            </div>
+            <div class="text">
+              <label>E-MD ref: {{deed_data.deed.md_ref}}</label><br>
+            </div>
+        </p>
+    </article>
+        <div class="text">
+            <form action="/searchdeed">
+            <input class="button" type="submit" value="Back">
+        </form>
+        </div>
+    </div>
 
-    <ul>
-        <li>Title number: {{ deed_data.deed.title_number }}</li>
-        <li>MD Ref: {{deed_data.deed.md_ref}}</li>
-    </ul>
-
-    <form action="/searchdeed">
-        <input class="button" type="submit" value="Back">
-    </form>
 </div>
 
 {% endblock %}
