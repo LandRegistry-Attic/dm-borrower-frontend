@@ -25,7 +25,9 @@
 
           <h3 class="heading-medium">Lender</h3>
         <div class="text">
-            Lender Information will go here
+            <p>{{  deed_data.lender.name }}</p>
+            <p>{{  deed_data.lender.address }}</p>
+            <p>{{  deed_data.lender.registration }}</p>
         </div>
 
         <h3 class="heading-medium">Borrower</h3>
@@ -37,19 +39,16 @@
 
         <div class="text">
             <h3 class="heading-small">Charging clause:</h3>
-            <p>The borrower, with full title guarantee, charges to the lender the property by way of legal mortgage with payment of all money secured by this charge.</p>
+            <p>{{  deed_data.charge_clause }}</p>
 
             <h3 class="heading-small">Additional provisions:</h3>
             <ol>
-              <li>
-                <p>This Mortgage Deed incorporates the <a href="#" rel="external">Lenders Mortgage Conditions and Explanation 2006</a>, a copy of which the borrower has received.</p>
-              </li>
-              <li>
-                <p>The lender is obliged to make further advances and applies for the obligation to be entered in the register.</p>
-              </li>
-              <li>
-                <p>The borrower applies to enter a restriction in the register that no disposition of the registered estate by the proprietor of the registered estate is to be registered without a written consent signed by the proprietor for the time being of the charge dated [the date of this charge] in favour of Bank of England Plc referred to in the charges register.</p>
-              </li>
+                {% for provision in deed_data.additional_provisions%}
+                  <li>
+                    <p>{{  provision.description }}</p>
+                  </li>
+                {% endfor %}
+
             </ol>
         </div>
 
