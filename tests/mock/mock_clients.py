@@ -12,12 +12,12 @@ class DeedApiMockClient:
         title_number = 'dm1234',
         lender = {
             "name": "Bank of England",
-            "address":"address",
-            "registration":"company registration"
+            "address": "address",
+            "registration": "company registration"
         }
-        charge_clause = { "description":"a charge clause"}
+        charge_clause = {"description": "a charge clause"}
 
-        additional_provisions = [ { "description":"provision 1"}]
+        additional_provisions = [{"description": "provision 1"}]
 
         deed = Deed(
             deed_reference,
