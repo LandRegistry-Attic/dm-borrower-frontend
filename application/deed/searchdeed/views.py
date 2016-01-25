@@ -15,23 +15,21 @@ def search_deed_main():
 def validate_dob(form):
     error = None
     try:
-
         day = int(form["dob-day"])
         month = int(form["dob-month"])
         year = int(form["dob-year"])
 
-        selectedDate = datetime.datetime(year, month, day)
+        datetime.datetime(year, month, day)
 
     except:
         print(sys.exc_info()[0])
-        error = "Please enter a valid dob"
+        error = "Please enter a valid date of birth"
 
     return error
 
 
 @searchdeed.route('/enter-dob', methods=['POST'])
 def enter_dob():
-    #borrower_token = request.form['borrower_token']
     form = request.form
 
     if 'validate' in form:
@@ -44,7 +42,9 @@ def enter_dob():
 
 def search_deed_search(form):
     borrower_token = form['borrower_token']
-    dob = form['dob-day']+"/"+form['dob-month']+"/"+form['dob-year']
+
+    dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
+
     deed_token = validate_borrower(borrower_token, dob)
 
     deed_data = None
@@ -64,10 +64,10 @@ def search_deed_search(form):
 
 def validate_borrower(borrower_token, dob):
     if borrower_token is not None and borrower_token != '':
-
+        print(dob)
         payload = {
             "borrower_token": borrower_token,
-            "dob": dob
+            "dob": str(dob)
             }
 
         deed_api_client = getattr(searchdeed, 'deed_api_client')
