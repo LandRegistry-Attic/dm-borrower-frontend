@@ -9,11 +9,23 @@ class DeedApiMockClient:
                           "London",
                           "SV19 9BT")
         borrower = Borrower("John Andrew", address)
-        title_number = 'dm1234'
+        title_number = 'dm1234',
+        lender = {
+            "name": "Bank of England",
+            "address":"address",
+            "registration":"company registration"
+        }
+        charge_clause = { "description":"a charge clause"}
+
+        additional_provisions = [ { "description":"provision 1"}]
+
         deed = Deed(
             deed_reference,
             [borrower],
-            title_number
+            title_number,
+            lender,
+            charge_clause,
+            additional_provisions
         )
 
         return {"deed": deed}
