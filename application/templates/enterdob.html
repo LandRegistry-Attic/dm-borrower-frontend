@@ -1,67 +1,53 @@
 {% extends "base/lr_base_layout.html" %}
 
 {% block content %}
-<div class="main" id="content">
+  <div class="main" id="content">
     {{ super() }}
     <div>&nbsp;</div>
     <h1 class="heading-small">What is your date of birth?</h1>
     <form id="enter-dob-form" action="/searchdeed/enter-dob" method="POST">
 
       <legend class="visuallyhidden">Date of birth</legend>
+      <fieldset>
 
-{#      <div class="form-date">#}
-{##}
-{#          <div class="{% if field.errors %}error{% endif %}">#}
-{#        <label for="example-{{ field.name }}" id="error-{{ field.name }}">#}
-{#            <span class="form-label-bold">{{ field.name }}</span>#}
-{#            {% if field.errors %}<span class="error-message" id="error-message-{{ field.name }}">Error message about {{ field.name }} goes here</span>{% endif %}#}
-{#        </label>#}
-{#    <input class="form-control" id="fieldname-{{ field.name }}" type="text" name="{{ field.name }}" value="{{ field.data }}" aria-describedby="error-message-{{field.name}}">#}
-{#    </div>#}
+        <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text"
+               value="{{ form.borrower_token }}">
+        <input id="validate" type="hidden" name="validate" class="form-control" type="text" value="True">
+        <legend class="visuallyhidden">Date of birth</legend>
 
-{##}
-{#        <p class="form-hint">For example, 31 3 1980</p>#}
-{#        <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text" value="{{borrower_token}}">#}
-{##}
-        <fieldset>
+        <div class="form-date">
 
-       <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text" value="{{form.borrower_token}}">
-       <input id="validate" type="hidden" name="validate" class="form-control" type="text" value="True">
-      <legend class="visuallyhidden">Date of birth</legend>
-
-      <div class="form-date">
-
-        <p class="form-hint">For example, 31 3 1980</p>
-        <div class="{% if form.error %}error{% endif %}">
+          <p class="form-hint">For example, 31 3 1980</p>
+          <div class="{% if form.error %}error{% endif %}">
             <label for="example-dob" id="error-dob">
-            <span class="form-label-bold">Date of birth</span>
-                {% if form.error %}<span class="error-message" id="error-message-dob">{{  form.error }}</span>{% endif %}
+              <span class="form-label-bold">Date of birth</span>
+              {% if form.error %}<span class="error-message" id="error-message-dob">{{ form.error }}</span>{% endif %}
             </label>
+          </div>
+
+          <div class="form-group form-group-day">
+            <label for="dob-day">Day</label>
+            <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
+          </div>
+
+          <div class="form-group form-group-month">
+            <label for="dob-month">Month</label>
+            <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
+          </div>
+
+          <div class="form-group form-group-year">
+            <label for="dob-year">Year</label>
+            <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
+          </div>
         </div>
 
-        <div class="form-group form-group-day">
-          <label for="dob-day">Day</label>
-          <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" min="0" max="31">
-        </div>
+      </fieldset>
 
-        <div class="form-group form-group-month">
-          <label for="dob-month">Month</label>
-          <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" min="0" max="12">
-        </div>
-
-        <div class="form-group form-group-year">
-          <label for="dob-year">Year</label>
-          <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" min="0" max="2014">
-        </div>
-      </div>
-
-    </fieldset>
-
-    <div>&nbsp;</div>
-    <div class="form-group">
+      <div>&nbsp;</div>
+      <div class="form-group">
         <input type="submit" class="button" value="Continue">
-    </div>
-  </form>
-</div>
+      </div>
+    </form>
+  </div>
 
 {% endblock %}

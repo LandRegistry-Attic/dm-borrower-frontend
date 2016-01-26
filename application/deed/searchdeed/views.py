@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 import datetime
 import sys
+from flask.ext.api import status
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -44,7 +45,7 @@ def enter_dob():
 def search_deed_search():
     form = request.values
     response = do_search_deed_search(form)
-    return response, 200
+    return response, status.HTTP_200_OK
 
 
 def do_search_deed_search(form):
