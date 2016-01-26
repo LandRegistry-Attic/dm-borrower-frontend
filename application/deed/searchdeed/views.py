@@ -1,4 +1,7 @@
 from flask import Blueprint, render_template, request
+import datetime
+import sys
+from flask.ext.api import status
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -10,11 +13,47 @@ def search_deed_main():
     return render_template('searchdeed.html')
 
 
+def validate_dob(form):
+    error = None
+    try:
+        day = int(form["dob-day"])
+        month = int(form["dob-month"])
+        year = int(form["dob-year"])
+
+        datetime.datetime(year, month, day)
+
+    except:
+        print(sys.exc_info()[0])
+        error = "Please enter a valid date of birth"
+
+    return error
+
+
+@searchdeed.route('/enter-dob', methods=['POST'])
+def enter_dob():
+    form = request.form
+
+    if 'validate' in form:
+        form.error = validate_dob(form)
+        if form.error is None:
+            return do_search_deed_search(form)
+
+    return render_template('enterdob.html', form=form)
+
+
 @searchdeed.route('/search', methods=['POST'])
 def search_deed_search():
-    borrower_token = request.form['borrower_token']
+    form = request.values
+    response = do_search_deed_search(form)
+    return response, status.HTTP_200_OK
 
-    deed_token = validate_borrower(borrower_token)
+
+def do_search_deed_search(form):
+    borrower_token = form['borrower_token']
+
+    dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
+
+    deed_token = validate_borrower(borrower_token, dob)
 
     deed_data = None
 
@@ -31,10 +70,15 @@ def search_deed_search():
     return response
 
 
-def validate_borrower(borrower_token):
+def validate_borrower(borrower_token, dob):
     if borrower_token is not None and borrower_token != '':
+        payload = {
+            "borrower_token": borrower_token,
+            "dob": str(dob)
+            }
+
         deed_api_client = getattr(searchdeed, 'deed_api_client')
-        deed_token = deed_api_client.validate_borrower(str(borrower_token))
+        deed_token = deed_api_client.validate_borrower(payload)
     else:
         deed_token = None
 

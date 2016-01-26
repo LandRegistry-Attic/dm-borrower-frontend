@@ -48,3 +48,14 @@
   </p>
 </div>
 {% endblock %}
+
+{% macro render_field(field) %}
+    <div class="{% if field.errors %}error{% endif %}">
+        <label for="example-{{ field.name }}" id="error-{{ field.name }}">
+            <span class="form-label-bold">{{ field.name }}</span>
+            {% if field.errors %}<span class="error-message" id="error-message-{{ field.name }}">Error message about {{ field.name }} goes here</span>{% endif %}
+        </label>
+    <input class="form-control" id="fieldname-{{ field.name }}" type="text" name="{{ field.name }}" value="{{ field.data }}" aria-describedby="error-message-{{field.name}}">
+    </div>
+    <br/>
+{% endmacro %}
