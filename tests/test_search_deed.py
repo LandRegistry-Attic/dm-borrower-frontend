@@ -10,8 +10,8 @@ class TestSearchDeed(unittest.TestCase):
     @with_client
     def test_search_deed_post(self, client):
         res = client.post('/searchdeed/search',
-                          data={'borrower_token': '38', 'dob-day':'01',
-                                'dob-month':'11','dob-year':'1975'})
+                          data={'borrower_token': '38', 'dob-day': '01',
+                                'dob-month': '11', 'dob-year': '1975'})
 
         self.assertEqual(res.status_code, 200)
 
@@ -19,8 +19,8 @@ class TestSearchDeed(unittest.TestCase):
     @with_client
     def test_search_deed_post_invalid_reference(self, client):
         res = client.post('/searchdeed/search',
-                          data={'borrower_token': '', 'dob-day':'01',
-                                'dob-month':'11','dob-year':'1975'})
+                          data={'borrower_token': '', 'dob-day': '01',
+                                'dob-month': '11', 'dob-year': '1975'})
 
         self.assertEqual(res.status_code, 200)
 
