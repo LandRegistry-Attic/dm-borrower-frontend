@@ -16,7 +16,7 @@ class DeedApiMockClient:
             "registration": "company registration"
         }
         charge_clause = {"description": "a charge clause"}
-
+        identity_checked = "Y"
         additional_provisions = [{"description": "provision 1"}]
 
         deed = Deed(
@@ -25,13 +25,14 @@ class DeedApiMockClient:
             title_number,
             lender,
             charge_clause,
-            additional_provisions
+            additional_provisions,
+            identity_checked
         )
 
         return {"deed": deed}
 
     @staticmethod
-    def validate_borrower(borrower_token):
+    def validate_borrower(payload):
         deed_token = "aaaaaaa"
 
         return {"deed_token": deed_token}

@@ -35,12 +35,19 @@ def enter_dob():
     if 'validate' in form:
         form.error = validate_dob(form)
         if form.error is None:
-            return search_deed_search(form)
+            return do_search_deed_search(form)
 
     return render_template('enterdob.html', form=form)
 
 
-def search_deed_search(form):
+@searchdeed.route('/search', methods=['POST'])
+def search_deed_search():
+    form = request.values
+    response = do_search_deed_search(form)
+    return response, 200
+
+
+def do_search_deed_search(form):
     borrower_token = form['borrower_token']
 
     dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
@@ -64,7 +71,6 @@ def search_deed_search(form):
 
 def validate_borrower(borrower_token, dob):
     if borrower_token is not None and borrower_token != '':
-        print(dob)
         payload = {
             "borrower_token": borrower_token,
             "dob": str(dob)
