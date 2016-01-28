@@ -62,7 +62,7 @@ def do_search_deed_search(form):
         deed_data = lookup_deed(deed_token['deed_token'])
 
     if deed_data is not None:
-        deed_data.deed.address = format_address_string(deed_data.deed.address)
+        deed_data["deed"]["address"] = format_address_string(deed_data["deed"]["address"])
         response = render_template('viewdeed.html', deed_data=deed_data,
                                    deed_reference=deed_token)
     else:
