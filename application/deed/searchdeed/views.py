@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 import datetime
-import sys
 from flask.ext.api import status
+
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -16,14 +16,18 @@ def search_deed_main():
 def validate_dob(form):
     error = None
     try:
+        present = datetime.datetime.now()
+
         day = int(form["dob-day"])
         month = int(form["dob-month"])
         year = int(form["dob-year"])
 
-        datetime.datetime(year, month, day)
+        dob_date = datetime.datetime(year, month, day)
+
+        if dob_date >= present:
+            raise Exception("Date cannot be in the future")
 
     except:
-        print(sys.exc_info()[0])
         error = "Please enter a valid date of birth"
 
     return error
@@ -32,6 +36,7 @@ def validate_dob(form):
 @searchdeed.route('/enter-dob', methods=['POST'])
 def enter_dob():
     form = request.form
+    form.current_year = str(datetime.datetime.now().year)
 
     if 'validate' in form:
         form.error = validate_dob(form)
