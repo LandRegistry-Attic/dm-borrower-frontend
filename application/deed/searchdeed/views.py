@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 import datetime
-import sys
 from flask.ext.api import status
+
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -28,7 +28,6 @@ def validate_dob(form):
             raise Exception("Date cannot be in the future")
 
     except:
-        print(sys.exc_info()[0])
         error = "Please enter a valid date of birth"
 
     return error
