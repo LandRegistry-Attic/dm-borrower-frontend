@@ -99,5 +99,3 @@ def lookup_deed(deed_reference):
         deed_data = None
 
     return deed_data
-
-

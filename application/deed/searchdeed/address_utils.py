@@ -10,7 +10,7 @@ def format_address_string(address_string):
         return x.strip()
 
     def uppercase_if_postcode(x, index, list):
-        return x.upper() if re.search(BASIC_POSTCODE_REGEX,x.upper()) else x
+        return x.upper() if re.search(BASIC_POSTCODE_REGEX, x.upper()) else x
 
     def handle_house_number(result, x, index):
         if index == 1 and result[0].isdigit():
@@ -20,7 +20,7 @@ def format_address_string(address_string):
         return result
 
     def make_postcode_last(context, x, index):
-        if index > 1 and re.search(BASIC_POSTCODE_REGEX,context[index-1]):
+        if index > 1 and re.search(BASIC_POSTCODE_REGEX, context[index-1]):
             postcode = context[index-1]
             context[index-1] = x
             context.append(postcode)
