@@ -1,14 +1,9 @@
-from application.service.model import Borrower, Address, Deed
-
-
 class DeedApiMockClient:
     @staticmethod
     def get_deed(deed_reference):
-        address = Address("Flat 16 Kingman Court",
-                          "Verdant Road",
-                          "London",
-                          "SV19 9BT")
-        borrower = Borrower("John Andrew", address)
+        borrowers = [
+            {"forename": "John", "surname": "Andrew", "address": ""}
+        ]
         title_number = 'dm1234',
         lender = {
             "name": "Bank of England",
@@ -18,16 +13,18 @@ class DeedApiMockClient:
         charge_clause = {"description": "a charge clause"}
         identity_checked = "Y"
         additional_provisions = [{"description": "provision 1"}]
+        property_address = "30, the address, the street, the city, the town, SW06 PL4"
 
-        deed = Deed(
-            deed_reference,
-            [borrower],
-            title_number,
-            lender,
-            charge_clause,
-            additional_provisions,
-            identity_checked
-        )
+        deed = {
+            "deed_reference": deed_reference,
+            "borrowers": borrowers,
+            "title_number": title_number,
+            "lender": lender,
+            "charge_clause": charge_clause,
+            "additional_provision": additional_provisions,
+            "identity_checked": identity_checked,
+            "address": property_address
+        }
 
         return {"deed": deed}
 
