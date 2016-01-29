@@ -4,7 +4,8 @@
 <div class="main" id="content">
     {{ super() }}
     <div>&nbsp;</div>
-    <div class="text error-summary" role="group" aria-labelledby="error-deed-not-found" tabindex="-1" style="display: none;">
+    {% if error %}
+    <div class="text error-summary" role="group" aria-labelledby="error-deed-not-found" tabindex="-1">
       <h1 class="heading-medium error-summary-heading" id="error-deed-not-found">Unable to find your mortgage deed</h1>
       <p>This might be because:</p>
       <ul>
@@ -16,6 +17,7 @@
         conveyancer.
       </p>
     </div>
+    {% endif %}
     <h1 class="heading-small">What is your borrower token?</h1>
     <form id="search-deed-form" action="/searchdeed/enter-dob" method="POST">
       <p class="form-hint">For example, ABC123</p>
