@@ -13,6 +13,7 @@ searchdeed = Blueprint('searchdeed', __name__,
 def search_deed_main():
     return render_template('searchdeed.html', error=None)
 
+
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
     return render_template('finished.html')
