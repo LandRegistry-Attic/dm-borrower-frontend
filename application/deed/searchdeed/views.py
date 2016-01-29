@@ -10,9 +10,7 @@ searchdeed = Blueprint('searchdeed', __name__,
 
 @searchdeed.route('/')
 def search_deed_main():
-    display_error = None
-
-    return render_template('searchdeed.html', error=display_error)
+    return render_template('searchdeed.html', error=None)
 
 
 def validate_dob(form):
