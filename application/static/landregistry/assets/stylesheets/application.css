@@ -125,7 +125,7 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
+dl, dt, dd, ol, ul, li, .deed-address-list,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
@@ -867,7 +867,7 @@ input[type=number] {
   .error-summary .error-summary-list {
     padding-left: 0; }
     @media (min-width: 641px) {
-      .error-summary .error-summary-list li {
+      .error-summary .error-summary-list li, .error-summary .error-summary-list .deed-address-list {
         margin-bottom: 5px; } }
     .error-summary .error-summary-list a {
       color: #b10e1e;
@@ -928,8 +928,9 @@ ol {
   margin-top: 5px;
   margin-bottom: 20px; }
 
-.list-bullet li,
-.list-number li {
+.list-bullet li, .list-bullet .deed-address-list,
+.list-number li,
+.list-number .deed-address-list {
   margin-bottom: 5px; }
 
 details {
@@ -1284,7 +1285,7 @@ details {
     #global-breadcrumb ol {
       float: left;
       width: 100%; } }
-  #global-breadcrumb ol li {
+  #global-breadcrumb ol li, #global-breadcrumb ol .deed-address-list {
     font-family: "nta", Arial, sans-serif;
     font-size: 14px;
     line-height: 1.14286;
@@ -1300,18 +1301,18 @@ details {
     margin-left: 0;
     padding-right: 1em; }
     @media (min-width: 641px) {
-      #global-breadcrumb ol li {
+      #global-breadcrumb ol li, #global-breadcrumb ol .deed-address-list {
         font-size: 16px;
         line-height: 1.25; } }
     @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 20 / 10), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-      #global-breadcrumb ol li {
+      #global-breadcrumb ol li, #global-breadcrumb ol .deed-address-list {
         background-image: url("/public/images/separator-2x.png");
         background-size: 6px 11px; } }
-    #global-breadcrumb ol li a {
+    #global-breadcrumb ol li a, #global-breadcrumb ol .deed-address-list a {
       color: #0b0c0c; }
-    #global-breadcrumb ol li strong {
+    #global-breadcrumb ol li strong, #global-breadcrumb ol .deed-address-list strong {
       font-weight: normal; }
-    #global-breadcrumb ol li:last-child {
+    #global-breadcrumb ol li:last-child, #global-breadcrumb ol .deed-address-list:last-child {
       background-image: none;
       margin-right: 0; }
 
@@ -1429,8 +1430,9 @@ ul.list-plain {
   list-style: none;
   padding-left: 0; }
 
-ul li,
-ol li {
+ul li, ul .deed-address-list,
+ol li,
+ol .deed-address-list {
   margin-bottom: 5px; }
 
 dl {
@@ -1537,5 +1539,9 @@ dl {
   padding: 4px;
   color: #6f777b;
   width: 350px; }
+
+.deed-address-list {
+  list-style-type: none;
+  padding-bottom: 20px; }
 
 /*# sourceMappingURL=application.css.map */
