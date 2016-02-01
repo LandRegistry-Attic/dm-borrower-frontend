@@ -2,7 +2,7 @@ class DeedApiMockClient:
     @staticmethod
     def get_deed(deed_reference):
         borrowers = [
-            {"forename": "John", "surname": "Andrew", "address": ""}
+            {"forename": "John", "surname": "Andrew", "address": "30, borrower address, borrower street, city, the town, SW06 PL4"}
         ]
         title_number = 'dm1234',
         lender = {
