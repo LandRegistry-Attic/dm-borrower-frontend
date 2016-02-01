@@ -24,17 +24,12 @@
   color:white;
 }
 
-.bordered-output-present{
-  border: 1px solid #bfc1c3;
-  padding: 4px;
-  width: 350px;
+.awaiting-information{
+  color: #6f777b;
 }
 
-.bordered-output-not-present {
-  border: 1px solid #bfc1c3;
-  padding: 4px;
-  color: #6f777b;
-  width: 350px;
+.deed-form-ref {
+  margin-top: ($gutter*2);
 }
 
 .deed-address-list {

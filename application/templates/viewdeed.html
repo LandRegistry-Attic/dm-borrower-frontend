@@ -43,49 +43,45 @@
         {% endfor %}
         </ul>
 
-        <div class="text">
-          <h3 class="heading-small">Charging clause:</h3>
+        <h3 class="heading-medium">Charging clause</h3>
+            <p>{{ deed_data.deed.charge_clause.description }}</p>
 
-          <p>{{ deed_data.deed.charge_clause.description }}</p>
-
-          <h3 class="heading-small">Additional provisions:</h3>
-          <ol>
+        <h3 class="heading-medium">Additional provisions</h3>
+          <ol class="list-number">
             {% for provision in deed_data.deed.additional_provisions %}
               <li>
-                <p>{{ provision.description|safe }}</p>
+                {{ provision.description|safe }}
               </li>
             {% endfor %}
-
           </ol>
-        </div>
 
-        <p class="text">
-          <label class="heading-small" for="auth-code">Effective date and time</label>
+        <h3 class="heading-medium">Effective date and time</h3>
+            <p>This charge takes effect when the registrar receives notification from
+               Pure Law that the charge is to take effect.</p>
 
-        <p>This charge takes effect when the registrar receives notification from
-          Pure Law that the charge is to take effect.</p>
+            <p class="awaiting-information">[Effective date and time will be shown here]</p>
 
-        <p class="bordered-output-not-present">[Effective date and time will be shown here]</p>
-        <label class="heading-small" for="signature">Borrower's electronic signature(s)</label>
+        <h3 class="heading-medium">Borrower's digital signature(s)</h3>
         {% for borrower in deed_data.deed.borrowers %}
-          <p class="bordered-output-not-present" id="signature{{ loop.index }}">[e-signature
+            <p class="awaiting-information" id="signature{{ loop.index }}">[Awaiting digital signature
             of {{ borrower.forename }}
-            {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }} goes
-            here]</p>
+            {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}]
+            </p>
         {% endfor %}
-        <div class="form-group">
-          <label class="heading-small" for="auth-code">Registrar's electronic signature</label>
 
-          <p class="bordered-output-not-present" id="registrarsig">[Will be applied when the charge takes
-            effect]</p>
-        </div>
-        <div class="text">
-          <label>{{ deed_data.deed.md_ref }}</label>
-        </div>
-        </p>
-      </article>
 
-      <div class="inner-block">
+        <h3 class="heading-medium">Registrar's digital signature</h3>
+            <p class="awaiting-information" id="registrarsig">[Will be applied when the charge takes
+            effect]
+            </p>
+
+        <div class="deed-form-ref">
+            <h3 class="visuallyhidden">Form of digital mortgage deed filed at HM Land Registry under reference</h3>
+              <p>{{ deed_data.deed.md_ref }}</p>
+        </div>
+    </article>
+
+    <div class="inner-block">
         <div class="text">
           <form method="post" action="/finished">
             <p>If you are happy with the details shown on your mortgage deed above, please continue.</p>
@@ -94,9 +90,8 @@
             <input class="button" type="submit" value="Continue">
           </form>
         </div>
-      </div>
     </div>
-
+    </div>
   </div>
 
 {% endblock %}
