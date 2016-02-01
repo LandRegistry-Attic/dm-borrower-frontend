@@ -1577,6 +1577,10 @@ dl {
 .bold-text {
   font-weight: 600; }
 
+@media (min-width: 641px) {
+  main {
+    font-size: 19px;
+    line-height: 1.3157894737; } }
 .button-get-started {
   font-family: "nta",Arial,sans-serif;
   font-size: 24px;
@@ -1596,6 +1600,132 @@ dl {
   .button-get-started {
     background-image: url("/static/landregistry/assets/images/icons/icon-pointer-2x.png");
     background-size: 30px 19px; } }
+fieldset {
+  width: 100%;
+  float: left;
+  clear: both; }
+
+.form-title {
+  margin-bottom: 30px; }
+
+@media (min-width: 641px) {
+  .form-title {
+    margin-bottom: 45px; } }
+.form-label {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.31579;
+  font-weight: 400;
+  text-transform: none;
+  display: block;
+  margin-bottom: 5px; }
+
+@media (max-width: 640px) {
+  .form-label {
+    font-size: 16px;
+    line-height: 1.25; } }
+.form-label-bold {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 400;
+  text-transform: none;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  .form-label-bold {
+    font-size: 20px;
+    line-height: 1.2; } }
+.form-label-bold .form-hint {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.31579;
+  font-weight: 400;
+  text-transform: none; }
+
+@media (max-width: 640px) {
+  .form-label-bold .form-hint {
+    font-size: 16px;
+    line-height: 1.25; } }
+.form-block {
+  float: left;
+  width: 100%; }
+
+.form-block:after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.form-hint {
+  display: block;
+  color: #6f777b;
+  margin-bottom: 5px; }
+
+@media (min-width: 641px) {
+  .form-hint {
+    margin-top: 8px; } }
+.form-control {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.31579;
+  font-weight: 400;
+  text-transform: none;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #bfc1c3;
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+@media (max-width: 640px) {
+  .form-control {
+    font-size: 16px;
+    line-height: 1.25; } }
+@media (min-width: 641px) {
+  .form-control {
+    width: 50%; } }
+.form-control-3-4 {
+  width: 100%; }
+
+@media (min-width: 641px) {
+  .form-control-3-4 {
+    width: 75%; } }
+.form-control-1-2 {
+  width: 100%; }
+
+@media (min-width: 641px) {
+  .form-control-1-2 {
+    width: 50%; } }
+.form-control-1-4 {
+  width: 25%; }
+
+.form-control-1-8 {
+  width: 12.5%; }
+
+.form-radio {
+  display: block;
+  margin: 10px 0; }
+
+.form-radio input {
+  vertical-align: middle;
+  margin: -4px 5px 0 0; }
+
+.form-checkbox {
+  display: block;
+  margin: 15px 0; }
+
+.form-checkbox input {
+  vertical-align: middle;
+  margin: -2px 5px 0 0; }
+
+@media (max-width: 640px) {
+  .form .button {
+    width: 100%; } }
 .verified-container {
   margin-top: 30px;
   width: 50%; }
