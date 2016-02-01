@@ -12,7 +12,7 @@
         <h3 class="heading-medium">Property </h3>
         <p itemscope itemtype="http://schema.org/PostalAddress">
                 <span itemprop="streetAddress">
-                  {{ deed_data.deed.address }}
+                  {{ deed_data.deed.property_address }}
                 </span>
       </p>
 
@@ -24,7 +24,7 @@
         <h3 class="heading-medium">Lender</h3>
         <div class="text">
           <p>{{ deed_data.deed.lender.name }}<br/>
-            {{ deed_data.deed.lender.property_address }}</p>
+            {{ deed_data.deed.lender.address }}</p>
           <p>{{ deed_data.deed.lender.registration }}</p>
         </div>
 
