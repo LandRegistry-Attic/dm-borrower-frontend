@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
@@ -9,7 +9,7 @@ searchdeed = Blueprint('searchdeed', __name__,
                        static_folder='static')
 
 
-@searchdeed.route('/')
+@searchdeed.route('/borrower-reference')
 def search_deed_main():
     return render_template('searchdeed.html', error=None)
 
@@ -39,7 +39,7 @@ def validate_dob(form):
     return error
 
 
-@searchdeed.route('/enter-dob', methods=['POST'])
+@searchdeed.route('/date-of-birth', methods=['POST'])
 def enter_dob():
     form = request.form
     form.current_year = str(datetime.datetime.now().year)
