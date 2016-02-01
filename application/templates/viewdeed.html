@@ -4,20 +4,19 @@
   <div class="main" id="content">
     {{ super() }}
 
+    <div class="inner-block">
+
     <h1 class="heading-xlarge">Your mortgage deed</h1>
 
-    <div class="column-two-thirds">
-      <article class="deed-document-bounds">
-        <h2 class="heading-large">Digital Mortgage Deed</h2>
-
-        <h3 class="heading-medium">Property </h3>
-      
+    <article class="text deed-document-bounds">
+      <h2 class="heading-large">Digital Mortgage Deed</h2>
+        <h3 class="heading-medium">Property</h3>
         <div class="deed-address-list ">
           {% for address_line in deed_data.deed.property_address %}
-
-            <li>{{ address_line }}</li>
+             <li>{{ address_line }}</li>
           {% endfor %}
         </div>
+
         <dl class="definition-inline">
           <dt class="bold-text">Title number</dt>
           <dd>{{ deed_data.deed.title_number }}</dd>
@@ -25,18 +24,23 @@
 
         <h3 class="heading-medium">Lender</h3>
 
-        <div class="text">
-          <p>{{ deed_data.deed.lender.name }}<br/>
-            {{ deed_data.deed.lender.address }}</p>
-
-          <p>{{ deed_data.deed.lender.registration }}</p>
-        </div>
+        <p itemscope itemtype="http://schema.org/Corporation">
+            <span itemprop="name">{{ deed_data.deed.lender.name }}</span>
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="address-inline">
+            <span itemprop="streetAddress">{{ deed_data.deed.lender.address }}</span>
+            </span>
+        </p>
+        <dl class="definition-inline">
+          <dd>{{ deed_data.deed.lender.registration }}</dd>
+        </dl>
 
         <h3 class="heading-medium">Borrower</h3>
-        {% for borrower in deed_data.deed.borrowers %} <p class="bold-text">
+        <ul>
+        {% for borrower in deed_data.deed.borrowers %} <li class="bold-text">
           {{ borrower.forename }}
           {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}
-        </p>
+        </li>
+        </ul>
         {% endfor %}
 
         <div class="text">
