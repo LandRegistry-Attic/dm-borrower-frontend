@@ -23,7 +23,7 @@ class DeedApiMockClient:
             "charge_clause": charge_clause,
             "additional_provision": additional_provisions,
             "identity_checked": identity_checked,
-            "address": property_address
+            "property_address": property_address
         }
 
         return {"deed": deed}

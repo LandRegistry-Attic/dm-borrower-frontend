@@ -36,3 +36,9 @@
   color: #6f777b;
   width: 350px;
 }
+
+.deed-address-list {
+  @extend li;
+  list-style-type:none;
+  padding-bottom: 20px;
+}

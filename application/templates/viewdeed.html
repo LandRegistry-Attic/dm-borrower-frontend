@@ -10,12 +10,12 @@
       <article class="deed-document-bounds">
         <h2 class="heading-large">Digital Mortgage Deed</h2>
         <h3 class="heading-medium">Property </h3>
-        <p>
-        {% for address_line in deed_data.deed.address %}
-          <div>{{ address_line }}</div>
+        <div class="deed-address-list ">
+        {% for address_line in deed_data.deed.property_address %}
+          <li>{{ address_line }}</li>
         {% endfor %}
-        </p>
-         <dl class="definition-inline">
+        </div>
+        <dl class="definition-inline">
           <dt class="bold-text">Title number</dt>
           <dd>{{ deed_data.deed.title_number }}</dd>
         </dl>
