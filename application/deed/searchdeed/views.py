@@ -10,7 +10,7 @@ searchdeed = Blueprint('searchdeed', __name__,
 
 @searchdeed.route('/')
 def search_deed_main():
-    return render_template('searchdeed.html')
+    return render_template('searchdeed.html', error=None)
 
 
 def validate_dob(form):
@@ -69,8 +69,7 @@ def do_search_deed_search(form):
         response = render_template('viewdeed.html', deed_data=deed_data,
                                    deed_reference=deed_token)
     else:
-        response = render_template('deednotfound.html',
-                                   borrower_token=borrower_token)
+        return render_template('searchdeed.html', error=True)
 
     return response
 
