@@ -2,7 +2,7 @@ from underscore import _
 import re
 
 BASIC_POSTCODE_REGEX = '^[A-Z]{1,2}[0-9R][0-9A-Z]? ?[0-9][A-Z]{2}$'
-
+HOUSE_CODE = '^[0-9]{1,}[A-z]{0,1}$'
 
 def format_address_string(address_string):
 
@@ -13,7 +13,7 @@ def format_address_string(address_string):
         return x.upper() if re.search(BASIC_POSTCODE_REGEX, x.upper()) else x
 
     def handle_house_number(result, x, index):
-        if index == 1 and result[0].isdigit():
+        if index == 1 and re.search(HOUSE_CODE, result[0]):
             result = [result[0] + ' ' + x]
         else:
             result.append(x)
