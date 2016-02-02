@@ -47,23 +47,27 @@ def enter_dob():
     if 'validate' in form:
         form.error = validate_dob(form)
         if form.error is None:
-            return do_search_deed_search(form)
+            return redirect('/how-to-proceed', code=307)
+            # return do_search_deed_search(form)
 
     return render_template('enterdob.html', form=form)
 
 
-@searchdeed.route('/search', methods=['POST'])
+@searchdeed.route('/mortgage-deed', methods=['POST'])
 def search_deed_search():
-    form = request.values
+    print("hello")
+    form = request.form
+    print(dir(form))
     response = do_search_deed_search(form)
     return response, status.HTTP_200_OK
 
 
 def do_search_deed_search(form):
+    print("2")
     borrower_token = form['borrower_token']
-
+    print("borrower token = %s " % borrower_token)
     dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
-
+    print("dob = %s" % dob)
     deed_token = validate_borrower(borrower_token, dob)
 
     deed_data = None
@@ -75,6 +79,7 @@ def do_search_deed_search(form):
         deed_data["deed"]["property_address"] = format_address_string(deed_data["deed"]["property_address"])
         response = render_template('viewdeed.html', deed_data=deed_data,
                                    deed_reference=deed_token)
+
     else:
         return render_template('searchdeed.html', error=True)
 
