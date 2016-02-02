@@ -1,4 +1,4 @@
-from flask import Flask  # type: ignore
+from flask import Flask, session  # type: ignore
 from flask.ext.script import Manager
 from application.service.deed_api import make_deed_api_client
 from .health.views import health
@@ -8,6 +8,7 @@ from .borrower.views import borrower_landing
 
 def create_manager(deed_api_client=make_deed_api_client()):
     app = Flask(__name__)
+    app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
     app.config.from_pyfile('config.py')
 
     manager = Manager(app)
