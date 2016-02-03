@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, url_for
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
@@ -47,33 +47,22 @@ def enter_dob():
     if 'validate' in form:
         form.error = validate_dob(form)
         if form.error is None:
-            print("setting session objects")
-            session['dob'] = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
-            print("dob set")
-            session['borrower-token'] = form['borrower_token']
-            print("borrower-token set")
             return redirect('/how-to-proceed', code=307)
-            # return do_search_deed_search(form)
 
     return render_template('enterdob.html', form=form)
 
 
 @searchdeed.route('/mortgage-deed', methods=['POST'])
 def search_deed_search():
-    print("hello")
     form = request.form
     response = do_search_deed_search(form)
     return response, status.HTTP_200_OK
 
 
 def do_search_deed_search(form):
-    print("2")
     borrower_token = form['borrower_token']
-    print("borrower token = %s " % borrower_token)
-    dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
-    print("dob = %s" % dob)
+    dob = form["dob"]
     deed_token = validate_borrower(borrower_token, dob)
-
     deed_data = None
 
     if deed_token:
@@ -96,7 +85,6 @@ def validate_borrower(borrower_token, dob):
             "borrower_token": borrower_token,
             "dob": str(dob)
             }
-
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         deed_token = deed_api_client.validate_borrower(payload)
     else:

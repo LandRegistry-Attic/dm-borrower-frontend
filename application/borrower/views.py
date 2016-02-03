@@ -7,12 +7,11 @@ borrower_landing = Blueprint('borrower_landing', __name__,
 
 @borrower_landing.route('/how-to-proceed', methods=['POST'])
 def verified():
-    print("yo")
-    print("borrower-token = %s" % session['borrower-token'])
-    print("dob = %s" % session['dob'])
-
-    print("form data for borrower-token = %s" % request.form['borrower_token'])
-    return render_template("howtoproceed.html")
+    form = request.form
+    dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
+    borrower_token = request.form['borrower_token']
+    return render_template('howtoproceed.html', borrower_token=borrower_token,
+                           dob=dob)
 
 
 @borrower_landing.route('/sign-my-mortgage')

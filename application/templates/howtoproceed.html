@@ -56,8 +56,13 @@
   </div>
   <div class="text">
     <p>
-      <form id="view-deed-form" action="/searchdeed/mortgage-deed" method="POST">
+      <form id="view-deed-form" action="/mortgage-deed" method="POST">
         <div class="form-group">
+          <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text"
+          <input id="borrower_token" type="hidden" name="borrower_token" class="form-control" type="text"
+               value="{{ borrower_token }}">
+          <input id="dob" type="hidden" name="dob" class="form-control" type="text"
+               value="{{ dob }}">
           <input type="submit" class="button" value="Continue">
         </div>
       </form>
