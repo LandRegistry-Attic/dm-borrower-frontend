@@ -10,12 +10,11 @@
       <article class="deed-document-bounds">
         <h2 class="heading-large">Digital Mortgage Deed</h2>
         <h3 class="heading-medium">Property </h3>
-        <p itemscope itemtype="http://schema.org/PostalAddress">
-                <span itemprop="streetAddress">
-                  {{ deed_data.deed.property_address }}
-                </span>
-      </p>
-
+        <div class="deed-address-list ">
+        {% for address_line in deed_data.deed.property_address %}
+          <li>{{ address_line }}</li>
+        {% endfor %}
+        </div>
         <dl class="definition-inline">
           <dt class="bold-text">Title number</dt>
           <dd>{{ deed_data.deed.title_number }}</dd>

@@ -1,4 +1,4 @@
-class DeedApiInterface(object):
+class DeedApiInterface(object):  # pragma: no cover
     def __init__(self, implementation):
         self.implementation = implementation
 
