@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string

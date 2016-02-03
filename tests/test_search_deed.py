@@ -11,25 +11,23 @@ class TestSearchDeed(unittest.TestCase):
     @with_context
     @with_client
     def test_search_deed_post(self, client):
-        res = client.post('/searchdeed/search',
-                          data={'borrower_token': '38', 'dob-day': '01',
-                                'dob-month': '11', 'dob-year': '1975'})
+        res = client.post('/mortgage-deed',
+                          data={'borrower_token': '38', 'dob': '01/11/1975'})
 
         self.assertEqual(res.status_code, 200)
 
     @with_context
     @with_client
     def test_search_deed_post_invalid_reference(self, client):
-        res = client.post('/searchdeed/search',
-                          data={'borrower_token': '', 'dob-day': '01',
-                                'dob-month': '11', 'dob-year': '1975'})
+        res = client.post('/mortgage-deed',
+                          data={'borrower_token': '', 'dob': '01/11/1975'})
 
         self.assertEqual(res.status_code, 200)
 
     @with_context
     @with_client
-    def test_search_deed_get(self, client):
-        res = client.get('/searchdeed')
+    def test_sign_my_mortgage_landing(self, client):
+        res = client.get('/sign-my-mortgage')
 
         self.assertEqual(res.status_code, 200)
 
