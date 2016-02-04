@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template
 
 borrower_landing = Blueprint('borrower_landing', __name__,
                              template_folder='/templates',
