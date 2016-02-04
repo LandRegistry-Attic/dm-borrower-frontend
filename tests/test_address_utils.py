@@ -30,3 +30,23 @@ class TestFormatAddress(unittest.TestCase):
     def test_format_combined(self):
         address = address_utils.format_address_string("103, street name , the town , the city , pl6 5ws ")
         self.assertEqual(address, ["103 street name", "the town", "the city", "PL6 5WS"])
+
+    def test_address_with_no_commas(self):
+        address = address_utils.format_address_string("58 Newstead Road Leicester Leicestershire LE3 0SA")
+        self.assertEqual(address, ["58 Newstead Road Leicester Leicestershire", "LE3 0SA"])
+
+    def test_address_with_no_comma_before_postcode(self):
+        address = address_utils.format_address_string("58 Newstead Road, Leicester, Leicestershire le3 0sa")
+        self.assertEqual(address, ["58 Newstead Road", "Leicester", "Leicestershire", "LE3 0SA"])
+
+    def test_address_with_no_comma_before_postcode2(self):
+        address = address_utils.format_address_string("58b Newstead Road, Leicester, Leicestershire le3 0sa")
+        self.assertEqual(address, ["58b Newstead Road", "Leicester", "Leicestershire", "LE3 0SA"])
+
+    def test_address_with_no_comma_before_postcode3(self):
+        address = address_utils.format_address_string("Dunroamin, 58 Newstead Road, Leicester, Leicestershire LE3 0SA")
+        self.assertEqual(address, ["Dunroamin", "58 Newstead Road", "Leicester", "Leicestershire", "LE3 0SA"])
+
+    def test_address_with_no_comma_before_postcode4(self):
+        address = address_utils.format_address_string("Dunroamin, 58 Newstead Road, Leicester le3 0sa, Leicestershire")
+        self.assertEqual(address, ["Dunroamin", "58 Newstead Road", "Leicester", "Leicestershire", "LE3 0SA"])
