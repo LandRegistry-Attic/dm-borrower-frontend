@@ -14,11 +14,10 @@
 
         -
         <div class="deed-address-list ">
-          -        {% for address_line in deed_data.deed.property_address %}
-          -
-          <li>{{ address_line }}</li>
-          -        {% endfor %}
-          -
+          {% for address_line in deed_data.deed.property_address %}
+
+            <li>{{ address_line }}</li>
+          {% endfor %}
         </div>
         <dl class="definition-inline">
           <dt class="bold-text">Title number</dt>
