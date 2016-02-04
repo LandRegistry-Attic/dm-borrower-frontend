@@ -30,8 +30,44 @@ class TestSearchDeed(unittest.TestCase):
 
     @with_context
     @with_client
+    def test_validate_borrower(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.post('/date-of-birth', data={'borrower_token': '38',
+                                                  'dob-day': '01',
+                                                  'dob-month': '10',
+                                                  'dob-year': '1976',
+                                                  'dob': '01/11/1975',
+                                                  'validate': 'True'})
+
+        self.assertEqual(res.status_code, 307)
+
+    @with_context
+    @with_client
     def test_sign_my_mortgage_landing(self, client):
         res = client.get('/sign-my-mortgage')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_finish_page(self, client):
+        res = client.post('/finished')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_how_to_proceed_page(self, client):
+        res = client.post('/how-to-proceed')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_borrower_reference_page(self, client):
+        res = client.get('/borrower-reference')
 
         self.assertEqual(res.status_code, 200)
 
