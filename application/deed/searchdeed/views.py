@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
@@ -47,31 +47,29 @@ def enter_dob():
     if 'validate' in form:
         form.error = validate_dob(form)
         if form.error is None:
-            return redirect('/how-to-proceed', code=307)
+            dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
+            deed_token = validate_borrower(form['borrower_token'], dob)
+            if deed_token is not None:
+                session['deed_token'] = deed_token['deed_token']
+                return redirect('/how-to-proceed', code=307)
+            else:
+                return render_template('searchdeed.html', error=True)
 
     return render_template('enterdob.html', form=form)
 
 
-@searchdeed.route('/mortgage-deed', methods=['POST'])
+@searchdeed.route('/mortgage-deed', methods=['GET'])
 def search_deed_search():
-    form = request.form
-    response = do_search_deed_search(form)
+    response = do_search_deed_search()
     return response, status.HTTP_200_OK
 
 
-def do_search_deed_search(form):
-    borrower_token = form['borrower_token']
-    dob = form["dob"]
-    deed_token = validate_borrower(borrower_token, dob)
-    deed_data = None
-
-    if deed_token:
-        deed_data = lookup_deed(deed_token['deed_token'])
+def do_search_deed_search():
+    deed_data = lookup_deed(session['deed_token'])
 
     if deed_data is not None:
         deed_data["deed"]["property_address"] = format_address_string(deed_data["deed"]["property_address"])
-        response = render_template('viewdeed.html', deed_data=deed_data,
-                                   deed_reference=deed_token)
+        response = render_template('viewdeed.html', deed_data=deed_data)
 
     else:
         return render_template('searchdeed.html', error=True)

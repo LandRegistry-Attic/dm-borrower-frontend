@@ -11,16 +11,20 @@ class TestSearchDeed(unittest.TestCase):
     @with_context
     @with_client
     def test_search_deed_post(self, client):
-        res = client.post('/mortgage-deed',
-                          data={'borrower_token': '38', 'dob': '01/11/1975'})
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.get('/mortgage-deed')
 
         self.assertEqual(res.status_code, 200)
 
     @with_context
     @with_client
     def test_search_deed_post_invalid_reference(self, client):
-        res = client.post('/mortgage-deed',
-                          data={'borrower_token': '', 'dob': '01/11/1975'})
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.get('/mortgage-deed')
 
         self.assertEqual(res.status_code, 200)
 
