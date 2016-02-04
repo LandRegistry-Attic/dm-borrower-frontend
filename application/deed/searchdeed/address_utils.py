@@ -9,6 +9,7 @@ BASIC_POSTCODE_WITH_SURROUNDING_GROUPS_REGEX = (
     r'(?P<trailing_text>.*)'
 )
 
+
 def format_address_string(address_string):
 
     def remove_whitespace(x, index, list):
