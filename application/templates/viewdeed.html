@@ -9,21 +9,25 @@
     <div class="column-two-thirds">
       <article class="deed-document-bounds">
         <h2 class="heading-large">Digital Mortgage Deed</h2>
+
         <h3 class="heading-medium">Property </h3>
-        <div class="deed-address-list ">
-        {% for address_line in deed_data.deed.property_address %}
-          <li>{{ address_line }}</li>
-        {% endfor %}
-        </div>
+
+        <p itemscope itemtype="http://schema.org/PostalAddress">
+                <span itemprop="streetAddress">
+                  {{ deed_data.deed.property_address }}
+                </span>
+        </p>
         <dl class="definition-inline">
           <dt class="bold-text">Title number</dt>
           <dd>{{ deed_data.deed.title_number }}</dd>
         </dl>
 
         <h3 class="heading-medium">Lender</h3>
+
         <div class="text">
           <p>{{ deed_data.deed.lender.name }}<br/>
             {{ deed_data.deed.lender.address }}</p>
+
           <p>{{ deed_data.deed.lender.registration }}</p>
         </div>
 
@@ -36,6 +40,7 @@
 
         <div class="text">
           <h3 class="heading-small">Charging clause:</h3>
+
           <p>{{ deed_data.deed.charge_clause.description }}</p>
 
           <h3 class="heading-small">Additional provisions:</h3>
@@ -51,8 +56,10 @@
 
         <p class="text">
           <label class="heading-small" for="auth-code">Effective date and time</label>
+
         <p>This charge takes effect when the registrar receives notification from
           Pure Law that the charge is to take effect.</p>
+
         <p class="bordered-output-not-present">[Effective date and time will be shown here]</p>
         <label class="heading-small" for="signature">Borrower's electronic signature(s)</label>
         {% for borrower in deed_data.deed.borrowers %}
@@ -63,6 +70,7 @@
         {% endfor %}
         <div class="form-group">
           <label class="heading-small" for="auth-code">Registrar's electronic signature</label>
+
           <p class="bordered-output-not-present" id="registrarsig">[Will be applied when the charge takes
             effect]</p>
         </div>
@@ -71,10 +79,15 @@
         </div>
         </p>
       </article>
-      <div class="text">
-        <form action="/searchdeed">
-          <input class="button" type="submit" value="Back">
-        </form>
+      <div class="inner-block">
+        <div class="text">
+          <form method="post" action="/searchdeed/finished">
+            <p>If you are happy with the details shown on your mortgage deed above, please continue.</p>
+
+            <p>If something is wrong you should contact your conveyancer</p>
+            <input class="button" type="submit" value="Continue">
+          </form>
+        </div>
       </div>
     </div>
 
