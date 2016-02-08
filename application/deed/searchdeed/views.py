@@ -10,7 +10,6 @@ searchdeed = Blueprint('searchdeed', __name__,
 
 @searchdeed.route('/borrower-reference', methods=['GET', 'POST'])
 def search_deed_main():
-
     if session.get("error"):
         session.pop("error")
         return render_template('searchdeed.html', error=True)
@@ -20,9 +19,6 @@ def search_deed_main():
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
-    if session.get('deed_token'):
-        session.pop('deed_token')
-
     return render_template('finished.html')
 
 
@@ -69,6 +65,7 @@ def enter_dob():
 @searchdeed.route('/mortgage-deed', methods=['GET'])
 def search_deed_search():
     response = do_search_deed_search()
+    session.clear()
     return response, status.HTTP_200_OK
 
 
