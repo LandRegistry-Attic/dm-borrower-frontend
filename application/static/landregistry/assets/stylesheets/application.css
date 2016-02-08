@@ -426,7 +426,7 @@ p {
   color: #4c2c92; }
 
 .link:hover {
-  color: #2e8aca; }
+  color: #2b8cc4; }
 
 .link:active {
   color: #005ea5; }
@@ -942,7 +942,7 @@ details {
     position: relative;
     margin-bottom: 0.26316em; }
     details summary:hover {
-      color: #2e8aca; }
+      color: #2b8cc4; }
     details summary:focus {
       outline: 3px solid #ffbf47; }
   details .summary {
@@ -1728,7 +1728,7 @@ fieldset {
     width: 100%; } }
 .verified-container {
   margin-top: 30px;
-  width: 50%; }
+  width: 66.66667%; }
 
 .verified-bullets {
   padding-left: 60px;
