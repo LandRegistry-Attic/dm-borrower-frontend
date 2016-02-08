@@ -1,7 +1,7 @@
 {% extends "base/lr_base_layout.html" %}
 
 {% block content %}
-<div class="main" id="content">
+<main id="content" role="main">
     {{ super() }}
     <div>&nbsp;</div>
     {% if error %}
@@ -41,6 +41,6 @@
            <p>If you don't have a reference your should contact your conveyancer.</p>
     </details>
 
-</div>
+</main>
 
 {% endblock %}

@@ -426,7 +426,7 @@ p {
   color: #4c2c92; }
 
 .link:hover {
-  color: #2b8cc4; }
+  color: #2e8aca; }
 
 .link:active {
   color: #005ea5; }
@@ -942,7 +942,7 @@ details {
     position: relative;
     margin-bottom: 0.26316em; }
     details summary:hover {
-      color: #2b8cc4; }
+      color: #2e8aca; }
     details summary:focus {
       outline: 3px solid #ffbf47; }
   details .summary {
@@ -1575,7 +1575,7 @@ dl {
   border-top: 1px solid #dee0e2; }
 
 .bold-text {
-  font-weight: 600; }
+  font-weight: 700; }
 
 @media (min-width: 641px) {
   main {
