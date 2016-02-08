@@ -1,21 +1,29 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, url_for
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
-
+import requests
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
                        static_folder='static')
 
 
-@searchdeed.route('/borrower-reference')
+@searchdeed.route('/borrower-reference', methods=['GET', 'POST'])
 def search_deed_main():
-    return render_template('searchdeed.html', error=None)
+
+    if session.get("error"):
+        session.pop("error")
+        return render_template('searchdeed.html', error=True)
+    else:
+        return render_template('searchdeed.html', error=None)
 
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
+    if session.get('deed_token'):
+        session.pop('deed_token')
+
     return render_template('finished.html')
 
 
@@ -53,7 +61,8 @@ def enter_dob():
                 session['deed_token'] = deed_token['deed_token']
                 return redirect('/how-to-proceed', code=307)
             else:
-                return render_template('searchdeed.html', error=True)
+                session['error'] = "True"
+                return redirect('/borrower-reference', code=307)
 
     return render_template('enterdob.html', form=form)
 
