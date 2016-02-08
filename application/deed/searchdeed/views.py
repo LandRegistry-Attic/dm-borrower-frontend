@@ -1,8 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for
+from flask import Blueprint, render_template, request, redirect, session
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
-import requests
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
