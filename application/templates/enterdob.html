@@ -21,7 +21,11 @@
             <p class="form-hint">For example, 31 3 1980</p>
             <div class="{% if form.error %}error{% endif %}">
               <label for="example-dob" id="error-dob">
-                {% if form.error %}<span class="error-message" id="error-message-dob">{{ form.error }}</span>{% endif %}
+                {% if form.error %}
+                  <span class="error-message" id="error-message-dob">
+                    {{ form.error }}
+                  </span>
+                {% endif %}
               </label>
             </div>
 
