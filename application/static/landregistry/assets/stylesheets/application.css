@@ -1387,6 +1387,77 @@ details {
       font-size: 16px;
       line-height: 1.25; } }
 
+.beta-banner {
+  padding: 10px 0 8px 0;
+  border-bottom: 1px solid #bfc1c3; }
+  @media (min-width: 641px) {
+    .beta-banner {
+      padding-bottom: 10px; } }
+  .beta-banner p {
+    margin: 0;
+    color: #000;
+    font-family: "nta", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.14286;
+    font-weight: 400;
+    text-transform: none; }
+    @media (min-width: 641px) {
+      .beta-banner p {
+        font-size: 16px;
+        line-height: 1.25; } }
+  .beta-banner .phase-tag {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 8px 0 0;
+    padding: 2px 5px 0;
+    font-family: "nta", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.14286;
+    font-weight: 700;
+    text-transform: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #f47738; }
+    @media (min-width: 641px) {
+      .beta-banner .phase-tag {
+        vertical-align: baseline; } }
+    @media (min-width: 641px) {
+      .beta-banner .phase-tag {
+        font-size: 16px;
+        line-height: 1.25; } }
+  .beta-banner span {
+    vertical-align: top; }
+    @media (min-width: 641px) {
+      .beta-banner span {
+        vertical-align: baseline; } }
+
+.beta-tag {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 8px 0 0;
+  padding: 2px 5px 0;
+  font-family: "nta", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.14286;
+  font-weight: 700;
+  text-transform: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #f47738; }
+  @media (min-width: 641px) {
+    .beta-tag {
+      vertical-align: baseline; } }
+  @media (min-width: 641px) {
+    .beta-tag {
+      font-size: 16px;
+      line-height: 1.25; } }
+
 .deed-summary {
   padding: 15px;
   border: 8px solid #DEE0E2; }
@@ -1416,10 +1487,6 @@ ol {
   padding: 0;
   margin-top: 5px;
   margin-bottom: 20px; }
-
-ul {
-  list-style-type: disc;
-  padding-left: 20px; }
 
 ol {
   list-style-type: decimal;
@@ -1508,11 +1575,160 @@ dl {
   border-top: 1px solid #dee0e2; }
 
 .bold-text {
-  font-weight: bold; }
+  font-weight: 700; }
 
+@media (min-width: 641px) {
+  main {
+    font-size: 19px;
+    line-height: 1.3157894737; } }
+.button-get-started {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 24px;
+  line-height: 1.25;
+  text-transform: none;
+  font-weight: 700;
+  background-image: url("/static/landregistry/assets/images/icons/icon-pointer.png");
+  background-repeat: no-repeat;
+  background-position: 100% 50%;
+  padding: 0.36842em 2.15789em 0.21053em 0.84211em; }
+
+@media (max-width: 640px) {
+  .button-get-started {
+    font-size: 20px;
+    line-height: 1.2; } }
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 20 / 10), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .button-get-started {
+    background-image: url("/static/landregistry/assets/images/icons/icon-pointer-2x.png");
+    background-size: 30px 19px; } }
+fieldset {
+  width: 100%;
+  float: left;
+  clear: both; }
+
+.form-title {
+  margin-bottom: 30px; }
+
+@media (min-width: 641px) {
+  .form-title {
+    margin-bottom: 45px; } }
+.form-label {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.31579;
+  font-weight: 400;
+  text-transform: none;
+  display: block;
+  margin-bottom: 5px; }
+
+@media (max-width: 640px) {
+  .form-label {
+    font-size: 16px;
+    line-height: 1.25; } }
+.form-label-bold {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 400;
+  text-transform: none;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0; }
+
+@media (max-width: 640px) {
+  .form-label-bold {
+    font-size: 20px;
+    line-height: 1.2; } }
+.form-label-bold .form-hint {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.31579;
+  font-weight: 400;
+  text-transform: none; }
+
+@media (max-width: 640px) {
+  .form-label-bold .form-hint {
+    font-size: 16px;
+    line-height: 1.25; } }
+.form-block {
+  float: left;
+  width: 100%; }
+
+.form-block:after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.form-hint {
+  display: block;
+  color: #6f777b;
+  margin-bottom: 5px; }
+
+@media (min-width: 641px) {
+  .form-hint {
+    margin-top: 8px; } }
+.form-control {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 19px;
+  line-height: 1.31579;
+  font-weight: 400;
+  text-transform: none;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #bfc1c3;
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+@media (max-width: 640px) {
+  .form-control {
+    font-size: 16px;
+    line-height: 1.25; } }
+@media (min-width: 641px) {
+  .form-control {
+    width: 50%; } }
+.form-control-3-4 {
+  width: 100%; }
+
+@media (min-width: 641px) {
+  .form-control-3-4 {
+    width: 75%; } }
+.form-control-1-2 {
+  width: 100%; }
+
+@media (min-width: 641px) {
+  .form-control-1-2 {
+    width: 50%; } }
+.form-control-1-4 {
+  width: 25%; }
+
+.form-control-1-8 {
+  width: 12.5%; }
+
+.form-radio {
+  display: block;
+  margin: 10px 0; }
+
+.form-radio input {
+  vertical-align: middle;
+  margin: -4px 5px 0 0; }
+
+.form-checkbox {
+  display: block;
+  margin: 15px 0; }
+
+.form-checkbox input {
+  vertical-align: middle;
+  margin: -2px 5px 0 0; }
+
+@media (max-width: 640px) {
+  .form .button {
+    width: 100%; } }
 .verified-container {
   margin-top: 30px;
-  width: 50%; }
+  width: 66.66667%; }
 
 .verified-bullets {
   padding-left: 60px;
@@ -1529,19 +1745,89 @@ dl {
   font-family: 'nta';
   color: white; }
 
-.bordered-output-present {
-  border: 1px solid #bfc1c3;
-  padding: 4px;
-  width: 350px; }
+.awaiting-information {
+  color: #6f777b; }
 
-.bordered-output-not-present {
-  border: 1px solid #bfc1c3;
-  padding: 4px;
-  color: #6f777b;
-  width: 350px; }
+.deed-form-ref {
+  margin-top: 60px; }
 
 .deed-address-list {
   list-style-type: none;
   padding-bottom: 20px; }
+
+.beta-banner {
+  padding: 10px 0 8px 0;
+  border-bottom: 1px solid #bfc1c3; }
+
+@media (min-width: 641px) {
+  .beta-banner {
+    padding-bottom: 10px; } }
+.beta-banner p {
+  margin: 0;
+  color: #000;
+  font-family: "nta", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.14286;
+  font-weight: 400;
+  text-transform: none; }
+
+@media (min-width: 641px) {
+  .beta-banner p {
+    font-size: 16px;
+    line-height: 1.25; } }
+.beta-banner .phase-tag {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 8px 0 0;
+  padding: 2px 5px 0;
+  font-family: "nta", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.14286;
+  font-weight: 700;
+  text-transform: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #f47738; }
+
+@media (min-width: 641px) {
+  .beta-banner .phase-tag {
+    vertical-align: baseline; } }
+@media (min-width: 641px) {
+  .beta-banner .phase-tag {
+    font-size: 16px;
+    line-height: 1.25; } }
+.beta-banner span {
+  vertical-align: top; }
+
+@media (min-width: 641px) {
+  .beta-banner span {
+    vertical-align: baseline; } }
+.beta-tag {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 8px 0 0;
+  padding: 2px 5px 0;
+  font-family: "nta", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.14286;
+  font-weight: 700;
+  text-transform: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #f47738; }
+
+@media (min-width: 641px) {
+  .beta-tag {
+    vertical-align: baseline; } }
+@media (min-width: 641px) {
+  .beta-tag {
+    font-size: 16px;
+    line-height: 1.25; } }
 
 /*# sourceMappingURL=application.css.map */
