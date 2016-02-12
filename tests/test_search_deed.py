@@ -1,5 +1,7 @@
 from tests.helpers import with_client, setUpApp, with_context
 import unittest
+from application.deed.searchdeed.views import validate_dob
+from datetime import date
 
 
 class TestSearchDeed(unittest.TestCase):
@@ -9,24 +11,82 @@ class TestSearchDeed(unittest.TestCase):
     @with_context
     @with_client
     def test_search_deed_post(self, client):
-        res = client.post('/searchdeed/search',
-                          data={'borrower_token': '38', 'dob-day': '01',
-                                'dob-month': '11', 'dob-year': '1975'})
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.get('/mortgage-deed')
 
         self.assertEqual(res.status_code, 200)
 
     @with_context
     @with_client
     def test_search_deed_post_invalid_reference(self, client):
-        res = client.post('/searchdeed/search',
-                          data={'borrower_token': '', 'dob-day': '01',
-                                'dob-month': '11', 'dob-year': '1975'})
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.get('/mortgage-deed')
 
         self.assertEqual(res.status_code, 200)
 
     @with_context
     @with_client
-    def test_search_deed_get(self, client):
-        res = client.get('/searchdeed')
+    def test_validate_borrower(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.post('/date-of-birth', data={'borrower_token': '38',
+                                                  'dob-day': '01',
+                                                  'dob-month': '10',
+                                                  'dob-year': '1976',
+                                                  'dob': '01/11/1975',
+                                                  'validate': 'True'})
+
+        self.assertEqual(res.status_code, 307)
+
+    @with_context
+    @with_client
+    def test_sign_my_mortgage_landing(self, client):
+        res = client.get('/sign-my-mortgage')
 
         self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_finish_page(self, client):
+        res = client.post('/finished')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_how_to_proceed_page(self, client):
+        res = client.post('/how-to-proceed')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_borrower_reference_page(self, client):
+        res = client.get('/borrower-reference')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    def test_validate_dob_future(self):
+        form = {
+            "dob-day": "01",
+            "dob-month": "01",
+            "dob-year": date.today().year + 1
+        }
+        dobResult = validate_dob(form)
+        self.assertEqual(dobResult, "Please enter a valid date of birth")
+
+    @with_context
+    def test_validate_dob(self):
+        form = {
+            "dob-day": "01",
+            "dob-month": "01",
+            "dob-year": date.today().year - 1
+        }
+        dobResult = validate_dob(form)
+        self.assertEqual(dobResult, None)

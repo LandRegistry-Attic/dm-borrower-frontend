@@ -1,0 +1,41 @@
+{% extends "base/lr_base_layout.html" %}
+
+{% block content %}
+  <main id="content" role="main">
+    {{ super() }}
+
+    <div class="grid-row">
+      <div class="column-two-thirds">
+
+        <div class="govuk-box-highlight">
+          <p></p>
+
+          <h1 class="bold-large">Thank you for viewing your</br> mortgage deed</h1></p>
+        </div>
+
+        <h2 class="heading-medium">What happens next?</h2>
+
+        <p>The online deed you've viewed is not the legal deed.</p>
+        <ul class="list-bullet">
+          <li>
+            You should sign and return your paper mortgage deed following the instructions you have received from your
+            conveyancer
+          </li>
+          <li>
+            Land Registry will then update your title register to include the new mortgage
+          </li>
+        </ul>
+        <p>
+          The time this takes will vary depending on the complexity of the
+          transaction.
+        </p>
+
+        <div class="division-standard-top">
+          <a rel="external" href="https://www.gov.uk/government/organisations/land-registry">More about the Land
+            Registry</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

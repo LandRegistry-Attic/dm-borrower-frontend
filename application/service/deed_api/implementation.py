@@ -3,7 +3,7 @@ from application import config
 from flask.ext.api import status
 
 
-def get_deed(deed_reference):
+def get_deed(deed_reference):  # pragma: no cover
     data = None
     resp = requests.get(config.DEED_API_BASE_HOST + '/deed/' +
                         str(deed_reference))
@@ -14,7 +14,7 @@ def get_deed(deed_reference):
     return data
 
 
-def validate_borrower(payload):
+def validate_borrower(payload):  # pragma: no cover
     resp = requests.post(config.DEED_API_BASE_HOST +
                          '/borrower/validate', json=payload)
     deed_token = None
