@@ -77,6 +77,7 @@ def session_ended():
 
 
 def do_search_deed_search():
+
     deed_data = lookup_deed(session['deed_token'])
     if deed_data is not None:
         deed_data["deed"]["property_address"] = format_address_string(deed_data["deed"]["property_address"])
