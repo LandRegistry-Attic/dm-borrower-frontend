@@ -19,6 +19,7 @@ def search_deed_main():
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
+    session.clear()
     return render_template('finished.html')
 
 
@@ -64,12 +65,19 @@ def enter_dob():
 
 @searchdeed.route('/mortgage-deed', methods=['GET'])
 def search_deed_search():
+    if 'deed_token' not in session:
+        return redirect('/session-ended', code=302)
     response = do_search_deed_search()
-    session.clear()
     return response, status.HTTP_200_OK
 
 
+@searchdeed.route('/session-ended', methods=['GET'])
+def session_ended():
+    return render_template('session-ended.html')
+
+
 def do_search_deed_search():
+
     deed_data = lookup_deed(session['deed_token'])
 
     if deed_data is not None:
