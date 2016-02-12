@@ -1,0 +1,4 @@
+
+[submodule "build/elements-toolkit"]
+	path = build/elements-toolkit
+	url = https://github.com/alphagov/govuk_elements.git
