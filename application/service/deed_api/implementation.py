@@ -4,7 +4,7 @@ from flask.ext.api import status
 
 webseal_headers = {
     "Content-Type": "application/json",
-    "Iv-User-L":"CN=DigitalMortgage%20DigitalMortgage,OU=devices,O=Land%20Registry%20Internal,*,C=gb"
+    "Iv-User-L":"CN=DigitalMortgage%20DigitalMortgage,OU=devices,O=Land%20Registry%20Internal,O=*,C=gb"
 }
 
 def get_deed(deed_reference):  # pragma: no cover
