@@ -3,6 +3,7 @@ import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
 
+
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
                        static_folder='static')
@@ -19,6 +20,7 @@ def search_deed_main():
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
+    sign_deed_with(session['deed_token'], get_borrower_id())
     return render_template('finished.html')
 
 
@@ -54,6 +56,7 @@ def enter_dob():
             deed_token = validate_borrower(form['borrower_token'], dob)
             if deed_token is not None:
                 session['deed_token'] = deed_token['deed_token']
+                session['borrower_token'] = form['borrower_token']
                 return redirect('/how-to-proceed', code=307)
             else:
                 session['error'] = "True"
@@ -104,3 +107,21 @@ def lookup_deed(deed_reference):
         deed_data = None
 
     return deed_data
+
+
+def sign_deed_with(deed_reference, and_borrower_id):
+    deed_api_client = getattr(searchdeed, 'deed_api_client')
+    response = deed_api_client.add_borrower_signature(deed_reference, and_borrower_id)
+    return response
+
+
+# This should be replaced with an api call to deed_api for borrower_id - WIP (Need to discuss)
+def get_borrower_id():
+    deed_data = lookup_deed(session['deed_token'])
+    borrower_id = None
+    if deed_data is not None:
+        for borrower in deed_data['deed']['borrowers']:
+            if borrower['token'] == session.get('borrower_token'):
+                borrower_id = {"borrower_id": borrower['id']}
+
+    return borrower_id
