@@ -50,7 +50,7 @@
         <h3 class="heading-medium">Charging clause</h3>
         <p>{{ deed_data.deed.charge_clause.description }}</p>
 
-        <h3 class="heading-medium">Additional provisions</h3>
+          <h3 class="heading-medium">Additional provisions</h3>
         <ol class="list-number">
           {% for provision in deed_data.deed.additional_provisions %}
             <li>
@@ -69,13 +69,13 @@
         {% for borrower in deed_data.deed.borrowers %}
             {% if borrower.signature %}
                 <p id="signature{{ loop.index }}">Confirmed by
-                <b class="bold-small"> {{ borrower.forename }}
-                {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }} </b>
-              </p>
+                    <b class="bold-small"> {{ borrower.forename }}
+                    {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }} </b>
+                </p>
             {% else %}
                 <p class="awaiting-information" id="signature{{ loop.index }}">[Awaiting confirmation from {{ borrower.forename }}
-                {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}]
-              </p>
+                    {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}]
+                </p>
             {% endif %}
         {% endfor %}
 
