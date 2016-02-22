@@ -73,8 +73,7 @@
                 {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }} </b>
               </p>
             {% else %}
-                <p class="awaiting-information" id="signature{{ loop.index }}">[Awaiting digital signature
-                of {{ borrower.forename }}
+                <p class="awaiting-information" id="signature{{ loop.index }}">[Awaiting confirmation from {{ borrower.forename }}
                 {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}]
               </p>
             {% endif %}
