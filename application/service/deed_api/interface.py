@@ -7,3 +7,6 @@ class DeedApiInterface(object):  # pragma: no cover
 
     def validate_borrower(self, payload):
             return self.implementation.validate_borrower(payload)
+
+    def add_borrower_signature(self, deed_reference, borrower_position):
+        return self.implementation.add_borrower_signature(deed_reference, borrower_position)
