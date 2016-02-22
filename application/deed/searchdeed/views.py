@@ -68,7 +68,6 @@ def enter_dob():
 @searchdeed.route('/mortgage-deed', methods=['GET'])
 def search_deed_search():
     response = do_search_deed_search()
-    session.clear()
     return response, status.HTTP_200_OK
 
 
