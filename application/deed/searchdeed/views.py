@@ -115,7 +115,7 @@ def lookup_deed(deed_reference):
     return deed_data
 
 
-def sign_deed_with(deed_reference, and_borrower_id):
+def sign_deed_with(deed_reference, and_borrower_token):
     if not deed_signed():
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         response = deed_api_client.add_borrower_signature(deed_reference, and_borrower_token)
