@@ -3,6 +3,7 @@ import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
 
+
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
                        static_folder='static')
