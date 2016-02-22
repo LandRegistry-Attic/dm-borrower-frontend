@@ -1,4 +1,6 @@
 from flask.ext.api import status
+
+
 class DeedApiMockClient:
     @staticmethod
     def get_deed(deed_reference):
@@ -37,5 +39,5 @@ class DeedApiMockClient:
 
     @staticmethod
     def add_borrower_signature(deed_reference, borrower_token):
-       
+
         return status.HTTP_200_OK
