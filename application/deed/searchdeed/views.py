@@ -19,6 +19,7 @@ def search_deed_main():
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
+    sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
     session.clear()
     return render_template('finished.html')
 
@@ -113,27 +114,13 @@ def lookup_deed(deed_reference):
     return deed_data
 
 
-def sign_deed_with(deed_reference, and_borrower_id):
+def sign_deed_with(deed_reference, and_borrower_token):
     if not deed_signed():
         deed_api_client = getattr(searchdeed, 'deed_api_client')
-        response = deed_api_client.add_borrower_signature(deed_reference, and_borrower_id)
+        response = deed_api_client.add_borrower_signature(deed_reference, and_borrower_token)
         return response
 
 
-# TODO This should be replaced with an api call to deed_api for borrower_id - WIP (Need to discuss)
-# Do we even need this on frontend ?
-def get_borrower_id():
-    deed_data = lookup_deed(session['deed_token'])
-    borrower_id = None
-    if deed_data is not None:
-        for borrower in deed_data['deed']['borrowers']:
-            if borrower['token'] == session.get('borrower_token'):
-                borrower_id = {"borrower_id": borrower['id']}
-
-    return borrower_id
-
-
-# TODO Reduce number of calls to api for deed_lookup
 def deed_signed():
     deed_data = lookup_deed(session['deed_token'])
     if deed_data is not None:
