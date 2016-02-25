@@ -53,6 +53,9 @@ class TestSearchDeed(unittest.TestCase):
     @with_context
     @with_client
     def test_finish_page(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+            sess['borrower_token'] = '38'
         res = client.post('/finished')
 
         self.assertEqual(res.status_code, 200)
