@@ -14,6 +14,7 @@ LOGGER = logging.getLogger(__name__)
 
 LOGGER.info("Starting the server")
 
+
 def create_manager(deed_api_client=make_deed_api_client()):
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
