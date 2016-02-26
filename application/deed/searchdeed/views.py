@@ -18,6 +18,12 @@ def search_deed_main():
         return render_template('searchdeed.html', error=None)
 
 
+@searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
+def show_authentication_code_page():
+
+    return render_template('authentication-code.html')
+
+
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
     sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
