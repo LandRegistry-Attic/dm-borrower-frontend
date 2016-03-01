@@ -18,9 +18,13 @@ def search_deed_main():
         return render_template('searchdeed.html', error=None)
 
 
-@searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
+@searchdeed.route('/enter-authentication-code', methods=['GET'])
 def show_authentication_code_page():
+    if 'deed_token' not in session:
+        return redirect('/session-ended', code=302)
 
+    deed_api_client = getattr(searchdeed, 'deed_api_client')
+    deed_api_client.send_sms(str(session.get('deed_token')), str(session.get('borrower_token')))
     return render_template('authentication-code.html')
 
 
