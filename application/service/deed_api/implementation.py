@@ -32,3 +32,17 @@ def add_borrower_signature(deed_reference, borrower_token):
     response = requests.post(config.DEED_API_BASE_HOST +
                              '/deed/' + deed_reference + '/sign', json=borrower_token, headers=webseal_headers)
     return response
+
+
+def send_sms(deed_reference, borrower_token):
+    payload = {"borrower_token": borrower_token}
+    response = requests.post(config.DEED_API_BASE_HOST +
+                             '/deed/' + deed_reference + '/send-sms', json=payload, headers=webseal_headers)
+    return response
+
+
+def verify_sms(deed_reference, borrower_token, authentication_code):
+    payload = {"borrower_token": borrower_token, "authentication_code": authentication_code}
+    response = requests.post(config.DEED_API_BASE_HOST +
+                             '/deed/' + deed_reference + '/verify-sms', json=payload, headers=webseal_headers)
+    return response
