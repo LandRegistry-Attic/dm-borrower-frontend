@@ -24,11 +24,8 @@ def validate_borrower(payload):  # pragma: no cover
     resp = requests.post(config.DEED_API_BASE_HOST +
                          '/borrower/validate', json=payload,
                          headers=webseal_headers)
-    deed_token = None
     if resp.status_code == status.HTTP_200_OK:
-        deed_token = resp.json()
-
-    return deed_token
+        return resp.json()
 
 
 def add_borrower_signature(deed_reference, borrower_token):

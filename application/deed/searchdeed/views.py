@@ -60,9 +60,10 @@ def enter_dob():
         form.error = validate_dob(form)
         if form.error is None:
             dob = form["dob-day"] + "/" + form["dob-month"] + "/" + form["dob-year"]
-            deed_token = validate_borrower(form['borrower_token'], dob)
-            if deed_token is not None:
-                session['deed_token'] = deed_token['deed_token']
+            result = validate_borrower(form['borrower_token'], dob)
+            if result is not None:
+                session['deed_token'] = result['deed_token']
+                session['phone_number'] = result['phone_number']
                 session['borrower_token'] = form['borrower_token']
                 return redirect('/how-to-proceed', code=307)
             else:
@@ -104,11 +105,8 @@ def validate_borrower(borrower_token, dob):
             "dob": str(dob)
             }
         deed_api_client = getattr(searchdeed, 'deed_api_client')
-        deed_token = deed_api_client.validate_borrower(payload)
-    else:
-        deed_token = None
-
-    return deed_token
+        result = deed_api_client.validate_borrower(payload)
+        return result
 
 
 def lookup_deed(deed_reference):
