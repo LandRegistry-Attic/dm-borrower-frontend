@@ -54,7 +54,7 @@ def show_authentication_code_page():
         return redirect('/session-ended', code=302)
 
     deed_api_client = getattr(searchdeed, 'deed_api_client')
-    deed_api_client.send_sms(str(session.get('deed_token')), str(session.get('borrower_token')))
+    deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
     return render_template('authentication-code.html')
 
 
