@@ -18,43 +18,6 @@ def search_deed_main():
         return render_template('searchdeed.html', error=None)
 
 
-@searchdeed.route('/enter-authentication-code', methods=['GET'])
-def show_authentication_code_page():
-    if 'deed_token' not in session:
-        return redirect('/session-ended', code=302)
-
-    deed_api_client = getattr(searchdeed, 'deed_api_client')
-    deed_api_client.send_sms(str(session.get('deed_token')), str(session.get('borrower_token')))
-    return render_template('authentication-code.html')
-
-
-@searchdeed.route('/finished', methods=['POST'])
-def show_final_page():
-    sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
-    session.clear()
-    return render_template('finished.html')
-
-
-def validate_dob(form):
-    error = None
-    try:
-        present = datetime.datetime.now()
-
-        day = int(form["dob-day"])
-        month = int(form["dob-month"])
-        year = int(form["dob-year"])
-
-        dob_date = datetime.datetime(year, month, day)
-
-        if dob_date >= present:
-            raise Exception("Date cannot be in the future")
-
-    except:
-        error = "Please enter a valid date of birth"
-
-    return error
-
-
 @searchdeed.route('/date-of-birth', methods=['POST'])
 def enter_dob():
     form = request.form
@@ -85,9 +48,57 @@ def search_deed_search():
     return response, status.HTTP_200_OK
 
 
+@searchdeed.route('/enter-authentication-code', methods=['GET'])
+def show_authentication_code_page():
+    if 'deed_token' not in session:
+        return redirect('/session-ended', code=302)
+
+    deed_api_client = getattr(searchdeed, 'deed_api_client')
+    deed_api_client.send_sms(str(session.get('deed_token')), str(session.get('borrower_token')))
+    return render_template('authentication-code.html')
+
+
+@searchdeed.route('/finished', methods=['POST'])
+def show_final_page():
+    sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
+    session.clear()
+    return render_template('finished.html')
+
+
 @searchdeed.route('/session-ended', methods=['GET'])
 def session_ended():
     return render_template('session-ended.html')
+
+
+def validate_dob(form):
+    error = None
+    try:
+        present = datetime.datetime.now()
+
+        day = int(form["dob-day"])
+        month = int(form["dob-month"])
+        year = int(form["dob-year"])
+
+        dob_date = datetime.datetime(year, month, day)
+
+        if dob_date >= present:
+            raise Exception("Date cannot be in the future")
+
+    except:
+        error = "Please enter a valid date of birth"
+
+    return error
+
+
+def validate_borrower(borrower_token, dob):
+    if borrower_token is not None and borrower_token != '':
+        payload = {
+            "borrower_token": borrower_token,
+            "dob": str(dob)
+            }
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        result = deed_api_client.validate_borrower(payload)
+        return result
 
 
 def do_search_deed_search():
@@ -100,17 +111,6 @@ def do_search_deed_search():
         return render_template('searchdeed.html', error=True)
 
     return response
-
-
-def validate_borrower(borrower_token, dob):
-    if borrower_token is not None and borrower_token != '':
-        payload = {
-            "borrower_token": borrower_token,
-            "dob": str(dob)
-            }
-        deed_api_client = getattr(searchdeed, 'deed_api_client')
-        result = deed_api_client.validate_borrower(payload)
-        return result
 
 
 def lookup_deed(deed_reference):
