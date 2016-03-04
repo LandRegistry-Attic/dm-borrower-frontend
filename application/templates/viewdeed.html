@@ -89,16 +89,24 @@
 
       <div class="inner-block">
         <div class="text">
-          <p>If you’re ready to confirm your mortgage, we’ll send you an authentication code which you’ll need to
-            enter on the next screen</p>
-          <p>If you do not wish to confirm the mortgage deed (for instance if you think there is a mistake or you
-            want further explanation) you should contact your conveyancer.</p>
-          <h2 class="heading-medium">Receiving your authentication code</h2>
-          <p>
-            We will be sending your authentication code by text message to your mobile number ending
-            <b class="bold-small">{{ session.phone_number }}</b>.
-          </p>
-          <a href="{{ url_for('searchdeed.show_authentication_code_page') }}" class="button">Send my code</a>
+          {% if signed %}
+          <form method="post" action="{{ url_for('searchdeed.show_final_page') }}">
+            <p>If you are happy with the details shown on your mortgage deed above, please continue.</p>
+            <p>If something is wrong you should contact your conveyancer.</p>
+            <input class="button" type="submit" value="Continue">
+          </form>
+          {% else %}
+            <p>If you’re ready to confirm your mortgage, we’ll send you an authentication code which you’ll need to
+              enter on the next screen</p>
+            <p>If you do not wish to confirm the mortgage deed (for instance if you think there is a mistake or you
+              want further explanation) you should contact your conveyancer.</p>
+            <h2 class="heading-medium">Receiving your authentication code</h2>
+            <p>
+              We will be sending your authentication code by text message to your mobile number ending
+              <b class="bold-small">{{ session.phone_number }}</b>.
+            </p>
+            <a href="{{ url_for('searchdeed.show_authentication_code_page') }}" class="button">Send my code</a>
+          {% endif %}
         </div>
       </div>
     </div>
