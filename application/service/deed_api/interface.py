@@ -10,3 +10,9 @@ class DeedApiInterface(object):  # pragma: no cover
 
     def add_borrower_signature(self, deed_reference, borrower_token):
         return self.implementation.add_borrower_signature(deed_reference, borrower_token)
+
+    def request_auth_code(self, deed_reference, borrower_token):
+        return self.implementation.request_auth_code(deed_reference, borrower_token)
+
+    def verify_auth_code(self, deed_reference, borrower_token, authentication_code):
+        return self.implementation.verify_auth_code(deed_reference, borrower_token, authentication_code)

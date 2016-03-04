@@ -50,7 +50,7 @@
         <h3 class="heading-medium">Charging clause</h3>
         <p>{{ deed_data.deed.charge_clause.description }}</p>
 
-          <h3 class="heading-medium">Additional provisions</h3>
+        <h3 class="heading-medium">Additional provisions</h3>
         <ol class="list-number">
           {% for provision in deed_data.deed.additional_provisions %}
             <li>
@@ -67,16 +67,17 @@
 
         <h3 class="heading-medium">Borrower's digital signature(s)</h3>
         {% for borrower in deed_data.deed.borrowers %}
-            {% if borrower.signature %}
-                <p id="signature{{ loop.index }}">Confirmed by
-                    <b class="bold-small"> {{ borrower.forename }}
-                    {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }} </b>
-                </p>
-            {% else %}
-                <p class="awaiting-information" id="signature{{ loop.index }}">[Awaiting confirmation from {{ borrower.forename }}
-                    {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}]
-                </p>
-            {% endif %}
+          {% if borrower.signature %}
+            <p id="signature{{ loop.index }}">Confirmed by
+              <b class="bold-small"> {{ borrower.forename }}
+                {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }} </b>
+            </p>
+          {% else %}
+            <p class="awaiting-information" id="signature{{ loop.index }}">[Awaiting confirmation
+              from {{ borrower.forename }}
+              {{ borrower.middle_name }}{% if borrower.middle_name %} {% endif %}{{ borrower.surname }}]
+            </p>
+          {% endif %}
         {% endfor %}
 
         <div class="deed-form-ref">
@@ -88,11 +89,16 @@
 
       <div class="inner-block">
         <div class="text">
-          <form method="post" action="/finished">
-            <p>If you are happy with the details shown on your mortgage deed above, please continue.</p>
-            <p>If something is wrong you should contact your conveyancer.</p>
-            <input class="button" type="submit" value="Continue">
-          </form>
+          <p>If you’re ready to confirm your mortgage, we’ll send you an authentication code which you’ll need to
+            enter on the next screen</p>
+          <p>If you do not wish to confirm the mortgage deed (for instance if you think there is a mistake or you
+            want further explanation) you should contact your conveyancer.</p>
+          <h2 class="heading-medium">Receiving your authentication code</h2>
+          <p>
+            We will be sending your authentication code by text message to your mobile number ending
+            <b class="bold-small">{{ session.phone_number }}</b>.
+          </p>
+          <a href="{{ url_for('searchdeed.show_authentication_code_page') }}" class="button">Send my code</a>
         </div>
       </div>
     </div>
