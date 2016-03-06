@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, url_for
+from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
@@ -49,19 +50,36 @@ def search_deed_search():
     return response, status.HTTP_200_OK
 
 
-@searchdeed.route('/enter-authentication-code', methods=['GET'])
+@searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
 def show_authentication_code_page():
+    # TODO refactor out the issue and validation of authentication code into separate methods,
+    # this looks ugly to me at the moment, think method name. - WIP
+
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
 
+    if request.method == 'POST':
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        verify_response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
+                                                           str(session.get('borrower_token')),
+                                                           request.form["auth-code"])
+        if verify_response.status_code == status.HTTP_200_OK:
+            sign_response = sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
+            if sign_response.status_code == status.HTTP_200_OK:
+                return redirect(url_for('searchdeed.show_final_page'), code=307)
+            else:
+                raise exceptions.ServiceUnavailable
+        else:
+            return render_template('authentication-code.html', error=True)
+
     deed_api_client = getattr(searchdeed, 'deed_api_client')
     deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
+
     return render_template('authentication-code.html')
 
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
-    sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
     session.clear()
     return render_template('finished.html')
 
@@ -69,6 +87,17 @@ def show_final_page():
 @searchdeed.route('/session-ended', methods=['GET'])
 def session_ended():
     return render_template('session-ended.html')
+
+
+@searchdeed.route('/service-unavailable/503')
+def show_internal_server_error_page():
+    session.clear()
+    return render_template('503.html')
+
+
+@searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)
+def internal_server_error(e):
+    return redirect(url_for('searchdeed.show_internal_server_error_page'))
 
 
 def validate_dob(form):
