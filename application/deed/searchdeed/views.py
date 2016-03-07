@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for
+from flask import Blueprint, render_template, request, redirect, session, url_for, Response
 from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
@@ -111,6 +111,14 @@ def show_internal_server_error_page():
 @searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)
 def internal_server_error(e):
     return redirect(url_for('searchdeed.show_internal_server_error_page'))
+
+
+@searchdeed.route('/identity-verified', methods=['GET', 'POST'])
+def identity_verified():
+    if 'Pid' not in request.headers:
+        return Response('Unauthenticated', 401, {'WWW-Authenticate': 'Basic realm="Authentication Required"'})
+    else:
+        return render_template("identityverified.html")
 
 
 def validate_dob(form):
