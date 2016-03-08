@@ -44,6 +44,7 @@ def enter_dob():
 def search_deed_search():
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
+
     response = do_search_deed_search()
     return response, status.HTTP_200_OK
 
@@ -105,8 +106,10 @@ def do_search_deed_search():
     deed_data = lookup_deed(session['deed_token'])
     if deed_data is not None:
         deed_data["deed"]["property_address"] = format_address_string(deed_data["deed"]["property_address"])
-        response = render_template('viewdeed.html', deed_data=deed_data)
-
+        if deed_signed():
+            response = render_template('viewdeed.html', deed_data=deed_data, signed=True)
+        else:
+            response = render_template('viewdeed.html', deed_data=deed_data, signed=False)
     else:
         return render_template('searchdeed.html', error=True)
 
