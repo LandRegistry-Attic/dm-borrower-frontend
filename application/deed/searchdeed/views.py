@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, Response
+from flask import Blueprint, render_template, request, redirect, session
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
@@ -69,14 +69,6 @@ def show_final_page():
 @searchdeed.route('/session-ended', methods=['GET'])
 def session_ended():
     return render_template('session-ended.html')
-
-
-@searchdeed.route('/identity-verified', methods=['GET', 'POST'])
-def identity_verified():
-    if 'Pid' not in request.headers:
-        return Response('Unauthenticated', 401, {'WWW-Authenticate': 'Basic realm="Authentication Required"'})
-    else:
-        return render_template("identityverified.html")
 
 
 def validate_dob(form):
