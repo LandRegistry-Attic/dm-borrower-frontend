@@ -47,3 +47,5 @@ def get_borrower_details_by_verify_pid(verify_pid):
                             "/borrower/verify/pid/" + str(verify_pid), headers=webseal_headers)
     if response.status_code == status.HTTP_200_OK:
         return response.json()
+    else:
+        return None
