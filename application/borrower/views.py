@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, Response, request, session, redirect
+from application import config
 
 borrower_landing = Blueprint('borrower_landing', __name__,
                              template_folder='/templates',
@@ -13,6 +14,14 @@ def verified():
 @borrower_landing.route('/sign-my-mortgage')
 def home():
     return render_template("start.html")
+
+
+@borrower_landing.route('/start')
+def start():
+    if config.VERIFY:
+        return redirect('/identity-verified', code=307)
+    else:
+        return redirect('/borrower-reference', code=307)
 
 
 @borrower_landing.route('/identity-verified', methods=['GET'])
