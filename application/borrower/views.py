@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, Response, request, session
+from flask import Blueprint, render_template, Response, request, session, redirect
 from application import config
 
 borrower_landing = Blueprint('borrower_landing', __name__,
