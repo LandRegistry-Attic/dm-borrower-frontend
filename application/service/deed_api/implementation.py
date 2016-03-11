@@ -46,3 +46,9 @@ def verify_auth_code(deed_reference, borrower_token, authentication_code):
     response = requests.post(config.DEED_API_BASE_HOST +
                              '/deed/' + deed_reference + '/verify-auth-code', json=payload, headers=webseal_headers)
     return response
+
+
+def get_borrower_details_by_verify_pid(verify_pid):
+    response = requests.get(config.DEED_API_BASE_HOST +
+                            "/borrower/verify/pid/" + str(verify_pid), headers=webseal_headers)
+    return response.json()

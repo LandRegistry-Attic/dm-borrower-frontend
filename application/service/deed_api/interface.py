@@ -16,3 +16,6 @@ class DeedApiInterface(object):  # pragma: no cover
 
     def verify_auth_code(self, deed_reference, borrower_token, authentication_code):
         return self.implementation.verify_auth_code(deed_reference, borrower_token, authentication_code)
+
+    def get_borrower_details_by_verify_pid(self, verify_pid):
+        return self.implementation.get_borrower_details_by_verify_pid(verify_pid)
