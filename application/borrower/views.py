@@ -28,5 +28,11 @@ def verify_identity():
     if 'Pid' in request.headers:
         # TODO: Update this to perform a lookup using the pid
         session['deed_token'] = 'e63eb5'
+        return redirect('/identity-verified', code=302)
+    else:
+        return redirect('/verify-error')
 
-    return redirect('/identity-verified', code=302)
+
+@borrower_landing.route('/verify-error', methods=['GET'])
+def verify_error():
+    return render_template('verify-error.html')
