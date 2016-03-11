@@ -39,7 +39,7 @@ def verify_identity():
         session['deed_token'] = 'e63eb5'
         return redirect('/identity-verified', code=302)
     else:
-        return redirect('/verify-error')
+        return redirect('/verify-error', code=302)
 
 
 @borrower_landing.route('/verify-error', methods=['GET'])
