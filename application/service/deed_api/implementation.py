@@ -51,4 +51,5 @@ def verify_auth_code(deed_reference, borrower_token, authentication_code):
 def get_borrower_details_by_verify_pid(verify_pid):
     response = requests.get(config.DEED_API_BASE_HOST +
                             "/borrower/verify/pid/" + str(verify_pid), headers=webseal_headers)
-    return response.json()
+    if response.status_code == status.HTTP_200_OK:
+        return response.json()
