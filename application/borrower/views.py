@@ -36,7 +36,7 @@ def identity_verified():
 def verify_identity():
     if 'Pid' in request.headers:
         verify_pid = request.headers.get('Pid')
-        result = store_borrower_details_in_session(verify_pid)
+        result = get_borrower_details(verify_pid)
 
         if result is not None:
             session['deed_token'] = result['deed_token']
@@ -53,6 +53,6 @@ def verify_error():
     return render_template('verify-error.html')
 
 
-def store_borrower_details_in_session(verify_pid):
+def get_borrower_details(verify_pid):
     deed_api_client = getattr(borrower_landing, 'deed_api_client')
     return deed_api_client.get_borrower_details_by_verify_pid(verify_pid)
