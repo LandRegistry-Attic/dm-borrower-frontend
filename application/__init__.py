@@ -23,6 +23,7 @@ def create_manager(deed_api_client=make_deed_api_client()):
     app.url_map.strict_slashes = False
 
     setattr(searchdeed, 'deed_api_client', deed_api_client)
+    setattr(borrower_landing, 'deed_api_client', deed_api_client)
 
     app.register_blueprint(health, url_prefix='/health')
     app.register_blueprint(searchdeed)

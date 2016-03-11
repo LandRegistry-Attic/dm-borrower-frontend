@@ -35,8 +35,14 @@ def identity_verified():
 @borrower_landing.route('/verify', methods=['POST'])
 def verify_identity():
     if 'Pid' in request.headers:
-        # TODO: Update this to perform a lookup using the pid
-        session['deed_token'] = 'e63eb5'
+        verify_pid = request.headers.get('Pid')
+        result = store_borrower_details_in_session(verify_pid)
+
+        if result is not None:
+            session['deed_token'] = result['deed_token']
+            session['phone_number'] = result['phone_number']
+            session['borrower_token'] = result['borrower_token']
+
         return redirect('/identity-verified', code=302)
     else:
         return redirect('/verify-error', code=302)
@@ -45,3 +51,8 @@ def verify_identity():
 @borrower_landing.route('/verify-error', methods=['GET'])
 def verify_error():
     return render_template('verify-error.html')
+
+
+def store_borrower_details_in_session(verify_pid):
+    deed_api_client = getattr(borrower_landing, 'deed_api_client')
+    return deed_api_client.get_borrower_details_by_verify_pid(verify_pid)
