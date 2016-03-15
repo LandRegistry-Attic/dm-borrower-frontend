@@ -63,14 +63,13 @@ def show_authentication_code_page():
         verify_response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
                                                            str(session.get('borrower_token')),
                                                            request.form["auth-code"])
+
         if verify_response.status_code == status.HTTP_200_OK:
-            sign_response = sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
-            if sign_response.status_code == status.HTTP_200_OK:
-                return redirect(url_for('searchdeed.show_final_page'), code=307)
-            else:
-                raise exceptions.ServiceUnavailable
-        else:
+            return redirect(url_for('searchdeed.show_final_page'), code=307)
+        elif verify_response.status_code == status.HTTP_401_UNAUTHORIZED:
             return render_template('authentication-code.html', error=True)
+        else:
+            raise exceptions.ServiceUnavailable
 
     deed_api_client = getattr(searchdeed, 'deed_api_client')
     deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
@@ -153,13 +152,6 @@ def lookup_deed(deed_reference):
         deed_data = None
 
     return deed_data
-
-
-def sign_deed_with(deed_reference, and_borrower_token):
-    if not deed_signed():
-        deed_api_client = getattr(searchdeed, 'deed_api_client')
-        response = deed_api_client.add_borrower_signature(deed_reference, and_borrower_token)
-        return response
 
 
 def deed_signed():

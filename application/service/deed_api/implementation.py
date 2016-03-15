@@ -28,12 +28,6 @@ def validate_borrower(payload):  # pragma: no cover
         return resp.json()
 
 
-def add_borrower_signature(deed_reference, borrower_token):
-    response = requests.post(config.DEED_API_BASE_HOST +
-                             '/deed/' + deed_reference + '/sign', json=borrower_token, headers=webseal_headers)
-    return response
-
-
 def request_auth_code(deed_reference, borrower_token):
     payload = {"borrower_token": borrower_token}
     response = requests.post(config.DEED_API_BASE_HOST +
