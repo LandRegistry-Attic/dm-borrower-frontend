@@ -88,10 +88,10 @@ def session_ended():
     return render_template('session-ended.html')
 
 
-@searchdeed.route('/service-unavailable/503')
+@searchdeed.route('/service-unavailable/deed-not-confirmed')
 def show_internal_server_error_page():
     session.clear()
-    return render_template('503.html')
+    return render_template('deed-not-confirmed.html')
 
 
 @searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)

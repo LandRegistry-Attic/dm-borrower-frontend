@@ -1,0 +1,27 @@
+{% extends "base/lr_base_layout.html" %}
+
+{% block content %}
+  <main id="content" role="main">
+    {{ super() }}
+    <div id="content">
+      <div class="grid-row">
+        <div class="column-two-thirds">
+          <h1 class="heading-xlarge">Your deed is not confirmed</h1>
+          <p>
+            You were not able to confirm your deed. This was not due to any mistake
+            on your part, but because the service encountered technical issues.
+          </p>
+          <p>
+            You will need to <a href="/sign-my-mortgage">start again</a>
+          </p>
+          <p>
+            If you continue to experience this error please
+            <a href="mailto:digital-mortgage-team@digital.landregistry.gov.uk">contact us</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+
+
