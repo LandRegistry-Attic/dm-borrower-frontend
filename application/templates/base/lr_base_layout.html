@@ -1,6 +1,7 @@
 {% set page_title = 'Sign your mortgage deed' %}
 {% set asset_path = '/static/govuk_template/assets/' %}
 {% set assets_main = '/static/elements/main.css' %}
+{% set google_code = 'UA-59849906-7' %}
 
 <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
 <link href="{{assets_main}}" media="screen" rel="stylesheet" type="text/css">
@@ -31,7 +32,7 @@
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-59849906-6', 'auto');
+    ga('create', '{{ google_code }}', 'auto');
     ga('send', 'pageview');
     ga('set', 'anonymizeIp', true);
 
