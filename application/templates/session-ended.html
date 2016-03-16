@@ -1,0 +1,16 @@
+{% extends "base/lr_base_layout.html" %}
+{% block content %}
+  <main id="content" role="main">
+    {{ super() }}
+    <div id="content">
+      <div class="inner-block">
+        <h1 class="heading-xlarge">Your session has ended</h1>
+        <p class="text">Your session has been ended by the service or has
+          timed out because you haven’t done anything for 20 minutes. We’ve
+          deleted all the details you’ve entered to protect your privacy.</p>
+        <p class="text">You’ll need to <a href="{{ url_for('borrower_landing.home') }}">start
+          again</a>.</p>
+      </div>
+    </div>
+  </main>
+{% endblock %}
