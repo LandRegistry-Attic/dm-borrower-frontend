@@ -52,29 +52,32 @@ def search_deed_search():
 
 @searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
 def show_authentication_code_page():
-    # TODO refactor out the issue and validation of authentication code into separate methods,
-    # this looks ugly to me at the moment, think method name. - WIP
+    # TODO refactor out the issue and validation of authentication code into separate methods.
+    # TODO figure out a way to identify if code is being requested again.
+    # TODO custom error handling and exception for deed not confirmed instead of using 503
+    # TODO this looks ugly to me at the moment, Make it pretty. - WIP
 
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
 
     if request.method == 'POST':
         deed_api_client = getattr(searchdeed, 'deed_api_client')
-        verify_response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
-                                                           str(session.get('borrower_token')),
-                                                           request.form["auth-code"])
+        response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
+                                                    str(session.get('borrower_token')),
+                                                    request.form["auth-code"])
 
-        if verify_response.status_code == status.HTTP_200_OK:
+        if response.status_code == status.HTTP_200_OK:
             return redirect(url_for('searchdeed.show_final_page'), code=307)
-        elif verify_response.status_code == status.HTTP_401_UNAUTHORIZED:
+        elif response.status_code == status.HTTP_401_UNAUTHORIZED:
             return render_template('authentication-code.html', error=True)
         else:
             raise exceptions.ServiceUnavailable
 
     deed_api_client = getattr(searchdeed, 'deed_api_client')
     deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
-
-    return render_template('authentication-code.html')
+    render_page = render_template('authentication-code.html')
+    session['code-sent'] = True
+    return render_page
 
 
 @searchdeed.route('/finished', methods=['POST'])
@@ -90,7 +93,6 @@ def session_ended():
 
 @searchdeed.route('/service-unavailable/deed-not-confirmed')
 def show_internal_server_error_page():
-    session.clear()
     return render_template('deed-not-confirmed.html')
 
 
