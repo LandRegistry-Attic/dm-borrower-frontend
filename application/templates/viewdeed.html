@@ -82,7 +82,10 @@
 
         <div class="deed-form-ref">
           <h3 class="visuallyhidden">Form of digital mortgage deed filed at HM Land Registry under reference</h3>
-          <p>{{ deed_data.deed.md_ref }}</p>
+          {% if deed_data.deed.society_ref %}
+          <p>Society ref: {{ deed_data.deed.society_ref }}</p>
+          {% endif %}
+          <p>e-MD ref: {{ deed_data.deed.md_ref }}</p>
         </div>
 
       </article>
