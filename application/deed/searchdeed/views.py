@@ -64,7 +64,7 @@ def show_authentication_code_page():
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
                                                     str(session.get('borrower_token')),
-                                                    request.form["auth-code"])
+                                                    request.form["auth_code"])
 
         if response.status_code == status.HTTP_200_OK:
             return redirect(url_for('searchdeed.show_final_page'), code=307)
