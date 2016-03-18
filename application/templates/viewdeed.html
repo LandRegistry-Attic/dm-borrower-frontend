@@ -61,7 +61,7 @@
         </ol>
 
         <h3 class="heading-medium">Effective date and time</h3>
-        <p>{{ deed_data.deed.effective_clause|safe}}</p>
+        <p>{{ deed_data.deed.effective_clause|safe }}</p>
 
         <p class="awaiting-information">[Effective date and time will be shown here]</p>
 
@@ -83,7 +83,7 @@
         <div class="deed-form-ref">
           <h3 class="visuallyhidden">Form of digital mortgage deed filed at HM Land Registry under reference</h3>
           {% if deed_data.deed.society_ref %}
-          <p>{{ deed_data.deed.society_ref }}</p>
+            <p>{{ deed_data.deed.society_ref }}</p>
           {% endif %}
           <p>{{ deed_data.deed.md_ref }}</p>
         </div>
@@ -93,11 +93,11 @@
       <div class="inner-block">
         <div class="text">
           {% if signed %}
-          <form method="post" action="{{ url_for('searchdeed.show_final_page') }}">
-            <p>If you are happy with the details shown on your mortgage deed above, please continue.</p>
-            <p>If something is wrong you should contact your conveyancer.</p>
-            <input class="button" type="submit" value="Continue">
-          </form>
+            <form method="post" action="{{ url_for('searchdeed.show_final_page') }}">
+              <p>If you are happy with the details shown on your mortgage deed above, please continue.</p>
+              <p>If something is wrong you should contact your conveyancer.</p>
+              <input class="button" type="submit" value="Continue">
+            </form>
           {% else %}
             <p>If you’re ready to confirm your mortgage, we’ll send you an authentication code which you’ll need to
               enter on the next screen</p>
