@@ -61,6 +61,10 @@ def show_authentication_code_page():
         return redirect('/session-ended', code=302)
 
     if request.method == 'POST':
+
+        if request.form['auth_code'] is None or request.form['auth_code'] == '':
+            return render_template('authentication-code.html', error=True)
+
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
                                                     str(session.get('borrower_token')),
