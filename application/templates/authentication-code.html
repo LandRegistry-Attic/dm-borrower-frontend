@@ -40,7 +40,7 @@
             number ending <span style="font-weight: bold;">{{ session.phone_number }}</span>
           </p>
 
-          <form class="form" action="{{ url_for('searchdeed.show_authentication_code_page') }}">
+          <form class="form" method="post" action="{{ url_for('searchdeed.show_authentication_code_page') }}">
             <div class="form-group error">
               <label class="form-label-bold" for="auth_code">
                 Enter your authentication code
