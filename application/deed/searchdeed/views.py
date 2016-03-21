@@ -52,10 +52,6 @@ def search_deed_search():
 
 @searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
 def show_authentication_code_page():
-    # TODO refactor out the issue and validation of authentication code into separate methods.
-    # TODO figure out a way to identify if code is being requested again.
-    # TODO custom error handling and exception for deed not confirmed instead of using 503
-    # TODO this looks ugly to me at the moment, Make it pretty. - WIP
 
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
@@ -81,6 +77,7 @@ def show_authentication_code_page():
     deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
     render_page = render_template('authentication-code.html')
     session['code-sent'] = True
+
     return render_page
 
 
