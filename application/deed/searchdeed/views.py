@@ -57,28 +57,39 @@ def show_authentication_code_page():
         return redirect('/session-ended', code=302)
 
     if request.method == 'POST':
+        return verify_auth_code(request.form['auth_code'])
 
-        if request.form['auth_code'] is None or request.form['auth_code'] == '':
-            return render_template('authentication-code.html', error=True)
-
-        deed_api_client = getattr(searchdeed, 'deed_api_client')
-        response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
-                                                    str(session.get('borrower_token')),
-                                                    request.form["auth_code"])
-
-        if response.status_code == status.HTTP_200_OK:
-            return redirect(url_for('searchdeed.show_final_page'), code=307)
-        elif response.status_code == status.HTTP_401_UNAUTHORIZED:
-            return render_template('authentication-code.html', error=True)
-        else:
-            raise exceptions.ServiceUnavailable
-
-    deed_api_client = getattr(searchdeed, 'deed_api_client')
-    deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
+    send_auth_code()
     render_page = render_template('authentication-code.html')
     session['code-sent'] = True
 
     return render_page
+
+
+def verify_auth_code(auth_code):
+
+    if auth_code is None or auth_code == '':
+        return render_template('authentication-code.html', error=True)
+
+    deed_api_client = getattr(searchdeed, 'deed_api_client')
+    response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
+                                                str(session.get('borrower_token')),
+                                                auth_code)
+
+    if response.status_code == status.HTTP_200_OK:
+        return redirect(url_for('searchdeed.show_final_page'), code=307)
+    elif response.status_code == status.HTTP_401_UNAUTHORIZED:
+        return render_template('authentication-code.html', error=True)
+    else:
+        raise exceptions.ServiceUnavailable
+
+
+def send_auth_code():
+    deed_api_client = getattr(searchdeed, 'deed_api_client')
+    response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
+
+    if response.status_code != status.HTTP_200_OK:
+        raise exceptions.ServiceUnavailable
 
 
 @searchdeed.route('/finished', methods=['POST'])
