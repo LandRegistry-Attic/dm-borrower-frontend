@@ -93,3 +93,24 @@ class TestSearchDeed(unittest.TestCase):
         }
         dobResult = validate_dob(form)
         self.assertEqual(dobResult, None)
+
+    @with_context
+    @with_client
+    def test_request_auth_code(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.get('/enter-authentication-code')
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_authenticate_code(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+            sess['borrower_token'] = 'A2C5v6'
+
+        res = client.post('/enter-authentication-code', data={'auth_code': 'AAA123'})
+
+        self.assertEqual(res.status_code, 307)

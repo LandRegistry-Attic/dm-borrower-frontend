@@ -42,3 +42,17 @@ class DeedApiMockClient:
     def add_borrower_signature(deed_reference, borrower_token):
 
         return status.HTTP_200_OK
+
+    @staticmethod
+    def request_auth_code(deed_reference, borrower_token):
+        class Response:
+            status_code = status.HTTP_200_OK
+
+        return Response
+
+    @staticmethod
+    def verify_auth_code(deed_reference, borrower_token, authentication_code):
+        class Response:
+            status_code = status.HTTP_200_OK
+
+        return Response

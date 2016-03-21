@@ -28,14 +28,14 @@ def validate_borrower(payload):  # pragma: no cover
         return resp.json()
 
 
-def request_auth_code(deed_reference, borrower_token):
+def request_auth_code(deed_reference, borrower_token):  # pragma: no cover
     payload = {"borrower_token": borrower_token}
     response = requests.post(config.DEED_API_BASE_HOST +
                              '/deed/' + deed_reference + '/request-auth-code', json=payload, headers=webseal_headers)
     return response
 
 
-def verify_auth_code(deed_reference, borrower_token, authentication_code):
+def verify_auth_code(deed_reference, borrower_token, authentication_code):  # pragma: no cover
     payload = {"borrower_token": borrower_token, "authentication_code": authentication_code}
     response = requests.post(config.DEED_API_BASE_HOST +
                              '/deed/' + deed_reference + '/verify-auth-code', json=payload, headers=webseal_headers)
