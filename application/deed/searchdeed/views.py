@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, url_for
+from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
@@ -49,19 +50,50 @@ def search_deed_search():
     return response, status.HTTP_200_OK
 
 
-@searchdeed.route('/enter-authentication-code', methods=['GET'])
+@searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
 def show_authentication_code_page():
+
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
 
+    if request.method == 'POST':
+        return verify_auth_code(request.form['auth_code'])
+
+    send_auth_code()
+    render_page = render_template('authentication-code.html')
+    session['code-sent'] = True
+
+    return render_page
+
+
+def verify_auth_code(auth_code):
+
+    if auth_code is None or auth_code == '':
+        return render_template('authentication-code.html', error=True)
+
     deed_api_client = getattr(searchdeed, 'deed_api_client')
-    deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
-    return render_template('authentication-code.html')
+    response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
+                                                str(session.get('borrower_token')),
+                                                auth_code)
+
+    if response.status_code == status.HTTP_200_OK:
+        return redirect(url_for('searchdeed.show_final_page'), code=307)
+    elif response.status_code == status.HTTP_401_UNAUTHORIZED:
+        return render_template('authentication-code.html', error=True)
+    else:
+        raise exceptions.ServiceUnavailable
+
+
+def send_auth_code():
+    deed_api_client = getattr(searchdeed, 'deed_api_client')
+    response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
+
+    if response.status_code != status.HTTP_200_OK:
+        raise exceptions.ServiceUnavailable
 
 
 @searchdeed.route('/finished', methods=['POST'])
 def show_final_page():
-    sign_deed_with(session['deed_token'], {"borrower_token": session['borrower_token']})
     session.clear()
     return render_template('finished.html')
 
@@ -69,6 +101,16 @@ def show_final_page():
 @searchdeed.route('/session-ended', methods=['GET'])
 def session_ended():
     return render_template('session-ended.html')
+
+
+@searchdeed.route('/service-unavailable/deed-not-confirmed')
+def show_internal_server_error_page():
+    return render_template('deed-not-confirmed.html')
+
+
+@searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)
+def internal_server_error(e):
+    return redirect(url_for('searchdeed.show_internal_server_error_page'))
 
 
 def validate_dob(form):
@@ -124,13 +166,6 @@ def lookup_deed(deed_reference):
         deed_data = None
 
     return deed_data
-
-
-def sign_deed_with(deed_reference, and_borrower_token):
-    if not deed_signed():
-        deed_api_client = getattr(searchdeed, 'deed_api_client')
-        response = deed_api_client.add_borrower_signature(deed_reference, and_borrower_token)
-        return response
 
 
 def deed_signed():

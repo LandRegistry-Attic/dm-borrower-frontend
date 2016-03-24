@@ -13,8 +13,6 @@
 
 
 {% block head %}
-
-
   <link href="/static/landregistry/assets/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css">
 
 <!-- google analytics code -->
@@ -31,7 +29,7 @@
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-59849906-6', 'auto');
+    ga('create','{{ config["GOOGLE_ANALYTICS_CODE"] }}', 'auto');
     ga('send', 'pageview');
     ga('set', 'anonymizeIp', true);
 
