@@ -40,6 +40,11 @@
             number ending <span style="font-weight: bold;">{{ session.phone_number }}</span>
           </p>
 
+          <p class="panel-indent">
+            This may take a few minutes to arrive depending on the mobile signal in
+            your area.
+				  </p>
+
           <form class="form" method="post" action="{{ url_for('searchdeed.show_authentication_code_page') }}">
             <div class="form-group error">
               <label class="form-label-bold" for="auth_code">
