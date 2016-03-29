@@ -3,7 +3,7 @@ from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
-import thread
+import _thread as thread
 
 
 searchdeed = Blueprint('searchdeed', __name__,
@@ -62,7 +62,7 @@ def show_authentication_code_page():
     if request.method == 'POST':
         return verify_auth_code(request.form['auth_code'])
 
-    send_auth_code()
+    thread.start_new_thread(send_auth_code, ("Sending Code Threaded",1))
     render_page = render_template('authentication-code.html')
     session['code-sent'] = True
 
