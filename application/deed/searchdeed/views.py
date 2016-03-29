@@ -62,7 +62,7 @@ def show_authentication_code_page():
     if request.method == 'POST':
         return verify_auth_code(request.form['auth_code'])
 
-    thread.start_new_thread(send_auth_code, ("Sending Code Threaded",1))
+    thread.start_new_thread(send_auth_code, ("Sending Code Threaded", 1))
     render_page = render_template('authentication-code.html')
     session['code-sent'] = True
 
