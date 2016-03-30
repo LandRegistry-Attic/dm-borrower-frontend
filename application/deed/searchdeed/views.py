@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, session, url_fo
 from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
+from application import LOGGER
 from application.deed.searchdeed.address_utils import format_address_string
 
 
@@ -95,7 +96,7 @@ def send_auth_code():
 
     if response.status_code != status.HTTP_200_OK:
         session['service_timeout_at_send_code'] = True
-        print("response code:", response.status_code)
+        LOGGER.info("response code:", response.status_code)
         raise exceptions.ServiceUnavailable
 
 
