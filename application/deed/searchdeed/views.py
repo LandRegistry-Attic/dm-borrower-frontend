@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for, app
+from flask import Blueprint, render_template, request, redirect, session, url_for
 from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
@@ -16,6 +16,8 @@ def search_deed_main():
         session.pop("error")
         return render_template('searchdeed.html', error=True)
     else:
+        session.clear()
+        session.permanent = True
         return render_template('searchdeed.html', error=None)
 
 
@@ -116,15 +118,6 @@ def show_internal_server_error_page():
 @searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)
 def internal_server_error(e):
     return redirect(url_for('searchdeed.show_internal_server_error_page'))
-
-
-@searchdeed.before_request
-def set_session_timeout():
-    session.permanent = True
-    #session.modified = True
-    app.permanent_session_lifetime = datetime.timedelta(seconds=5)
-    session['counter'] = 1
-    print ('var count:', session['counter'])
 
 
 def validate_dob(form):
