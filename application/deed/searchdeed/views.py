@@ -96,7 +96,7 @@ def send_auth_code():
 
     if response.status_code != status.HTTP_200_OK:
         session['service_timeout_at_send_code'] = True
-        LOGGER.info("response code:", response.status_code)
+        LOGGER.info("Request of Auth Code response of: " g+ response.status_code)
         raise exceptions.ServiceUnavailable
 
 
