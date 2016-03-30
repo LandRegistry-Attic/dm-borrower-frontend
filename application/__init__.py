@@ -1,4 +1,4 @@
-from flask import Flask, session  # type: ignore
+from flask import Flask, session  #noqa
 from flask.ext.script import Manager
 from application.service.deed_api import make_deed_api_client
 from .health.views import health
