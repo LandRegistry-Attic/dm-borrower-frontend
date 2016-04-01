@@ -16,6 +16,8 @@ def search_deed_main():
         session.pop("error")
         return render_template('searchdeed.html', error=True)
     else:
+        session.clear()
+        session.permanent = True
         return render_template('searchdeed.html', error=None)
 
 
@@ -81,6 +83,9 @@ def verify_auth_code(auth_code):
     elif response.status_code == status.HTTP_401_UNAUTHORIZED:
         return render_template('authentication-code.html', error=True)
     else:
+        session['code-sent'] = None
+        session['service_timeout_at_send_code'] = None
+        session['service_timeout_at_verify_code'] = True
         raise exceptions.ServiceUnavailable
 
 
@@ -89,6 +94,7 @@ def send_auth_code():
     response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
 
     if response.status_code != status.HTTP_200_OK:
+        session['service_timeout_at_send_code'] = True
         raise exceptions.ServiceUnavailable
 
 
