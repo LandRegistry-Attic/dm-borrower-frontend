@@ -7,3 +7,9 @@ class DeedApiInterface(object):  # pragma: no cover
 
     def validate_borrower(self, payload):
             return self.implementation.validate_borrower(payload)
+
+    def request_auth_code(self, deed_reference, borrower_token):
+        return self.implementation.request_auth_code(deed_reference, borrower_token)
+
+    def verify_auth_code(self, deed_reference, borrower_token, authentication_code):
+        return self.implementation.verify_auth_code(deed_reference, borrower_token, authentication_code)
