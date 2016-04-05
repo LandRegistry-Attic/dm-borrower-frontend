@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for
+from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
 from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
@@ -58,8 +58,8 @@ def show_authentication_code_page():
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
 
-    if request.method == 'POST':
-        return verify_auth_code(request.form['auth_code'])
+    if request.args.get('error', False):
+        return render_template('authentication-code.html', error=True)
 
     send_auth_code()
     render_page = render_template('authentication-code.html')
@@ -68,25 +68,46 @@ def show_authentication_code_page():
     return render_page
 
 
-def verify_auth_code(auth_code):
+@searchdeed.route('/confirming-mortagage-deed', methods=['POST'])
+def show_confirming_deed_page():
+
+    auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
         return render_template('authentication-code.html', error=True)
 
+    page_render = render_template('confirming-mortgage-deed.html', auth_code=request.form['auth_code'])
+    return page_render
+
+@searchdeed.route('/confirming-mortagage-deed-call', methods=['POST'])
+def show_confirming_deed_page_call():
+
+    auth_code = request.form['auth_code']
+
+    if auth_code is None or auth_code == '':
+        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+
+    # Check to see if we've got a result back from eSecurity and return an appropriate status to the browser
     deed_api_client = getattr(searchdeed, 'deed_api_client')
     response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
                                                 str(session.get('borrower_token')),
                                                 auth_code)
 
-    if response.status_code == status.HTTP_200_OK:
-        return redirect(url_for('searchdeed.show_final_page'), code=307)
-    elif response.status_code == status.HTTP_401_UNAUTHORIZED:
-        return render_template('authentication-code.html', error=True)
+    if response.status_code == status.HTTP_401_UNAUTHORIZED:
+        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_404_NOT_FOUND:
+        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page')})
+
+    return jsonify({'error': False})
+
+
+@searchdeed.route('/confirming-mortagage-deed-check', methods=['GET'])
+def show_confirming_deed_page_check():
+
+    if deed_signed():
+        return jsonify({'result': True, 'redirect': url_for('searchdeed.show_final_page')})
     else:
-        session['code-sent'] = None
-        session['service_timeout_at_send_code'] = None
-        session['service_timeout_at_verify_code'] = True
-        raise exceptions.ServiceUnavailable
+        return jsonify({'result': False})
 
 
 def send_auth_code():
@@ -98,7 +119,7 @@ def send_auth_code():
         raise exceptions.ServiceUnavailable
 
 
-@searchdeed.route('/finished', methods=['POST'])
+@searchdeed.route('/finished', methods=['GET', 'POST'])
 def show_final_page():
     session.clear()
     return render_template('finished.html')

@@ -10,6 +10,10 @@
 
     	<h1 class="heading-xlarge">Confirming...</h1>
 
+      <form>
+        <input type="hidden" name="auth_code" value="{{auth_code}}">
+      </form>
+
 	    <p>
         Your mortgage deed is now being confirmed. This process may take a few
         moments to complete.
@@ -27,4 +31,9 @@
 
   </main>
 
+{% endblock %}
+
+{% block body_end %}
+  {{ super() }}
+  <script type=text/javascript src="{{ url_for('static', filename='landregistry/assets/javascript/confirming-deed.js') }}"> </script>
 {% endblock %}
