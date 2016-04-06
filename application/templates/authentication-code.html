@@ -70,25 +70,26 @@
           <h1 class="heading-xlarge">Confirm your mortgage deed</h1>
 
           {% if code_is_sent %}
-            <p class="panel-indent">
-              Your new authentication code has been sent.
-            </p> <br/>
+            <p>
+              We have just sent your authentication code by text message to your mobile
+              number ending <b class="bold-small">{{ session.phone_number }}</b>
+            </p>
+          {% elif code_is_resent %}
+            <p>
+              <b class="bold-small">A new authentication code has been sent to your mobile.</b>
+            </p>
           {% endif %}
 
-          <p>
-            We have just sent your authentication code by text message to your mobile
-            number ending <b class="bold-small">{{ session.phone_number }}</b>
-          </p>
           <p class="panel-indent">
             This may take a few minutes to arrive depending on the mobile signal in
             your area.
-          </p>
+          </p><br/>
 
           <form class="form" method="post" action="{{ url_for('searchdeed.show_authentication_code_page') }}">
             <div class="form-group">
               <label class="form-label-bold" for="auth_code">
                 Enter your authentication code
-                <span class="form-hint">For example, c6e78a</span>
+                <span class="form-hint">For example, C6E78A</span>
               </label>
               <input type="text" class="form-control" id="auth_code" name="auth_code">
             </div>

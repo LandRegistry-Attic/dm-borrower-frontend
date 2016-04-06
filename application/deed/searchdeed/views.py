@@ -61,10 +61,21 @@ def show_authentication_code_page():
         return verify_auth_code(request.form['auth_code'])
 
     referer_page = request.headers.get("Referer")
-    if "mortgage-deed" in referer_page or "enter-authentication-code" in referer_page:
-        return send_auth_code()
-    elif "deed-not-confirmed" in referer_page:
-        return render_template('authentication-code.html')
+
+    if referer_page is not None:
+        if "mortgage-deed" in referer_page:
+            print ('code sent from mortgage deed page')
+            send_auth_code()
+            return render_template('authentication-code.html', code_is_sent=True)
+        elif "enter-authentication-code" in referer_page and request.method != 'POST':
+            print ('code resent from authentication code page')
+            send_auth_code()
+            return render_template('authentication-code.html', code_is_resent=True)
+        elif "deed-not-confirmed" in referer_page:
+            print ('code not sent')
+            return render_template('authentication-code.html', code_is_sent=True)
+    else:
+        return render_template('authentication-code.html', code_is_sent=True)
 
 
 def verify_auth_code(auth_code):
@@ -91,9 +102,6 @@ def send_auth_code():
     try:
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
-
-        if response.status_code == status.HTTP_200_OK:
-            return render_template('authentication-code.html', code_is_sent=True)
     except:
         session['service_timeout_at_send_code'] = True
         raise exceptions.ServiceUnavailable
