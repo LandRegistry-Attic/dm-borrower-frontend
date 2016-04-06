@@ -64,11 +64,9 @@ def show_authentication_code_page():
 
     if referer_page is not None:
         if "mortgage-deed" in referer_page:
-            print ('code sent from mortgage deed page')
             send_auth_code()
             return render_template('authentication-code.html', code_is_sent=True)
         elif "enter-authentication-code" in referer_page and request.method != 'POST':
-            print ('code resent from authentication code page')
             send_auth_code()
             return render_template('authentication-code.html', code_is_resent=True)
         elif "deed-not-confirmed" in referer_page:
