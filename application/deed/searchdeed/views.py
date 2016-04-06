@@ -93,8 +93,7 @@ def send_auth_code():
         response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
 
         if response.status_code == status.HTTP_200_OK:
-            session['code_sent'] = True
-            return render_template('authentication-code.html', code_sent=True)
+            return render_template('authentication-code.html', code_is_sent=True)
     except:
         session['service_timeout_at_send_code'] = True
         raise exceptions.ServiceUnavailable
