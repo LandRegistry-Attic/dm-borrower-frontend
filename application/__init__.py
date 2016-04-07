@@ -1,6 +1,7 @@
 from flask import Flask
 from flask.ext.script import Manager
 from application.service.deed_api import make_deed_api_client
+from application import config
 from .health.views import health
 from .deed.searchdeed.views import searchdeed
 from .borrower.views import borrower_landing
