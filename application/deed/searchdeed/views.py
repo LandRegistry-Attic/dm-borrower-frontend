@@ -70,7 +70,6 @@ def show_authentication_code_page():
             send_auth_code()
             return render_template('authentication-code.html', code_is_resent=True)
         elif "deed-not-confirmed" in referer_page:
-            print ('code not sent')
             return render_template('authentication-code.html', code_is_sent=True)
     else:
         return render_template('authentication-code.html', code_is_sent=True)
@@ -93,7 +92,9 @@ def verify_auth_code(auth_code):
     except:
         session['service_timeout_at_send_code'] = None
         session['service_timeout_at_verify_code'] = True
-        raise exceptions.ServiceUnavailable
+
+        raise exceptions.InternalServerError
+
 
 
 def send_auth_code():
@@ -102,7 +103,8 @@ def send_auth_code():
         response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
     except:
         session['service_timeout_at_send_code'] = True
-        raise exceptions.ServiceUnavailable
+        
+        raise exceptions.InternalServerError
 
 
 @searchdeed.route('/finished', methods=['POST'])
@@ -122,6 +124,11 @@ def show_internal_server_error_page():
 
 
 @searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)
+def service_unavailable_error(e):
+    return redirect(url_for('searchdeed.show_internal_server_error_page'))
+
+
+@searchdeed.app_errorhandler(status.HTTP_500_INTERNAL_SERVER_ERROR)
 def internal_server_error(e):
     return redirect(url_for('searchdeed.show_internal_server_error_page'))
 
