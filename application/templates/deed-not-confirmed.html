@@ -6,20 +6,22 @@
     <div id="content">
       <div class="grid-row">
         <div class="column-two-thirds">
-          <h1 class="heading-xlarge">Your deed is not confirmed</h1>
-          <p>
-            You were not able to confirm your deed. This was not due to any mistake
-            on your part, but because the service encountered technical issues.
-          </p>
           {% if session['service_timeout_at_send_code'] %}
+            <h1 class="heading-xlarge">Your code has not been sent</h1>
             <p>
-              You will need to <a href="/mortgage-deed">try to confirm again</a>
+              We were not able to send your authentication code. This was not due to any mistake
+              on your part, but because the service encountered technical issues.
             </p>
             <p>
               If you continue to experience this error <a href="/sign-my-mortgage">start from the beginning</a>
               or you can <a href="mailto:digital-mortgage-feedback@digital.landregistry.gov.uk">contact us via email</a>
             </p>
             {% elif session['service_timeout_at_verify_code'] %}
+            <h1 class="heading-xlarge">Your deed is not confirmed</h1>
+            <p>
+              You were not able to confirm your deed. This was not due to any mistake
+              on your part, but because the service encountered technical issues.
+            </p>
             <p>
               You will need to <a href="/enter-authentication-code">try to confirm again</a>
             </p>
