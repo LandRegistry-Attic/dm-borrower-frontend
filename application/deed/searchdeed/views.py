@@ -79,9 +79,9 @@ def show_confirming_deed_page():
     page_render = render_template('confirming-mortgage-deed.html', auth_code=request.form['auth_code'])
     return page_render
 
+
 @searchdeed.route('/confirming-mortagage-deed-call', methods=['POST'])
 def show_confirming_deed_page_call():
-
     auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
@@ -103,7 +103,6 @@ def show_confirming_deed_page_call():
 
 @searchdeed.route('/confirming-mortagage-deed-check', methods=['GET'])
 def show_confirming_deed_page_check():
-
     if deed_signed():
         return jsonify({'result': True, 'redirect': url_for('searchdeed.show_final_page')})
     else:
