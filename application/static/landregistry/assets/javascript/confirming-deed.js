@@ -50,5 +50,4 @@
 
   // Every 5 seconds check again
   setTimeout(check_deed_is_signed, interval);
-
 })();
