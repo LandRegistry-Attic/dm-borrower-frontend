@@ -82,10 +82,8 @@ def show_confirming_deed_page():
 
 @searchdeed.route('/verify-auth-code', methods=['POST'])
 def verify_auth_code(auth_code=None):
-    print ('auth_code', auth_code)
     if request.form['auth_code']:
         auth_code = request.form['auth_code']
-        print ('auth_code in request form', auth_code)
     elif auth_code is None or auth_code == '':
         return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
 
