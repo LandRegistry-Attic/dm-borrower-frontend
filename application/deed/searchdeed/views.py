@@ -80,14 +80,14 @@ def show_confirming_deed_page():
     return page_render
 
 
-@searchdeed.route('/confirming-mortagage-deed-call', methods=['POST'])
-def show_confirming_deed_page_call():
+@searchdeed.route('/verify-auth-code', methods=['POST'])
+def verify_auth_code():
     auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
         return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
 
-    # Check to see if we've got a result back from eSecurity and return an appropriate status to the browser
+    # Check to see if we've got a result back and return an appropriate status to the browser
     deed_api_client = getattr(searchdeed, 'deed_api_client')
     response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
                                                 str(session.get('borrower_token')),
@@ -101,8 +101,8 @@ def show_confirming_deed_page_call():
     return jsonify({'error': False})
 
 
-@searchdeed.route('/confirming-mortagage-deed-check', methods=['GET'])
-def show_confirming_deed_page_check():
+@searchdeed.route('/confirm-mortgage-is-signed', methods=['GET'])
+def confirm_mortgage_is_signed():
     if deed_signed():
         return jsonify({'result': True, 'redirect': url_for('searchdeed.show_final_page')})
     else:
