@@ -81,24 +81,46 @@ def show_confirming_deed_page():
 
 
 @searchdeed.route('/verify-auth-code', methods=['POST'])
-def verify_auth_code():
+def verify_auth_code(auth_code=None):
+    print ('auth_code', auth_code)
+    if request.form['auth_code']:
+        auth_code = request.form['auth_code']
+        print ('auth_code in request form', auth_code)
+    elif auth_code is None or auth_code == '':
+        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+
+    try:
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
+                                                    str(session.get('borrower_token')),
+                                                    auth_code)
+
+        if response.status_code == status.HTTP_401_UNAUTHORIZED:
+            return jsonify({'error': True, 'redirect': url_for('authentication-code.html', error=True)})
+        elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+            return jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page')})
+
+        return jsonify({'error': False})
+    except:
+        session['service_timeout_at_verify_code'] = True
+        raise exceptions.ServiceUnavailable
+
+
+@searchdeed.route('/verify-auth-code-no-js', methods=['POST'])
+def verify_auth_code_no_js():
     auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
-        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+        return redirect(url_for('searchdeed.show_authentication_code_page', error=True))
 
-    # Check to see if we've got a result back and return an appropriate status to the browser
-    deed_api_client = getattr(searchdeed, 'deed_api_client')
-    response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
-                                                str(session.get('borrower_token')),
-                                                auth_code)
+    response = verify_auth_code(auth_code)
 
     if response.status_code == status.HTTP_401_UNAUTHORIZED:
-        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
-    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_404_NOT_FOUND:
-        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page')})
-
-    return jsonify({'error': False})
+        return redirect(url_for('authentication-code.html', error=True))
+    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+        return redirect(url_for('searchdeed.show_internal_server_error_page'))
+    elif response.status_code == status.HTTP_200_OK:
+        return redirect(url_for('searchdeed.show_final_page'))
 
 
 @searchdeed.route('/confirm-mortgage-is-signed', methods=['GET'])
