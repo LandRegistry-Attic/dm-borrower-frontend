@@ -84,8 +84,6 @@ def show_confirming_deed_page():
 def verify_auth_code(auth_code=None):
     if request.form['auth_code']:
         auth_code = request.form['auth_code']
-    elif auth_code is None or auth_code == '':
-        return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
 
     try:
         deed_api_client = getattr(searchdeed, 'deed_api_client')
