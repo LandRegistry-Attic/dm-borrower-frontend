@@ -126,7 +126,6 @@ class TestSearchDeed(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
 
-
     @with_context
     @with_client
     def test_verify_auth_code(self, client):
