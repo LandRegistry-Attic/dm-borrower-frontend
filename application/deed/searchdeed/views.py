@@ -68,7 +68,7 @@ def show_authentication_code_page():
     return render_page
 
 
-@searchdeed.route('/confirming-mortagage-deed', methods=['POST'])
+@searchdeed.route('/confirming-mortgage-deed', methods=['POST'])
 def show_confirming_deed_page():
 
     auth_code = request.form['auth_code']
