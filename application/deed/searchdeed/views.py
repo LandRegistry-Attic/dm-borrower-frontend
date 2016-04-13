@@ -1,9 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
-from werkzeug import exceptions
-import datetime
-from flask.ext.api import status
-from application.deed.searchdeed.address_utils import format_address_string
 import logging
+
+import datetime
+from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
+from flask.ext.api import status
+from werkzeug import exceptions
+
+from application.deed.searchdeed.address_utils import format_address_string
 
 LOGGER = logging.getLogger(__name__)
 
@@ -56,7 +58,6 @@ def search_deed_search():
 
 @searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
 def show_authentication_code_page():
-
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
 
@@ -71,7 +72,6 @@ def show_authentication_code_page():
 
 @searchdeed.route('/confirming-mortgage-deed', methods=['POST'])
 def show_confirming_deed_page():
-
     auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
@@ -95,9 +95,11 @@ def verify_auth_code(auth_code=None):
                                                     auth_code)
 
         if response.status_code == status.HTTP_401_UNAUTHORIZED:
-            return_val = jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+            return_val = jsonify(
+                {'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
         elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-            return_val = jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
+            return_val = jsonify(
+                {'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
         else:
             return_val = jsonify({'error': False})
 
@@ -194,7 +196,7 @@ def validate_borrower(borrower_token, dob):
         payload = {
             "borrower_token": borrower_token,
             "dob": str(dob)
-            }
+        }
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         result = deed_api_client.validate_borrower(payload)
         return result
