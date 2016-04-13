@@ -3,7 +3,9 @@ from werkzeug import exceptions
 import datetime
 from flask.ext.api import status
 from application.deed.searchdeed.address_utils import format_address_string
+import logging
 
+LOGGER = logging.getLogger(__name__)
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -93,13 +95,14 @@ def verify_auth_code(auth_code=None):
                                                     auth_code)
 
         if response.status_code == status.HTTP_401_UNAUTHORIZED:
-            return jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
-        elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE:
-            return jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page')})
-        elif response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-            return jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page')})
+            return_val = jsonify({'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+        elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+            return_val = jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
+        else:
+            return_val = jsonify({'error': False})
 
-        return jsonify({'error': False})
+        LOGGER.error("Status code: %s for auth code %s was returned" % (str(response.status_code), (str(auth_code))))
+        return return_val
     except:
         session['service_timeout_at_verify_code'] = True
         raise exceptions.ServiceUnavailable
@@ -107,6 +110,9 @@ def verify_auth_code(auth_code=None):
 
 @searchdeed.route('/verify-auth-code-no-js', methods=['POST'])
 def verify_auth_code_no_js():
+    if 'deed_token' not in session:
+        return redirect('/session-ended', code=302)
+
     auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
@@ -115,13 +121,14 @@ def verify_auth_code_no_js():
     response = verify_auth_code(auth_code)
 
     if response.status_code == status.HTTP_401_UNAUTHORIZED:
-        return redirect(url_for('authentication-code.html', error=True))
-    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE:
-        return redirect(url_for('searchdeed.show_internal_server_error_page'))
-    elif response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-        return redirect(url_for('searchdeed.show_internal_server_error_page'))
+        return_val = redirect(url_for('authentication-code.html', error=True))
+    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+        return_val = redirect(url_for('searchdeed.show_internal_server_error_page'))
     elif response.status_code == status.HTTP_200_OK:
-        return redirect(url_for('searchdeed.show_final_page'))
+        return_val = redirect(url_for('searchdeed.show_final_page'))
+
+    LOGGER.error("Status code: %s for auth code %s was returned" % (str(response.status_code), (str(auth_code))))
+    return return_val
 
 
 @searchdeed.route('/confirm-mortgage-is-signed', methods=['GET'])
