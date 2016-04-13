@@ -10,6 +10,6 @@ def verified():
     return render_template('howtoproceed.html')
 
 
-@borrower_landing.route('/sign-my-mortgage')
+@borrower_landing.route('/')
 def home():
     return render_template("start.html")
