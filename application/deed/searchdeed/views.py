@@ -97,7 +97,8 @@ def verify_auth_code(auth_code=None):
         if response.status_code == status.HTTP_401_UNAUTHORIZED:
             return_val = jsonify(
                 {'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
-        elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+        elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE \
+                or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
             return_val = jsonify(
                 {'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
         else:
@@ -124,7 +125,8 @@ def verify_auth_code_no_js():
 
     if response.status_code == status.HTTP_401_UNAUTHORIZED:
         return_val = redirect(url_for('authentication-code.html', error=True))
-    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE \
+            or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
         return_val = redirect(url_for('searchdeed.show_internal_server_error_page'))
     elif response.status_code == status.HTTP_200_OK:
         return_val = redirect(url_for('searchdeed.show_final_page'))
