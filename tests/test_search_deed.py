@@ -46,7 +46,7 @@ class TestSearchDeed(unittest.TestCase):
     @with_context
     @with_client
     def test_sign_my_mortgage_landing(self, client):
-        res = client.get('/sign-my-mortgage')
+        res = client.get('/')
 
         self.assertEqual(res.status_code, 200)
 
