@@ -1,5 +1,4 @@
 import logging
-
 import datetime
 from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
 from flask.ext.api import status
