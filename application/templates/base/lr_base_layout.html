@@ -37,6 +37,10 @@
 
 {% endblock %}
 
+{% block body_end %}
+<script type=text/javascript src="{{ url_for('static', filename='landregistry/assets/javascript/jquery-1.12.2.min.js') }}"> </script>
+{% endblock %}
+
 {% block content %}
 <div class="beta-banner">
   <p>
