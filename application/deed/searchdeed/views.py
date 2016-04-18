@@ -63,10 +63,23 @@ def show_authentication_code_page():
     if request.args.get('error', False):
         return render_template('authentication-code.html', error=True)
 
-    send_auth_code()
-    session['code-sent'] = True
+    referer_page = request.headers.get("Referer")
 
-    return render_template('authentication-code.html')
+    if referer_page is not None:
+        if "mortgage-deed" in referer_page and "confirming-mortgage-deed" not in referer_page:
+            send_auth_code()
+            return_val = render_template('authentication-code.html', code_is_sent=True)
+        elif "enter-authentication-code" in referer_page and request.method != 'POST':
+            send_auth_code()
+            return_val = render_template('authentication-code.html', code_is_resent=True)
+        elif "deed-not-confirmed" in referer_page:
+            return_val = render_template('authentication-code.html', code_is_sent=True)
+        elif "confirming-mortgage-deed" in referer_page and request.method == 'GET':
+            return_val = render_template('authentication-code.html', code_is_resent=True)
+    else:
+        return_val = render_template('authentication-code.html', code_is_sent=True)
+
+    return return_val
 
 
 @searchdeed.route('/confirming-mortgage-deed', methods=['POST'])
@@ -104,10 +117,12 @@ def verify_auth_code(auth_code=None):
             return_val = jsonify({'error': False})
 
         LOGGER.error("Status code: %s for auth code %s was returned" % (str(response.status_code), (str(auth_code))))
-        return return_val
     except:
         session['service_timeout_at_verify_code'] = True
-        raise exceptions.ServiceUnavailable
+        return_val = jsonify({'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
+        LOGGER.error("No Status code for auth code %s was returned" % (str(auth_code)))
+
+    return return_val
 
 
 @searchdeed.route('/verify-auth-code-no-js', methods=['POST'])
@@ -143,12 +158,16 @@ def confirm_mortgage_is_signed():
 
 
 def send_auth_code():
-    deed_api_client = getattr(searchdeed, 'deed_api_client')
-    response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
+    try:
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        response = deed_api_client.request_auth_code(str(session.get('deed_token')), str(session.get('borrower_token')))
 
-    if response.status_code != status.HTTP_200_OK:
+        if response.status_code != status.HTTP_200_OK:
+            session['service_timeout_at_send_code'] = True
+            raise exceptions.InternalServerError
+    except:
         session['service_timeout_at_send_code'] = True
-        raise exceptions.ServiceUnavailable
+        raise exceptions.InternalServerError
 
 
 @searchdeed.route('/finished', methods=['GET', 'POST'])
@@ -168,6 +187,11 @@ def show_internal_server_error_page():
 
 
 @searchdeed.errorhandler(status.HTTP_503_SERVICE_UNAVAILABLE)
+def service_unavailable_error(e):
+    return redirect(url_for('searchdeed.show_internal_server_error_page'))
+
+
+@searchdeed.app_errorhandler(status.HTTP_500_INTERNAL_SERVER_ERROR)
 def internal_server_error(e):
     return redirect(url_for('searchdeed.show_internal_server_error_page'))
 
