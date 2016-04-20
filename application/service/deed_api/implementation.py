@@ -42,7 +42,7 @@ def verify_auth_code(deed_reference, borrower_token, authentication_code):  # pr
     return response
 
 
-def get_borrower_details_by_verify_pid(verify_pid):
+def get_borrower_details_by_verify_pid(verify_pid):  # pragma: no cover
     response = requests.get(config.DEED_API_BASE_HOST +
                             "/borrower/verify/pid/" + str(verify_pid), headers=webseal_headers)
     if response.status_code == status.HTTP_200_OK:
