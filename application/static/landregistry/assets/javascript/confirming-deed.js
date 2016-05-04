@@ -16,9 +16,7 @@
     timeout: interval * maxTries, // Make it wait for the full duration
     success: function(data) {
       if(data.error) {
-        setTimeout(function() {
-            window.location = data.redirect;
-        }, interval);
+        window.location = data.redirect;
       }
     }
   });
