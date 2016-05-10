@@ -42,6 +42,8 @@ def verify_identity():
             session['deed_token'] = result['deed_token']
             session['phone_number'] = result['phone_number']
             session['borrower_token'] = result['borrower_token']
+        else:
+            return redirect('/verify-error', code=302)
 
         return redirect('/identity-verified', code=302)
     else:
