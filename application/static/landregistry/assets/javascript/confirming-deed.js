@@ -37,6 +37,10 @@
         if(data.result) {
           window.location = data.redirect;
         }
+        // If error occurs redirect to error page
+        if(data.error) {
+          window.location = data.redirect;
+        }
 
       }
     });
