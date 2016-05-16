@@ -1,0 +1,17 @@
+{% extends "base/lr_base_layout.html" %}
+{% block content %}
+  <main id="content" role="main">
+    {{ super() }}
+    <div id="content">
+      <div class="inner-block">
+        <h1 class="heading-xlarge">GOV Verify error</h1>
+        <p class="text">
+          Unfortunately, we were not able to sign you in using GOV Verify platform.
+        </p>
+        <p class="text">
+          You’ll need to <a href="{{ url_for('borrower_landing.home') }}">start again</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+{% endblock %}
