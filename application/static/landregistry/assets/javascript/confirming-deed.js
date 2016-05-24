@@ -12,7 +12,7 @@
     data: {
       auth_code: $('input[name="auth_code"]').val()
     },
-    url: '/verify-auth-code',
+    url: 'verify-auth-code',
     timeout: interval * maxTries, // Make it wait for the full duration
     success: function(data) {
       if(data.error) {
@@ -30,11 +30,12 @@
     $.ajax({
       dataType: 'json',
       method: 'GET',
-      url: '/confirm-mortgage-is-signed',
+      url: 'confirm-mortgage-is-signed',
       success: function(data) {
 
         // If it's ready, redirect, otherwise go round again
         if(data.result) {
+          //window.location = data.redirect;
           window.location = data.redirect;
         }
         // If error occurs redirect to error page
@@ -48,7 +49,7 @@
     if(count < maxTries) {
       setTimeout(check_deed_is_signed, interval);
     } else {
-      window.location = '/service-unavailable/deed-not-confirmed';
+      window.location = 'service-unavailable/deed-not-confirmed';
     }
   }
 
