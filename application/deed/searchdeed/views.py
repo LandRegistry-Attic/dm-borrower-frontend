@@ -82,7 +82,7 @@ def show_confirming_deed_page():
 @searchdeed.route('/verify-auth-code', methods=['POST'])
 def verify_auth_code(auth_code=None):
     if 'deed_token' not in session:
-        return jsonify({'error': True, 'redirect': url_for('searchdeed.session_ended')})
+        return jsonify({'error': True, 'redirect': 'session-ended'})
 
     if request.form['auth_code']:
         auth_code = request.form['auth_code']
@@ -95,11 +95,11 @@ def verify_auth_code(auth_code=None):
 
         if response.status_code == status.HTTP_401_UNAUTHORIZED:
             return_val = jsonify(
-                {'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+                {'error': True, 'redirect': 'enter-authentication-code'})
         elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE \
                 or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
             return_val = jsonify(
-                {'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
+                {'error': True, 'redirect': 'service-unavailable/deed-not-confirmed'})
         else:
             return_val = jsonify({'error': False})
 
@@ -137,7 +137,7 @@ def verify_auth_code_no_js():
 @searchdeed.route('/confirm-mortgage-is-signed', methods=['GET'])
 def confirm_mortgage_is_signed():
     if deed_signed():
-        return jsonify({'result': True, 'redirect': url_for('searchdeed.show_final_page')})
+        return jsonify({'result': True, 'redirect': 'finished'})
     else:
         return jsonify({'result': False})
 
