@@ -97,7 +97,12 @@
           <form id="confirming-deed-form" class="form" method="post" action="{{url_for('searchdeed.verify_auth_code_no_js') }}">
 
             <script>
-              document.getElementById('confirming-deed-form').action = "{{ url_for('searchdeed.show_confirming_deed_page') }}"
+              (function() {
+                var form = document.getElementById('confirming-deed-form');
+                var originalUrl = "{{url_for('searchdeed.verify_auth_code_no_js') }}";
+                var newUrl = "{{ url_for('searchdeed.show_confirming_deed_page') }}";
+                form.action = form.action.replace(originalUrl, newUrl);
+              })();
             </script>
 
             <div class="form-group">
