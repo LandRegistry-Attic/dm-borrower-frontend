@@ -95,7 +95,7 @@ def verify_auth_code(auth_code=None):
 
         if response.status_code == status.HTTP_401_UNAUTHORIZED:
             return_val = jsonify(
-                {'error': True, 'redirect': 'enter-authentication-code'})
+                {'error': True, 'redirect': 'enter-authentication-code?error=true'})
         elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE \
                 or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
             return_val = jsonify(
