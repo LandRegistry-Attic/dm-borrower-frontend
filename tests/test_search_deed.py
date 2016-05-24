@@ -46,7 +46,7 @@ class TestSearchDeed(unittest.TestCase):
     @with_context
     @with_client
     def test_sign_my_mortgage_landing(self, client):
-        res = client.get('/sign-my-mortgage')
+        res = client.get('/')
 
         self.assertEqual(res.status_code, 200)
 
@@ -113,4 +113,54 @@ class TestSearchDeed(unittest.TestCase):
 
         res = client.post('/enter-authentication-code', data={'auth_code': 'AAA123'})
 
-        self.assertEqual(res.status_code, 307)
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_show_confirming_deed_page_check(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+            sess['borrower_token'] = 'A2C5v6'
+
+        res = client.post('/confirming-mortgage-deed', data={'auth_code': 'AAA123'})
+
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_verify_auth_code(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.post('/verify-auth-code', data={'auth_code': 'AAA123'})
+        self.assertEqual(res.status_code, 200)
+
+    @with_context
+    @with_client
+    def test_verify_auth_code_no_js(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.post('/verify-auth-code-no-js', data={'auth_code': 'AAA123'})
+
+        self.assertEqual(res.status_code, 302)
+
+    @with_context
+    @with_client
+    def test_verify_auth_code_no_js_with_missing_authcode(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.post('/verify-auth-code-no-js')
+
+        self.assertEqual(res.status_code, 400)
+
+    @with_context
+    @with_client
+    def test_confirm_mortgage_is_signed(self, client):
+        with client.session_transaction() as sess:
+            sess['deed_token'] = '063604'
+
+        res = client.get('/confirm-mortgage-is-signed')
+
+        self.assertEqual(res.status_code, 200)

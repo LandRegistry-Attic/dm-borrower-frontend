@@ -1,9 +1,12 @@
-from flask import Blueprint, render_template, request, redirect, session, url_for
-from werkzeug import exceptions
+import logging
 import datetime
+from flask import Blueprint, render_template, request, redirect, session, url_for, jsonify
 from flask.ext.api import status
+from werkzeug import exceptions
+
 from application.deed.searchdeed.address_utils import format_address_string
 
+LOGGER = logging.getLogger(__name__)
 
 searchdeed = Blueprint('searchdeed', __name__,
                        template_folder='/templates',
@@ -54,39 +57,89 @@ def search_deed_search():
 
 @searchdeed.route('/enter-authentication-code', methods=['GET', 'POST'])
 def show_authentication_code_page():
-
     if 'deed_token' not in session:
         return redirect('/session-ended', code=302)
 
-    if request.method == 'POST':
-        return verify_auth_code(request.form['auth_code'])
+    if request.args.get('error', False):
+        return render_template('authentication-code.html', error=True)
 
     send_auth_code()
-    render_page = render_template('authentication-code.html')
     session['code-sent'] = True
 
-    return render_page
+    return render_template('authentication-code.html')
 
 
-def verify_auth_code(auth_code):
+@searchdeed.route('/confirming-mortgage-deed', methods=['POST'])
+def show_confirming_deed_page():
+    auth_code = request.form['auth_code']
 
     if auth_code is None or auth_code == '':
         return render_template('authentication-code.html', error=True)
 
-    deed_api_client = getattr(searchdeed, 'deed_api_client')
-    response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
-                                                str(session.get('borrower_token')),
-                                                auth_code)
+    return render_template('confirming-mortgage-deed.html', auth_code=request.form['auth_code'])
 
-    if response.status_code == status.HTTP_200_OK:
-        return redirect(url_for('searchdeed.show_final_page'), code=307)
-    elif response.status_code == status.HTTP_401_UNAUTHORIZED:
-        return render_template('authentication-code.html', error=True)
-    else:
-        session['code-sent'] = None
-        session['service_timeout_at_send_code'] = None
+
+@searchdeed.route('/verify-auth-code', methods=['POST'])
+def verify_auth_code(auth_code=None):
+    if 'deed_token' not in session:
+        return jsonify({'error': True, 'redirect': url_for('searchdeed.session_ended')})
+
+    if request.form['auth_code']:
+        auth_code = request.form['auth_code']
+
+    try:
+        deed_api_client = getattr(searchdeed, 'deed_api_client')
+        response = deed_api_client.verify_auth_code(str(session.get('deed_token')),
+                                                    str(session.get('borrower_token')),
+                                                    auth_code)
+
+        if response.status_code == status.HTTP_401_UNAUTHORIZED:
+            return_val = jsonify(
+                {'error': True, 'redirect': url_for('searchdeed.show_authentication_code_page', error=True)})
+        elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE \
+                or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+            return_val = jsonify(
+                {'error': True, 'redirect': url_for('searchdeed.show_internal_server_error_page', error=True)})
+        else:
+            return_val = jsonify({'error': False})
+
+        LOGGER.error("Status code: %s for auth code %s was returned" % (str(response.status_code), (str(auth_code))))
+        return return_val
+    except:
         session['service_timeout_at_verify_code'] = True
         raise exceptions.ServiceUnavailable
+
+
+@searchdeed.route('/verify-auth-code-no-js', methods=['POST'])
+def verify_auth_code_no_js():
+    if 'deed_token' not in session:
+        return redirect('/session-ended', code=302)
+
+    auth_code = request.form['auth_code']
+
+    if auth_code is None or auth_code == '':
+        return redirect(url_for('searchdeed.show_authentication_code_page', error=True))
+
+    response = verify_auth_code(auth_code)
+
+    if response.status_code == status.HTTP_401_UNAUTHORIZED:
+        return_val = redirect(url_for('authentication-code.html', error=True))
+    elif response.status_code == status.HTTP_503_SERVICE_UNAVAILABLE \
+            or response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
+        return_val = redirect(url_for('searchdeed.show_internal_server_error_page'))
+    elif response.status_code == status.HTTP_200_OK:
+        return_val = redirect(url_for('searchdeed.show_final_page'))
+
+    LOGGER.error("Status code: %s for auth code %s was returned" % (str(response.status_code), (str(auth_code))))
+    return return_val
+
+
+@searchdeed.route('/confirm-mortgage-is-signed', methods=['GET'])
+def confirm_mortgage_is_signed():
+    if deed_signed():
+        return jsonify({'result': True, 'redirect': url_for('searchdeed.show_final_page')})
+    else:
+        return jsonify({'result': False})
 
 
 def send_auth_code():
@@ -98,7 +151,7 @@ def send_auth_code():
         raise exceptions.ServiceUnavailable
 
 
-@searchdeed.route('/finished', methods=['POST'])
+@searchdeed.route('/finished', methods=['GET', 'POST'])
 def show_final_page():
     session.clear()
     return render_template('finished.html')
@@ -144,7 +197,7 @@ def validate_borrower(borrower_token, dob):
         payload = {
             "borrower_token": borrower_token,
             "dob": str(dob)
-            }
+        }
         deed_api_client = getattr(searchdeed, 'deed_api_client')
         result = deed_api_client.validate_borrower(payload)
         return result
